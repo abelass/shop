@@ -1,0 +1,16 @@
+<!DOCTYPE webprojectsession>
+<webprojectsession>
+  <session usePreviewPrefix="0" previewPrefix="" >
+    <itemcursorpositions>
+      <item line="0" column="0" url="exec/inc-shop_shortcuts.php" />
+    </itemcursorpositions>
+    <treestatus>
+      <openfolder url="base" />
+      <openfolder url="exec" />
+      <openfolder url="fonds" />
+      <openfolder url="formulaires" />
+      <openfolder url="img" />
+      <openfolder url="lang" />
+    </treestatus>
+  </session>
+</webprojectsession>

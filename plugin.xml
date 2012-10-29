@@ -1,0 +1,60 @@
+<plugin>
+	<nom>Shop</nom>
+	<auteur><a href="http://www.mychacra.net">Rainer Müller</a></auteur>
+	<version>0.2.0</version>
+	<version_base>0.3.0</version_base>
+	<etat>test</etat>
+	<description>
+	plugin pour e-commerce simple inspir&eacute; du plugin &eacute;choppe
+	</description>
+	<licence>GPL 3</licence>
+	<prefix>shop</prefix>
+	<icon>img/logo_shop_32.png</icon>
+	<bouton id="shop_edit" parent="naviguer">
+		<icone>img/logo_shop_24.png</icone>
+		<titre>Shop</titre>   
+		<url>shop</url>   
+    	</bouton>
+	<fonctions>shop_mes_fonctions.php</fonctions>
+	<fonctions>inc/devises.php</fonctions>	
+	<options>shop_mes_options.php</options>		
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/tables_interfaces.php</inclure>
+		<action>init_tables_interfaces</action>
+	</pipeline>		
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/shop_tables_principales.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/shop_tables_auxiliaires.php</inclure>
+	</pipeline>		
+	<install>base/shop_install.php</install>
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>shop_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>shop_pipelines.php</inclure>
+	</pipeline>	
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>shop_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>I2_cfg_form</nom>
+		<inclure>shop_pipelines.php</inclure>
+	</pipeline>	
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>shop_autoriser.php</inclure>
+	</pipeline>		
+	
+	<necessite id="SPIP" version="[2.0.0;]" />
+	<necessite id="spip_bonux" version="[1.8;]" />
+	<necessite id="saisies" version="[1.7.8;]" />
+</plugin>
+
