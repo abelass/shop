@@ -1,0 +1,27 @@
+<paquet
+	prefix="selection_objet"
+	categorie="edition"
+	version="1.2.5"
+	etat="dev"
+	compatibilite="[3.0.5;3.0.*]"
+	logo="prive/themes/spip/images/selection_objet-64.png"
+	documentation=""
+	schema="0.2.4" 
+>
+
+	<nom>Selection d'objets</nom>
+
+	<auteur lien='http://mychacra.net'>Rainer Müller</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<necessite nom="saisies" compatibilite="[1.24.0;]" /> 
+
+	<pipeline nom="autoriser" inclure="selection_objet_autorisations.php" /> 
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/selection_objet.php" /> 
+	<pipeline nom="declarer_tables_interfaces" inclure="base/selection_objet.php" />
+	<pipeline nom="affiche_milieu" inclure="selection_objet_pipelines.php" /> 
+	<pipeline nom="affiche_gauche" inclure="selection_objet_pipelines.php" /> 	 
+
+</paquet>
