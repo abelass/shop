@@ -20,8 +20,8 @@ function shop_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
 
 
-	$maj['create'] = array(array('maj_tables', array('spip_shop_commande','spip_shop_prix','spip_tokens_retour','spip_geo_pays')));
-
+	$maj['create'] = array(array('maj_tables', array('spip_shop_commande','spip_shop_prix','spip_shop_tokens_retour','spip_geo_pays')));
+    $maj['1.0.0'] = array(array('maj_tables', array('spip_shop_commande','spip_shop_prix','spip_tokens_retour','spip_geo_pays')));
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);

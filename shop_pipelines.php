@@ -6,9 +6,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function shop_affiche_milieu($flux){
 	// affichage du formulaire d'activation désactivation projets
 		
-	include_spip('shop_mes_fonctions');
+	//include_spip('shop_mes_fonctions');
 
-        if ($flux['args']['exec']=='articles') {
+    if ($flux['args']['exec']=='article') {
 	$id_article = $flux['args']['id_article'];
 	$rubriques_produits=rubrique_produits($id_article);
 		if($rubriques_produits){
@@ -16,7 +16,7 @@ function shop_affiche_milieu($flux){
 				if($_REQUEST['formulaire_action']=='prix' OR $_REQUEST['retour_action']) $deplie=true;
 				if($_REQUEST['retour_action']=='prix')$deplie=true;
 				$contexte = array('id_article'=>$id_article);
-				$contenu .= recuperer_fond('prive/contenu/prix', $contexte,array('ajax'=>'oui'));
+				$contenu .= recuperer_fond('prive/squelettes/contenu/prix', $contexte,array('ajax'=>'oui'));
 				$res .= cadre_depliable('',_T('shop:info_prix'),$deplie,$contenu,'prix','e');    		
 				$flux["data"] .= $res;
 				}
