@@ -1,0 +1,24 @@
+
+
+<BOUCLE_art(BOUTIQUE_COMMANDE){id_commande}>
+<form action="https://www.paypal.com/fr/cgi-bin/webscr" method="post" id="formulaire_prestataire_paiement">
+	<input type="hidden" name="cmd" value="_cart" /> 
+	
+	<input type="hidden" name="amount" value="#PRIX" /> 
+	<input type="hidden" name="image_url" value="#LOGO_SITE_SPIP" /> 
+	<input type="hidden" name="upload" value="1" /> 
+	<input type="hidden" name="return" value="[(#TOKEN|generer_url_retour_paiement{paypal})]" /> 
+	<input type="hidden" name="rm" value="2" /> 
+	<input type="hidden" name="currency_code" value="#CODE_DEVISE" /> 
+	<input type="hidden" name="business" value="crushthebutton@gmail.com" /> 
+	<input type="hidden" name="item_name_1" value="[(#ID_PRODUIT|titre_article)]" /> 
+	<input type="hidden" name="amount_1" value="#PRIX" /> 
+	<input type="hidden" name="quantity_1" value="1" /> 
+	<input type="hidden" name="item_name_2" value="<shop:frais_livraison:>" /> 
+	<input type="hidden" name="amount_2" value="#FRAIS_LIVRAISON" /> 
+	<input type="hidden" name="quantity_2" value="1" /> 
+	
+	<br />
+	<input type="submit" value="<:payer_paypal:>"  />
+</form>
+</BOUCLE_art

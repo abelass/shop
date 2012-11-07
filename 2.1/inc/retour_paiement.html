@@ -1,0 +1,9 @@
+<h3><:shop:retour_paiement:></h3>
+
+<BOUCLE_art(BOUTIQUE_COMMANDE){id_commande}>
+	<div class="message">
+	[(#STATUT|=={paye}|?{<:shop:paiement_valide:>,<:shop:paiement_probleme:>: #EMAIL_WEBMASTER})]
+	</div>
+</BOUCLE_art>
+
+

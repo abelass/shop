@@ -1,0 +1,5 @@
+<li class="editer_prix[ (#ENV**{erreurs}|table_valeur{prix}|oui)erreur]">
+	<label for="prix"><:shop:info_prix:></label>
+		[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{prix})</span>]
+		<input name='prix' id='prix' value="#ENV{prix}"/>
+</li>
