@@ -1,12 +1,23 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION")) return;
+/*
+ * pas utilisé pour le moment
+function shop_affiche_gauche($flux){
+     $exec = $flux["args"]["exec"];
+     $args=$flux['args'];
+    if (autoriser('shop_modifie') AND $exec=='shop'){
+        $id_document=$args['id_document'];
+        $voir=$args['voir'];
+        //$flux['data'] .= recuperer_fond('prive/squelettes/navigation/shop',array('voir'=>$voir,'id_document'=>$id_document),array('ajax'=>true));
+    }
 
-
+    return $flux;
+}*/
 
 function shop_affiche_milieu($flux){
 	// affichage du formulaire d'activation désactivation projets
 		
-	//include_spip('shop_mes_fonctions');
+	include_spip('shop_fonctions');
 
     if ($flux['args']['exec']=='article') {
 	$id_article = $flux['args']['id_article'];
