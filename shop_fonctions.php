@@ -7,8 +7,144 @@ include_spip('base/abstract_sql');
 
 
 function devises(){
-    $devises=charger_fonction('inc','devises');
-    return $devises();
+    $devises=array(
+    
+        //A
+        'AUD'=>'AUD',   
+             
+        //B 
+        'BRL'=>'Real',               
+             
+        //C          
+        'CAD'=>'CAD',        
+        'CHF'=>'CHF',    
+        'CNY'=>'Yuan',
+        'CSD'=>'CSD',                        
+        'CZK'=>'CZK',
+                 
+        //D     
+        'DKK'=>'DKK', 
+             
+        //E     
+        'EUR'=>'€',
+             
+        //G          
+        'GBP'=>'£',
+             
+        //H 
+        'HKD'=>'HKD',        
+        'HUF'=>'HUF',
+                 
+        //I              
+        'IDR'=>'IDR',                
+        'ILS'=>'Shekel',
+        'IQD'=>'IQD',       
+        'IRR'=>'IRR',       
+        'ISK'=>'ISK',   
+            
+        //J         
+        'JEP'=>'JEP',   
+        'JOD'=>'JOD',                       
+        'JMD'=>'JMD',                
+        'JPY'=>'¥',
+        
+        //K     
+        'KES'=>'KES',   
+        'KGS'=>'KGS',
+        'KWD'=>'KWD',           
+        'KZT'=>'Tenge',                         
+        
+        //L     
+        'LAK'=>'Kip',   
+        'LBP'=>'LBP',   
+        'LKR'=>'LKR',                           
+        'LRD'=>'LRD',    
+        'LTL'=>'Litas', 
+        'LVL'=>'Lat',                               
+                            
+        //M     
+        'MAD'=>'Dirham',     
+        'MDL'=>'MDL',                   
+        'MGA'=>'Ariary',    
+        'MKD'=>'MKD',           
+        'MNT'=>'Tughrik',           
+        'MRO'=>'Ouguiya',   
+        'MUR'=>'MUR',
+        'MVR'=>'Rufiyaa',                           
+        'MWK'=>'MWK',                    
+        'MXN'=>'MXN',
+        'MYR'=>'Ringgit',       
+        'MZN'=>'Metical',       
+        
+        //N     
+        'NAD'=>'NAD',
+        'NGN'=>'Naira',
+        'NIO'=>'Cordoba',           
+        'NPR'=>'NPR',                                    
+        'NOK'=>'NOK',        
+        'NZD'=>'NZD',
+        
+        //O     
+        'OMR'=>'OMR',
+                
+        'QAR'=>'Riyal',             
+        
+        //P     
+        'PGK'=>'Kina',
+        'PHP'=>'PHP',   
+        'PKR'=>'PKR',                                
+        'PLN'=>'Zloty',  
+            
+        
+        'RON'=>'RON',       
+        'RUB'=>'Rouble',            
+        'RWF'=>'RWF',
+        
+        //S     
+        'SCR'=>'SCR',           
+        'SDD'=>'SDD',                            
+        'SEK'=>'SEK',        
+        'SGD'=>'SGD',
+        'SOS'=>'SOS',       
+        'SLL'=>'Leone',         
+        'SRD'=>'SRD',       
+        'STD'=>'Dobra',
+        'SVC'=>'Colon',
+        'SYP'=>'SYP',                           
+                
+        //T 
+        'THB'=>'Baht',              
+        'TJS'=>'Somoni',                    
+        'TND'=>'TND',   
+        'TMM'=>'TMM',                   
+        'TRY'=>'Lirasi',
+        'TTD'=>'TTD',       
+        'TWD'=>'TWD',
+        'TZS'=>'TZS',       
+            
+            
+        //U     
+        'UAH'=>'Hryvna',    
+        'UGX'=>'UGX',                                                    
+        'USD'=>'USD',
+        'UZS'=>'UZS',       
+        
+        //V     
+        'VND'=>'Dong',
+        
+        //X     
+        'XAF'=>'XAF',
+        'XOF'=>'XOF',   
+        
+        //Y     
+        'YER'=>'Rial',          
+        
+        //Z     
+        'ZMK'=>'ZMK',                               
+        'ZWN'=>'ZWN',       
+        );
+
+    return $devises;
 }
 
 // traduit le nom de la devise
@@ -147,7 +283,7 @@ function myUrlEncode($string) {
     return str_replace($entities, $replacements, urlencode($string));
     }
     
-function rubrique_config($rubrique_produit){
+/*function rubrique_config($rubrique_produit){
 
 	$rubriques=array();
 	foreach($rubrique_produit AS $rubrique){
@@ -157,21 +293,20 @@ function rubrique_config($rubrique_produit){
 		}
 
      	return $rubriques;
-}
+}*/
     
 function rubrique_produits($id,$objet='article',$sousrubriques=false){
 
-     	$rubrique_produit=lire_config('shop/rubrique_produits');
-        echo serialize($rubrique_produit);
+     	$rubrique_produit=picker_selected(lire_config('shop/rubrique_produits'),'rubrique');
+
      	if($rubrique_produit){
-		$id_parent=rubrique_config($rubrique_produit);
+		$id_parent=$rubrique_produit;
 
      	if(!$sousrubriques){
 			$rubriques=$id_parent;
 			}
 		else $rubriques=array();
-		
-        echo serialize($rubriques);
+
 		$rubriques=rubriques_enfant($id_parent,$rubriques);
 		$valide=sql_getfetsel('id_'.$objet, 'spip_'.$objet.'s', 'id_'.$objet.'='.$id.' AND id_rubrique IN ('.implode(',',$rubriques).')');
 	}
@@ -180,17 +315,20 @@ return $valide;
 } 
    
 function rubriques_enfant($id_parent,$rubriques=array()){
-	echo serialize($id_parent);
+	//echo serialize($id_parent);
+$id_p='';
 	if (is_array($id_parent))$id_parent=implode(',',$id_parent);
-    if(!is_array($rubriques))$rubriques=array(0=>$rubriques);
 
-	$sql=sql_select('id_rubrique','spip_rubriques','id_parent IN ('.$id_parent.')');
+
+	if($id_parent)$sql=sql_select('id_rubrique','spip_rubriques','id_parent IN ('.$id_parent.')');
 	
-
+    $id_p=array();
 	while($row=sql_fetch($sql)){
-		$rubriques[$row['id_rubrique']]=rubriques_enfant($row['id_rubrique'],$row['id_rubrique']);
+		$id_p[]=$row['id_rubrique'];
+        $rubriques[]=$row['id_rubrique'];
 		}
 
+    if(count($id_p)>0)$rubriques=rubriques_enfant($id_p,$rubriques);
 return $rubriques;
 }
 

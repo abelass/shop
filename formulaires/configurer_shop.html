@@ -1,5 +1,5 @@
 #CACHE{0}
-[(#REM) désactivé #SET{devises,(#VAL|devises)}]
+
 #SET{selected,#CONFIG{shop/devises,#ARRAY}}
 <div class="formulaire_spip formulaire_#FORM">
 	<form action="#ENV{action}" method="post"><div>
@@ -55,10 +55,8 @@
 								<input type="text" name="email_paypal_test" id="email_paypal_test" value="#ENV{email_paypal_test}" />
 							</div>
 						</li>
-						</ul>
-						</fieldset>			
 					</ul>
-				</fieldset>
+				</fieldset>	
 			</li>
 			<li class="fieldset">
 				<fieldset><legend><:shop:transference:></legend>
