@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'annule' => "Annulé",
 'alerte_action' => "Cette action est irréversible, voulez-vous vraiment continuer ?",
 'attente' => "En attente",
+'acune_commande_traitement' => 'Il n\'y a actuellement aucune commande en traitement',
 
 // b
 'bonjour' => "Bonjour",
