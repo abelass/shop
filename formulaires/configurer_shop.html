@@ -1,48 +1,15 @@
 #CACHE{0}
-<!-- nom=shop -->
-#SET{devises,(#VAL|devises)}
+[(#REM) désactivé #SET{devises,(#VAL|devises)}]
 #SET{selected,#CONFIG{shop/devises,#ARRAY}}
 <div class="formulaire_spip formulaire_#FORM">
 	<form action="#ENV{action}" method="post"><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
+		<input name="devise_default" type="hidden" value="EUR"/>  
 		<ul>
 			<li class="fieldset">
 				<fieldset><legend><:shop:info_produit:></legend>
+				    
 						<ul>
-							<li class="editer_devises_choisis[ (#GET{erreurs}|oui)erreur]">	
-								<B_choix>
-									<div>
-										<:shop:devises_choisis:> :
-										<BOUCLE_choix(POUR){tableau #CONFIG{shop/devises,#ARRAY}}{', '}>
-										[(#VALEUR|traduire_devise)]
-									</BOUCLE_choix>
-								</div>
-							</B_choix>
-							<li class="editer_choix_devises[ (#GET{erreurs}|oui)erreur]">
-								<label for="devises"><:shop:choix_devises:></label>
-									
-									<select name="devises[]" class="forml" style="width:auto;" multiple="multiple" size="5" id="devises">	
-										<option value=""><:shop:choix_devise:></option>
-										<BOUCLE_selection(POUR){tableau #GET{devises}}>
-										<option value="#CLE" [(#CLE|in_array{#GET{selected}}|?{' selected="selected"'})]>#VALEUR</option>
-									</BOUCLE_selection>
-								</select>
-							</li>
-							
-							<B_selection_default>
-								<li class="editer_devise_default[ (#GET{erreurs}|oui)erreur]">
-									<label for="devises"><:shop:devise_default:></label>	
-										<select name="devise_default" class="forml" style="width:auto;" id="devise_default">	
-										<option value=""><:shop:choisir:></option>
-										<BOUCLE_selection_default(POUR){tableau #CONFIG{shop/devises,#ARRAY}}>
-										<option value="#VALEUR" [(#ENV{devise_default}|=={#VALEUR}|?{'selected="selected"'})]>[(#VALEUR|traduire_devise)]</option>
-									</BOUCLE_selection_default>
-								</select>
-								
-							</li>
-						</B_selection_default>
-						
-						
 						<li class="editer_frais_livraison[ (#GET{erreurs}|oui)erreur]">
 							
 							<B_frais>

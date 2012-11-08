@@ -6,6 +6,12 @@ function shop_autoriser(){}
 
 // declarations d'autorisations
 
+// Édition
+// modifier
+function autoriser_shop_modifier_dist($faire, $type, $id, $qui, $opt) {
+    return $qui['statut'] == '0minirezo' AND !$qui['restreint'];
+}
+
 
 // détecte la présence d'un commercant
 function autoriser_commercant_dist($faire, $type, $id, $qui, $opt='') {
@@ -15,7 +21,5 @@ function autoriser_commercant_dist($faire, $type, $id, $qui, $opt='') {
 	if($commercant) $retour=true;
 
 	return $retour;
-
 }
-
 ?>
