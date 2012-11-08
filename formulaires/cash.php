@@ -17,9 +17,9 @@ function formulaires_cash_traiter_dist(){
 	
 	$retour = array();
 	
-	sql_updateq('spip_shop_commande',array('type_paiement'=>'cash'),'id_commande='._request('id_commande'));
+	sql_updateq('spip_shop_commandes',array('type_paiement'=>'cash'),'id_commande='._request('id_commande'));
 	
-	$cont=sql_fetsel('*','spip_shop_commande','id_commande='._request('id_commande'));
+	$cont=sql_fetsel('*','spip_shop_commandes','id_commande='._request('id_commande'));
 	
 	
 	include_spip('inc/config');
@@ -42,7 +42,7 @@ function formulaires_cash_traiter_dist(){
 	
 	include_spip('inc/mail');
 	include_spip('shop_mes_fonctions');
-	//$cont=sql_fetsel('*','spip_shop_commande',Array("token = '".$contexte["token"]."'"));
+	//$cont=sql_fetsel('*','spip_shop_commandes',Array("token = '".$contexte["token"]."'"));
 	lang_select(_request('lang'));
 						
 	$header ="Content-Type: text/html; charset=UTF-8\n"

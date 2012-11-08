@@ -22,7 +22,7 @@ function shop_upgrade($nom_meta_base_version, $version_cible) {
 
 	$maj['create'] = array(array('maj_tables', array('spip_shop_commandes','spip_shop_prix','spip_shop_tokens_retour','spip_geo_pays')));
     $maj['1.0.0'] = array(array('maj_tables', array('spip_shop_commandes','spip_shop_prix','spip_tokens_retour','spip_geo_pays')));
-    $maj['1.0.1']  = array(array('sql_alter','TABLE spip_shop_commande RENAME TO spip_shop_commandes'));
+    $maj['1.0.1']  = array(array('sql_alter','TABLE spip_shop_commandes RENAME TO spip_shop_commandes'));
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
@@ -40,7 +40,7 @@ function shop_vider_tables($nom_meta_base_version) {
 	# sql_drop_table("spip_xx");
 	# sql_drop_table("spip_xx_liens");
 
-	sql_drop_table("spip_shop_commande");
+	sql_drop_table("spip_shop_commandes");
     sql_drop_table("spip_shop_prix");
     sql_drop_table("spip_tokens_retour");
     sql_drop_table("spip_geo_pays");    
