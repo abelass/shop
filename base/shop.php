@@ -1,7 +1,7 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function shop_tables_interfaces($tables_interfaces){
+function shop_declarer_tables_interfaces($tables_interfaces){
 
     $tables_interfaces['table_des_tables']['shop_prix'] = 'shop_prix';
     $tables_interfaces['table_des_tables']['shop_commandes'] = 'shop_commandes';
