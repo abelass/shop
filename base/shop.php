@@ -4,14 +4,14 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function shop_tables_interfaces($tables_interfaces){
 
     $tables_interfaces['table_des_tables']['shop_prix'] = 'shop_prix';
-    $tables_interfaces['table_des_tables']['shop_commande'] = 'shop_commande';
+    $tables_interfaces['table_des_tables']['shop_commandes'] = 'shop_commandes';
     $tables_interfaces['table_des_tables']['geo_pays'] = 'geo_pays';    
     
     return $tables_interfaces;
 }
 
 function shop_declarer_tables_principales($tables_principales){
-	$spip_shop_commande = array(
+	$spip_shop_commandes = array(
 		"id_commande" 			=> "int(21) NOT NULL",
 		"id_panier" 			=> "int(21) NOT NULL",		
 		"nom_societe" 			=> "varchar(255) NOT NULL",		
@@ -44,20 +44,20 @@ function shop_declarer_tables_principales($tables_principales){
 		"date_creation" 		=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",		
 		"maj" 					=> "TIMESTAMP");
 	
-	$spip_shop_commande_key = array(
+	$spip_shop_commandes_key = array(
 		"PRIMARY KEY" 	=> "id_commande",
 		"KEY id_panier" 	=> "id_panier",		
 		);
 		
-	$spip_shop_commande_join = array(
+	$spip_shop_commandes_join = array(
 		"id_commande"	=> "id_commande",
 		"id_panier"	=> "id_panier",		
 		);
 
-	$tables_principales['spip_shop_commande'] = array(
-		'field' => &$spip_shop_commande,
-		'key' => &$spip_shop_commande_key,
-		'join' => &$spip_shop_commande_join
+	$tables_principales['spip_shop_commandes'] = array(
+		'field' => &$spip_shop_commandes,
+		'key' => &$spip_shop_commandes_key,
+		'join' => &$spip_shop_commandes_join
 	);
 
 	$spip_shop_prix = array(
