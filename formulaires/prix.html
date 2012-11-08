@@ -1,23 +1,24 @@
 
-
+<div class="formulaire_spip editer_prix liste">
 <B_prix>
-	<div class="cadre cadre-liste">
+    <h3 class="titrem"><:shop:prix_choisis:></h3>
 		<ul style="list-style:none;">
 		<BOUCLE_prix(POUR){tableau #ENV{prix_choisis}}>
 			<li>
-				<span>[(#VALEUR|table_valeur{prix})]</span>&nbsp;<span>[(#VALEUR|table_valeur{code_devise}|traduire_devise)]</span><a href="[(#URL_ACTION_AUTEUR{eliminer_prix,[(#VALEUR|table_valeur{id_prix})],[(#SELF|parametre_url{retour_action,oui})]})]#prix"> <img src="#CHEMIN{prive/images/croix-rouge.gif}" /></a>
+				<span>[(#VALEUR|table_valeur{prix})]</span>&nbsp;<span>[(#VALEUR|table_valeur{code_devise}|traduire_devise)]</span><a class="ajax" href="[(#URL_ACTION_AUTEUR{eliminer_prix,[(#VALEUR|table_valeur{id_prix})],[(#SELF|parametre_url{retour_action,oui})]})]#prix"> <img src="#CHEMIN_IMAGE{supprimer-12.png}" /></a>
 			</li>
 
 		</BOUCLE_prix>
 		</ul>
-	</div>
+
 </B_prix>
 
 <BOUCLE_test0(CONDITION){si #ENV{devises}|count|>{0}}>
+    <h3 class="titrem"><:shop:ajouter_prix:></h3>
 	<form id="form_prix" name="form_prix" action="[(#SELFparametre_url{retour_action,''})]#prix" method="post"/>
     		#ACTION_FORMULAIRE{#ENV{action}}
-		<fieldset>
-			<label><shop:choix_prix:></label>
+
+			<label><:shop:choix_prix:></label>
 			[<div class='erreur_message'>(#ENV**{erreurs}|table_valeur{prix})</div>]
 			[<div class='erreur_message'>(#ENV**{erreurs}|table_valeur{code_devise})</div>]
 			<span>
@@ -38,12 +39,12 @@
 				</B_selection>					
 				<//B_test>
 			</span>	
-		</fieldset>
+
 		<p><input type="submit"  class="submit" value="<:pg:envoyer:>" /></p>
 	</form>
 </BOUCLE_test0>
-		
-
+<B_prix>		
+</div>
 	
 	
 

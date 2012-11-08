@@ -9,7 +9,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'annule' => "Annulé",
 'alerte_action' => "Cette action est irréversible, voulez-vous vraiment continuer ?",
 'attente' => "En attente",
-'acune_commande_traitement' => 'Il n\'y a actuellement aucune commande en traitement',
+'aucune_commande_traitement' => 'Il n\'y a actuellement aucune commande en traitement',
+'ajouter_prix' => 'Ajouter un prix',
 
 // b
 'bonjour' => "Bonjour",
@@ -20,6 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'choisir' => "Sélectionner",
 'choix_devises' => "Choix des devises",
 'choix_devise' => "Devise",
+'choix_prix' => "Le prix du produit",
 'choix_rubrique' => "Choix la rubrique",
 'code_postal' => "Code postal",
 'commande' => "Commande",
@@ -80,6 +82,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'payer_paypal' => "Payer via Paypal",
 'paiement' => "Paiement de la commande",
 'pendant' => "En cours",
+'prix_choisis' => "Prix choisi",
 'prix_devises' => "Prix",
 'produit' => "Produit",
 'paiement_description' => "Veuillez sélectionner le mode de paiement",

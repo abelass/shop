@@ -29,9 +29,13 @@ function shop_affiche_milieu($flux){
 				if($_REQUEST['retour_action']=='prix')$deplie=true;
 				$contexte = array('id_article'=>$id_article);
 				$contenu .= recuperer_fond('prive/squelettes/contenu/prix', $contexte,array('ajax'=>'oui'));
-				$res .= cadre_depliable('',_T('shop:info_prix'),$deplie,$contenu,'prix','e');    		
-				$flux["data"] .= $res;
-				}
+				$res .= cadre_depliable('',_T('shop:info_prix'),$deplie,$contenu,'prix','r');    		
+
+                if ($p=strpos($flux['data'],"<!--affiche_milieu-->"))
+                 $flux['data'] = substr_replace($flux['data'],$res,$p,0);
+                else
+                    $flux['data'] .= $res;
+				    }
 		}
 return $flux;
 }
