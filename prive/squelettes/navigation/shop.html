@@ -9,5 +9,27 @@
          <p>(#ID_COMMANDE)</p>
       </div>
      ]
+     [(#ENV{exec}|=={configurer_shop}|oui)<strong><:spip:icone_configuration_site:></strong>]
 </div>
 #BOITE_FERMER
+
+[(#BOITE_OUVRIR{
+    [(#CHEMIN_IMAGE{logo_shop_24.png}|balise_img{'','cadre-icone'})]
+    
+,'simple personnel'})]
+<h3 style="text-align:center;"><:spip:titre_cadre_raccourcis:></h3>
+<ol class="shortcut">
+    [(#ENV{voir}|oui|ou{#ENV{exec}|=={configurer_shop}|oui})
+        <li><a href="#URL_ECRIRE{shop}"class="cellule-h"><img src="#CHEMIN_IMAGE{logo_shop_24.png}" alt="<:spip:icone_configuration_site:>" align="absmiddle" /> &nbsp;<:shop:retour_panel:> <:shop:shop:></a></li>
+    ]
+     [(#ENV{exec}|=={configurer_shop}|non)
+    <li><a href="#URL_ECRIRE{configurer_shop}" class="cellule-h"><img src="#CHEMIN_IMAGE{cfg-16.png}" alt="<:spip:icone_configuration_site:>" align="absmiddle"/> &nbsp;<:spip:icone_configuration_site:></a></li>
+    ]
+[(#PIPELINE{shop_affiche_gauche_shortcuts})]
+</ol>
+</div>
+#BOITE_FERMER
+
+
+    
+
