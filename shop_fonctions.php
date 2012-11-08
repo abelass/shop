@@ -162,6 +162,7 @@ function rubrique_config($rubrique_produit){
 function rubrique_produits($id,$objet='article',$sousrubriques=false){
 
      	$rubrique_produit=lire_config('shop/rubrique_produits');
+        echo serialize($rubrique_produit);
      	if($rubrique_produit){
 		$id_parent=rubrique_config($rubrique_produit);
 
@@ -170,6 +171,7 @@ function rubrique_produits($id,$objet='article',$sousrubriques=false){
 			}
 		else $rubriques=array();
 		
+        echo serialize($rubriques);
 		$rubriques=rubriques_enfant($id_parent,$rubriques);
 		$valide=sql_getfetsel('id_'.$objet, 'spip_'.$objet.'s', 'id_'.$objet.'='.$id.' AND id_rubrique IN ('.implode(',',$rubriques).')');
 	}
@@ -178,16 +180,17 @@ return $valide;
 } 
    
 function rubriques_enfant($id_parent,$rubriques=array()){
-	
+	echo serialize($id_parent);
 	if (is_array($id_parent))$id_parent=implode(',',$id_parent);
-	
-
+    if(!is_array($rubriques))$rubriques=array(0=>$rubriques);
 
 	$sql=sql_select('id_rubrique','spip_rubriques','id_parent IN ('.$id_parent.')');
-		
+	
+
 	while($row=sql_fetch($sql)){
 		$rubriques[$row['id_rubrique']]=rubriques_enfant($row['id_rubrique'],$row['id_rubrique']);
 		}
+
 return $rubriques;
 }
 

@@ -17,7 +17,10 @@ function shop_affiche_gauche($flux){
 function shop_affiche_milieu($flux){
 	// affichage du formulaire d'activation désactivation projets
 		
+	
+
     if ($flux['args']['exec']=='article') {
+    include_spip('shop_fonctions');    
 	$id_article = $flux['args']['id_article'];
 	$rubriques_produits=rubrique_produits($id_article);
 		if($rubriques_produits){
