@@ -11,8 +11,8 @@ function shop_declarer_tables_interfaces($tables_interfaces){
 
 function shop_declarer_tables_principales($tables_principales){
 	$spip_prix = array(
-		"id_prix" 	=> "int(21) NOT NULL",
-		"id_objet" 	=> "int(21) NOT NULL",
+		"id_prix" 	=> "bigint(21) NOT NULL",
+		"id_objet" 	=> "bigint(21) NOT NULL",
 		'objet' => 'varchar(25) not null default ""',		
 		"code_devise" 	=> "varchar(3) NOT NULL",
 		"prix_ht" 		=> "float (38,2) NOT NULL",
