@@ -54,7 +54,7 @@ function formulaires_prix_traiter_dist($id_objet,$objet='article'){
 	$valeurs=array(
 		'id_objet'=>$id_objet,
 		'objet'=>$objet,	
-		'prix' => _request('prix'),
+		'prix_ht' => _request('prix'),
 		'code_devise' => _request('code_devise')
 		);
 	sql_insertq('spip_prix', $valeurs);
