@@ -15,7 +15,8 @@ function shop_declarer_tables_principales($tables_principales){
 		"id_objet" 	=> "int(21) NOT NULL",
 		'objet' => 'varchar(25) not null default ""',		
 		"code_devise" 	=> "varchar(3) NOT NULL",
-		"prix" 		=> "float (38,2) NOT NULL",
+		"prix_ht" 		=> "float (38,2) NOT NULL",
+        "prix_ttc"       => "float (38,2) NOT NULL",		
 		);
 	
 	$spip_prix_key = array(

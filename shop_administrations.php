@@ -25,6 +25,10 @@ function shop_upgrade($nom_meta_base_version, $version_cible) {
         array('sql_alter','TABLE spip_shop_commandes RENAME TO spip_commandes'),
         array('sql_alter','TABLE spip_shop_prix RENAME TO spip_prix')
         );
+    $maj['1.1.2']  = array(  
+        array('sql_alter','TABLE spip_prix CHANGE prix prix_ht float (38,2) NOT NULL'),
+        array('maj_tables', array('spip_prix')),
+        );        
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
