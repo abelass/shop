@@ -47,10 +47,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'email' => "Email",
 'echoue' => "Echoué",
 'expire' => "Expiré",
-'exemple_nom_etoile' => "Par ex. Marie",
-'exemple_message' => "Saisissez ici votre message personnel",
-'exemple_delapartde' => "Votre nom ou vous pouvez également mettre anonyme",
-'exemple_nom' => "Le prénom et nom de la personne à qui est adressé le coffret",
 'explication_confirmation' => "voici les informations que vous avez encodées",
 
 // f
@@ -74,10 +70,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'message_validation_accepte_webmaster' => "Le paiement a été accepté",
 'message_validation_inconnue' => "raison inconnu",
 
-// n
-'nom_etoile' => "Nom de l'étoile",
-'nom_etoile_1' => "Nom de la première étoile",
-'nom_etoile_2' => "Nom de la deuxième étoile",
 
 // p
 'paye'=> "payé",
@@ -85,6 +77,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'paiement' => "Paiement de la commande",
 'pendant' => "En cours",
 'prix_choisis' => "Prix choisi",
+'prix_ht' => "Prix ht",
 'prix_devises' => "Prix",
 'produit' => "Produit",
 'paiement_description' => "Veuillez sélectionner le mode de paiement",
@@ -102,6 +95,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // s
 'statut_paiement' => "Statut",
+'supprimer' => "Supprimer",
 
 // t
 'titre_confirmation' => "Confirmation de votre commande",
