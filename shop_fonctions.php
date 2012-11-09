@@ -163,7 +163,7 @@ function prix_defaut($id_objet,$objet='article'){
 	elseif(lire_config('shop/devise_default'))$devise_defaut=lire_config('shop/devise_default');
 	else 	$devise_defaut='EUR';
 
-	$req=sql_select('code_devise,prix','spip_shop_prix','id_objet='.$id_objet.' AND objet='.sql_quote($objet));
+	$req=sql_select('code_devise,prix','spip_prix','id_objet='.$id_objet.' AND objet='.sql_quote($objet));
 
 	while($row=sql_fetch($req)){
 	
@@ -185,7 +185,7 @@ function prix_objet($id_objet,$objet='article',$devise='',$integer=false){
 	if(!$devise)$devise=devise_defaut($id_objet,$objet);
 	if(!$devise)$devise='EUR';
 
-	$sql_prix=sql_fetsel('code_devise,prix','spip_shop_prix','id_objet='.$id_objet.' AND objet='.sql_quote($objet).' AND code_devise='.sql_quote($devise));
+	$sql_prix=sql_fetsel('code_devise,prix','spip_prix','id_objet='.$id_objet.' AND objet='.sql_quote($objet).' AND code_devise='.sql_quote($devise));
 
 		$prix= $sql_prix['prix'].($integer?'':' '.traduire_devise($sql_prix['code_devise']));
 
@@ -198,7 +198,7 @@ function devise_defaut($id_objet,$objet='article'){
 	elseif(lire_config('shop/devise_default'))$devise_defaut=lire_config('shop/devise_default');
 	else 	$devise_defaut='EUR';
 
-	$req=sql_select('code_devise,prix','spip_shop_prix','id_objet='.$id_objet.' AND objet='.sql_quote($objet));
+	$req=sql_select('code_devise,prix','spip_prix','id_objet='.$id_objet.' AND objet='.sql_quote($objet));
 
 	while($row=sql_fetch($req)){
 	
@@ -234,7 +234,7 @@ function donnees_objet($id_objet,$objet='article',$champs='*'){
 
 function traduire_code_devise($code_devise,$id_objet,$objet='article',$option=""){
 
-	$prix=sql_fetsel('prix','spip_shop_prix','id_objet='.$id_objet.' AND objet='.sql_quote($objet).' AND code_devise ='.sql_quote($code_devise));
+	$prix=sql_fetsel('prix','spip_prix','id_objet='.$id_objet.' AND objet='.sql_quote($objet).' AND code_devise ='.sql_quote($code_devise));
 
 	$return =$prix['prix'].' '. traduire_devise($code_devise);
 	

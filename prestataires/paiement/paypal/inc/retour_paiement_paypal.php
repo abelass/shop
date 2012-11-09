@@ -16,7 +16,7 @@ function inc_retour_paiement_paypal_dist($token){
 	spip_log($les_entetes_get,"shop_paypal");
 	spip_log($les_entetes_post,"shop_paypal");
 	
-	$token_client = sql_fetsel("token","spip_shop_commandes","token = '".$token."'");
+	$token_client = sql_fetsel("token","spip_commandes","token = '".$token."'");
 	
 	//$contexte["token_notification"] = _request("token");
 	
@@ -36,7 +36,7 @@ function inc_retour_paiement_paypal_dist($token){
 		case 'Canceled-Reversal' :
 			spip_log("NOTIFICATION Annulation d'un panier","shop");
 			
-			sql_updateq("spip_shop_commandes",Array("statut"=>"annule"),Array("token = '".$contexte["token"]."'"));
+			sql_updateq("spip_commandes",Array("statut"=>"annule"),Array("token = '".$contexte["token"]."'"));
 			
 // 			notifier_client($token_client['token_client'], _T("paypal:votre_panier_a_ete_annuler_depuis_le_site_de_paypal"));
 // 			echoppe_informer_panier($contexte["token"],"Canceled-Reversal","Une annulation de paiement a été annulée. Par exemple, vous avez obtenu gain de cause dans un litige avec le client et les fonds de la transaction qui avaient été remboursés vous sont retournés.","paypal",0,"warning");
@@ -45,7 +45,7 @@ function inc_retour_paiement_paypal_dist($token){
 		/* Completed : le paiement a été effectué et les fonds ont été ajoutés au solde de votre compte. */
 		case 'Completed' :
 			spip_log("NOTIFICATION Validation de paiement d'un panier","shop");
-			sql_updateq("spip_shop_commandes",Array("statut"=>"paye"),Array("token = '".$contexte["token"]."'"));
+			sql_updateq("spip_commandes",Array("statut"=>"paye"),Array("token = '".$contexte["token"]."'"));
 // 			notifier_client($token_client['token_client'], _T("paypal:votre_paiement_a_bien_ete_valide_depuis_le_site_de_paypal"));
 // 			notifier_marchand(_T("paypal:un_paiement_a_bien_ete_valide_depuis_le_site_de_paypal")."\n Voir le panier: ".generer_url_ecrire('echoppe_edit_panier','token='.$contexte["token"],"&"));
 // 			echoppe_informer_panier($contexte["token"],"Completed","Le paiement a été effectué et les fonds ont été ajoutés au solde de votre compte.","paypal",0,"warning");
@@ -55,7 +55,7 @@ function inc_retour_paiement_paypal_dist($token){
 		/*Denied : vous avez rejeté le paiement. Ce cas se produit uniquement si le paiement était précédemment en attente pour des raisons possibles décrites dans l'élément PendingReason.*/
 		case 'Denied' :
 			spip_log("NOTIFICATION Refu de paiement d'un panier","shop");
-			sql_updateq("spip_shop_commandes",Array("statut"=>"annule"),Array("token = '".$contexte["token"]."'"));
+			sql_updateq("spip_commandes",Array("statut"=>"annule"),Array("token = '".$contexte["token"]."'"));
 			/*notifier_client($token_client['token_client'], _T("paypal:votre_paiement_a_ete_refuse_depuis_le_site_de_paypal_pour_les_raison_suivantes_"._request('PendingReason')));
 			notifier_marchand(_T("paypal:un_paiement_a_ete_refuse_depuis_le_site_de_paypal_pour_les_raison_suivantes_"._request('PendingReason'))."\n Voir le panier: ".generer_url_ecrire('echoppe_edit_panier','token='.$contexte["token"],"&"));
 			echoppe_informer_panier($contexte["token"],"Denied","vous avez rejeté le paiement. Ce cas se produit uniquement si le paiement était précédemment en attente.","paypal",0,"warning");*/
@@ -64,7 +64,7 @@ function inc_retour_paiement_paypal_dist($token){
 		/* Expired : l'autorisation a expiré et ne peut être collectée. */
 		case 'Expired' :
 			spip_log("NOTIFICATION Delais de paiement d'un panier expire","shop");
-			ql_updateq("spip_shop_commandes",Array("statut"=>"annule"),Array("token = '".$contexte["token"]."'"));
+			ql_updateq("spip_commandes",Array("statut"=>"annule"),Array("token = '".$contexte["token"]."'"));
 			/*snotifier_client($token_client['token_client'], _T("paypal:le_delai_de_paiement_a_expire_et_votre_panier_a_ete_annule"));
 			notifier_marchand(_T("paypal:le_delai_de_paiement_a_expire_et_votre_panier_a_ete_annule"));
 			echoppe_informer_panier($contexte["token"],"Expired","l'autorisation a expiré et ne peut être collectée.","paypal",0,"warning");*/
@@ -73,7 +73,7 @@ function inc_retour_paiement_paypal_dist($token){
 		/* Failed : le paiement a échoué. Survient uniquement si le paiement a été effectué à partir du compte bancaire de l'utilisateur. */
 		case 'Failed' :
 			spip_log("NOTIFICATION Le paiement d'un panier a echoue","shop");
-			sql_updateq("spip_shop_commandes",Array("statut"=>"annule"),Array("token = '".$contexte["token"]."'"));
+			sql_updateq("spip_commandes",Array("statut"=>"annule"),Array("token = '".$contexte["token"]."'"));
 			/*notifier_client($token_client['token_client'], _T("paypal:le_paiement_a_echoue_et_votre_panier_a_ete_annule"));
 			notifier_marchand(_T("paypal:un_paiement_a_echoue_et_un_panier_a_ete_annule"))."\n Voir le panier: ".generer_url_ecrire('echoppe_edit_panier','token='.$contexte["token"],"&");
 			echoppe_informer_panier($contexte["token"],"Failed","Le paiement a échoué. Survient uniquement si le paiement a été effectué à partir du compte bancaire de l'utilisateur.","paypal",0,"warning");*/
@@ -82,7 +82,7 @@ function inc_retour_paiement_paypal_dist($token){
 		/* In-Progress : la transaction est en cours d'autorisation et de collecte. */
 		case 'In-Progress' :
 			spip_log("NOTIFICATION Un paiement d'un panier est en cour","shop");
-			sql_updateq("spip_shop_commandes",Array("statut"=>"1_progress"),Array("token = '".$contexte["token"]."'"));
+			sql_updateq("spip_commandes",Array("statut"=>"1_progress"),Array("token = '".$contexte["token"]."'"));
 			notifier_client($token_client['token_client'], _T("paypal:le_paiement_de_votre_panier_est_en_cour"));
 			notifier_marchand(_T("paypal:un_paiement_a_echoue_et_un_panier_a_ete_annule"));
 			echoppe_informer_panier($contexte["token"],"In-Progress","la transaction est en cours d'autorisation et de collecte.","paypal",0,"warning");
@@ -91,7 +91,7 @@ function inc_retour_paiement_paypal_dist($token){
 		/* Partially-Refunded : la transaction a fait l'objet d'un remboursement partiel. */
 		case 'Part-Ref' :
 			spip_log("NOTIFICATION Un remboursement partiel d'un panier est en cour","shop");
-			sql_updateq("spip_shop_commandes",Array("statut"=>"1_Part-Ref"),Array("token = '".$contexte["token"]."'"));
+			sql_updateq("spip_commandes",Array("statut"=>"1_Part-Ref"),Array("token = '".$contexte["token"]."'"));
 			/*notifier_client($token_client['token_client'], _T("paypal:le_paiement_de_votre_panier_est_rembourse_en_partie"));
 			notifier_marchand(_T("paypal:un_paiement_a_ete_rembourse_en_partie"));
 			echoppe_informer_panier($contexte["token"],"Partially-Refunded","la transaction a fait l'objet d'un remboursement partiel.","paypal",0,"warning");*/
@@ -109,7 +109,7 @@ function inc_retour_paiement_paypal_dist($token){
 		/* Refunded : vous avez remboursé le paiement. */
 		case 'Refunded' :
 			spip_log("NOTIFICATION Un paiement d'un panier est rembourse","shop");
-			sql_updateq("spip_shop_commandes",Array("statut"=>"1_Refunded"),Array("token = '".$contexte["token"]."'"));
+			sql_updateq("spip_commandes",Array("statut"=>"1_Refunded"),Array("token = '".$contexte["token"]."'"));
 			/*notifier_client($token_client['token_client'], _T("paypal:le_paiement_de_votre_panier_est_rembourse"));
 			notifier_marchand(_T("paypal:un_paiement_a_ete_rembourse"));
 			echoppe_informer_panier($contexte["token"],"Refunded","la transaction a fait l'objet d'un remboursement.","paypal",0,"warning");*/
@@ -129,7 +129,7 @@ function inc_retour_paiement_paypal_dist($token){
 		/* Processed : un paiement a été accepté. */
 		case 'Processed' :
 			spip_log("NOTIFICATION Paiement d'un panier accepte","shop");
-			sql_updateq("spip_shop_commandes",Array("statut"=>"paye"),Array("token = '".$contexte["token"]."'"));
+			sql_updateq("spip_commandes",Array("statut"=>"paye"),Array("token = '".$contexte["token"]."'"));
 			/*notifier_client($token_client['token_client'], _T("paypal:votre_paiement_a_bien_ete_valide_depuis_le_site_de_paypal"));
 			notifier_marchand(_T("paypal:un_paiement_a_bien_ete_valide_depuis_le_site_de_paypal")."\n Voir le panier: ".generer_url_ecrire('echoppe_edit_panier','token='.$contexte["token"],"&"));
 			echoppe_informer_panier($contexte["token"],"Processed","un paiement a été accepté.","paypal",0,"warning");
@@ -139,7 +139,7 @@ function inc_retour_paiement_paypal_dist($token){
 		/* Voided : cette autorisation a été annulée. */
 		case 'Voided' :
 			spip_log("NOTIFICATION Paiement d'un panier accepte","shop");
-			sql_updateq("spip_shop_commandes",Array("statut"=>"1_Voided"),Array("token = '".$contexte["token"]."'"));
+			sql_updateq("spip_commandes",Array("statut"=>"1_Voided"),Array("token = '".$contexte["token"]."'"));
 			/*notifier_client($token_client['token_client'], _T("paypal:votre_paiement_a_bien_ete_valide_depuis_le_site_de_paypal"));
 			notifier_marchand(_T("paypal:un_paiement_a_bien_ete_valide_depuis_le_site_de_paypal")."\n Voir le panier: ".generer_url_ecrire('echoppe_edit_panier','token='.$contexte["token"],"&"));
 			echoppe_informer_panier($contexte["token"],"Voided","cette autorisation a été annulée.","paypal",0,"warning");*/

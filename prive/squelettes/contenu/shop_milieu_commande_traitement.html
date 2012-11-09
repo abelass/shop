@@ -36,7 +36,7 @@
 <th></th>
 </tr>
 [<tr><td colspan="9" class="pagination">(#PAGINATION)</td></tr>]
-	<BOUCLE_commande(SHOP_COMMANDES){par #ENV{tri,date_creation}}{statut!=supprime}{traitement!=envoye}{inverse #GET{senstri}}{pagination 20}>
+	<BOUCLE_commande(COMMANDES){par #ENV{tri,date_creation}}{statut!=supprime}{traitement!=envoye}{inverse #GET{senstri}}{pagination 20}>
 	<tr class="tr_liste[ (#COMPTEUR_BOUCLE|alterner{row_even, row_odd})]">
 		<td class="arial1">#ID_COMMANDE</td>
 		<td class="arial1">[(#DATE_CREATION|affdate{'d-m-Y'})]</td>

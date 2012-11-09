@@ -104,7 +104,7 @@ function formulaires_commande_traiter_dist($id_produit,$n_titre=NULL){
 			'token'=>$token							
 			);
 	 
-	 	$id_commande=sql_insertq('spip_shop_commandes',$valeurs);
+	 	$id_commande=sql_insertq('spip_commandes',$valeurs);
 	 	
 		$retour['message_ok']=array('id_commande'=>$id_commande);
 		

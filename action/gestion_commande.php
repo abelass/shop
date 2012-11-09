@@ -8,11 +8,11 @@ function action_gestion_commande_dist(){
 	switch($arg){
 		case 'eliminer':
 		$where = array('id_commande='._request('id_commande'));
-		sql_updateq('spip_shop_commandes',array('statut'=>'supprime'),$where);
+		sql_updateq('spip_commandes',array('statut'=>'supprime'),$where);
 		break;
 		case 'envoye':
 		$where = array('id_commande='._request('id_commande'));
-		sql_updateq('spip_shop_commandes',array('traitement'=>$arg),$where);
+		sql_updateq('spip_commandes',array('traitement'=>$arg),$where);
 		break;		
     	}
 

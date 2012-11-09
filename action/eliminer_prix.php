@@ -7,7 +7,7 @@ function action_eliminer_prix_dist(){
 	$arg = $securiser_action();
 
     	$where = array('id_prix='._request('arg'));
-    	sql_delete('spip_shop_prix',$where);
+    	sql_delete('spip_prix',$where);
 
 }
 ?>

@@ -3,7 +3,7 @@
 <p class="shop_paiement no-ajax"><:shop:paiement_description:></p>
 
 #SET{api_paypal,#VAL|api_paypal}
-<BOUCLE_art(SHOP_COMMANDES){id_commande}>
+<BOUCLE_art(COMMANDES){id_commande}>
 
 <form action="https://[(#GET{api_paypal}|table_valeur{url_paypal})]/#ENV{lang}/cgi-bin/webscr" method="post" id="formulaire_prestataire_paiement">
 	<input TYPE="hidden" name="charset" value="#CHARSET"/>
