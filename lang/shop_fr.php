@@ -64,6 +64,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_pays' => "Pays",
 'info_produit' => "Informations produits",
 
+//l
+'liste_de_commandes'=>'Liste des commandes',
 
 // m
 'message_paiement_client' => "Votre paiement n'a pas encore été validé; la raison :",

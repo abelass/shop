@@ -10,6 +10,7 @@
       </div>
      ]
      [(#ENV{exec}|=={configurer_shop}|oui)<strong><:spip:icone_configuration_site:></strong>]
+     [(#ENV{exec}|=={shop}|oui|et{#ENV{voir}|non})<strong><:shop:liste_de_commandes:></strong>]
 #BOITE_FERMER
 
 [(#BOITE_OUVRIR{
