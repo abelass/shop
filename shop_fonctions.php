@@ -220,7 +220,6 @@ function titre_mot($id_mot){
 }
 
 
-
 function titre_objet($id_objet,$objet='article'){
 	$titre=sql_fetsel('titre','spip_'.$objet.'s','id_'.$objet.'='.$id_objet);
 
