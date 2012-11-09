@@ -20,9 +20,8 @@ function shop_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
 
 
-	$maj['create'] = array(array('maj_tables', array('spip_commandes','spip_prix','spip_shop_tokens_retour')));
-    $maj['1.1.0']  = array(
-        array('sql_alter','TABLE spip_shop_commande RENAME TO spip_commandes'),    
+	$maj['create'] = array(array('maj_tables', array('spip_prix','spip_shop_tokens_retour')));
+    $maj['1.1.0']  = array(  
         array('sql_alter','TABLE spip_shop_commandes RENAME TO spip_commandes'),
         array('sql_alter','TABLE spip_shop_prix RENAME TO spip_prix')
         );
@@ -39,7 +38,6 @@ function shop_upgrade($nom_meta_base_version, $version_cible) {
 **/
 function shop_vider_tables($nom_meta_base_version) {
 
-	sql_drop_table("spip_commandes");
     sql_drop_table("spip_prix");
     sql_drop_table("spip_tokens_retour");
         
