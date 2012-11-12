@@ -27,6 +27,7 @@ function shop_declarer_tables_principales($tables_principales){
 	$spip_prix_join = array(
 		"id_prix"	=> "id_prix",
 		"id_objet"	=> "id_objet",
+		"id_objet"	=> "id_article",		
 		);
 
 	$tables_principales['spip_prix'] = array(
