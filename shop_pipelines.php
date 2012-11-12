@@ -52,7 +52,7 @@ function shop_I2_cfg_form($flux){
 	return $flux;	
 }
 
-
+// Ajouter la configuration aux objets
 function shop_objets_shop($flux){
     
     // La configuration
