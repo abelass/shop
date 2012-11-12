@@ -56,8 +56,9 @@ function shop_I2_cfg_form($flux){
 function shop_objets_shop($flux){
     
     // La configuration
-    $flux['data']['configuration']=array(
+    $flux['data']['configurer_shop']=array(
         'action'=>'configurer_shop',
+        'objet'=>'configurer_shop',
         'nom_action'=>_T('spip:icone_configuration_site'),
         'icone'=>'cfg-16.png'
         );

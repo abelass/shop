@@ -5,7 +5,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('base/abstract_sql');
 
-
+//Liste les objets gérés par ce plugin
 function objets_shop(){
     
     $objets_shop=charger_fonction('objets_shop','inc');
@@ -233,8 +233,10 @@ function titre_objet($id_objet,$objet='article'){
 	return $titre['titre'];
 }
 
-function donnees_objet($id_objet,$objet='article',$champs='*'){
-	$donnees=sql_fetsel($champs,'spip_'.$objet.'s','id_'.$objet.'='.$id_objet);
+function donnees_objet($id_objet='',$objet='article',$champs='*'){
+
+    if(!$id_objet)$id_objet=_request('id_'.$objet);
+	if($id_objet)$donnees=sql_fetsel($champs,'spip_'.$objet.'s','id_'.$objet.'='.$id_objet);
 
 	return $donnees;
 }

@@ -20,6 +20,7 @@ function inc_objets_shop_dist(){
             $plugin_objet_sing=substr($plugin_objet,0,strlen($plugin_objet)-1);
             $objets_shop[$plugin_objet]=array(
             'action'=>$plugin_objet,
+            'objet'=>$plugin_objet,
             'nom_action'=>_T($plugin_objet_sing.':titre_'.$plugin_objet),
             'nom_objet'=>_T($plugin_objet_sing.':titre_'.$plugin_objet_sing),
             'icone'=>$plugin_objet_sing.'-16.png'                      
