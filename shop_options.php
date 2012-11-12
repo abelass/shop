@@ -27,10 +27,10 @@
 	    //elseif()
     return false;
 }
-function autoriser_article_id_produit_voirextra_dist($faire, $type, $id, $qui, $opt) {
-    return autoriser('modifierextra', $type, $id, $qui, $opt);
-}
-	
+    function autoriser_article_id_produit_voirextra_dist($faire, $type, $id, $qui, $opt) {
+        return autoriser('modifierextra', $type, $id, $qui, $opt);
+    }
+    	
 	
 			
 			

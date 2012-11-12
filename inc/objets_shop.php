@@ -32,9 +32,9 @@ function inc_objets_shop_dist(){
     
    
      /*Possibilité de rajouter de plugin ou de modifier leur définition*/
-    $objets_shop=pipeline('objets_shop',array('data'=>$objets_shop));
+    $objets_shop=pipeline('objets_shop',$objets_shop);
     
-    return $objets_shop['data'];
+    return $objets_shop;
 }
 
 ?>
