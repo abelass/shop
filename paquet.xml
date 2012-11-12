@@ -1,7 +1,7 @@
 <paquet
 	prefix="shop"
 	categorie="edition"
-	version="1.0.0"
+	version="1.1.0"
 	etat="dev"
 	compatibilite="[3.0.5;3.0.*]"
 	logo="prive/themes/spip/images/logo_shop_32.png"
@@ -25,7 +25,7 @@
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/shop.php" />	
 	<pipeline nom="affiche_milieu" inclure="shop_pipelines.php" /> 
 	<pipeline nom="I2_cfg_form" inclure="shop_pipelines.php" /> 	 
- 
+	<pipeline nom="objets_shop" inclure="shop_pipelines.php" /> 	 
 	<pipeline nom="insert_head" inclure="shop_pipelines.php" /> 	
 	
 	<menu nom="shop" titre="shop:shop" parent="menu_edition" icone="images/logo_shop_16.png" action="shop" /> 

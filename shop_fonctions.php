@@ -6,6 +6,13 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('base/abstract_sql');
 
 
+function objets_shop(){
+    
+    $objets_shop=charger_fonction('objets_shop','inc');
+    
+    return $objets_shop();
+}
+
 function devises(){
     $devises=array(
     

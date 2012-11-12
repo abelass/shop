@@ -7,7 +7,7 @@
 	$GLOBALS['spip_pipeline']['shop_form_commande_traiter'] = '';
 	$GLOBALS['spip_pipeline']['shop_form_commande_afficher_prev_prix'] = '';	
 	$GLOBALS['spip_pipeline']['shop_form_cfg'] = '';	
-		
+    $GLOBALS['spip_pipeline']['objets_shop'] = '';    
 		
 	// Affichage interfacen interne
 	$GLOBALS['spip_pipeline']['shop_affiche_gauche_shortcuts'] = '';	
