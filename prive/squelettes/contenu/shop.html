@@ -13,7 +13,13 @@
     ]
     [(#ENV{voir}|match{_edit}|oui)
     #SET{objet,#ENV{voir}|replace{_edit,''}}
-    [(#INCLURE{fond=prive/squelettes/contenu/#ENV{voir},env,redirect=#SELF|parametre_url{voir,#GET{objet}},retourajax=oui})]
+    #SET{retour,#SELF|parametre_url{voir,#GET{objet}}}
+    #SET{retourajax,oui}    
+    [(#ENV{new}|oui)
+         #SET{retour,#SELF|parametre_url{new,''}}
+         #SET{retourajax,''}   
+         ]
+    [(#INCLURE{fond=prive/squelettes/contenu/#ENV{voir},env,redirect=#GET{retour},retourajax=#GET{retourajax}})]
     ]
 ]
 
