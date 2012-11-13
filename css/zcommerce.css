@@ -1,17 +1,17 @@
-ul.menu-zcommerce{
+ul.menu-shop{
 	margin:0;
 	padding:0;
 	list-style-type:none;
 	text-transform:lowercase;
 }
-.menu-zcommerce li{
+.menu-shop li{
 	display: inline;
 	margin-right:1.2em;
 }
-#contenu_zcommerce{
+#contenu_shop{
 	margin-top:2em;
 }
-#contenu_zcommerce h2{
+#contenu_shop h2{
 	margin-top:2em;
 }
 #extra .menu {
@@ -70,9 +70,9 @@ ul.menu-zcommerce{
 -------------------------------------------------------------- */
 
 @media print {
-	#contenu_zcommerce .formulaire_spip{
+	#contenu_shop .formulaire_spip{
 		display:block;
 	}
-	.menu-conteneur, .liste_panier, .menu-zcommerce, .paypal, .submit, submit, .bouton, .mon_compte, .pied, .copyleft{display:none;}
+	.menu-conteneur, .liste_panier, .menu-shop, .paypal, .submit, submit, .bouton, .mon_compte, .pied, .copyleft{display:none;}
 	.formulaire_spip input.text, .formulaire_spip select {border:none}
 }

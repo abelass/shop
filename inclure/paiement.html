@@ -2,7 +2,7 @@
 
 <BOUCLE_commande(COMMANDES){id_commande=#SESSION{id_commande}}{statut=encours}{!par id_commande}>
    <div class="liste_commande">
-      <h1><:zcommerce:votre_commande_du:> [(#DATE|affdate_jourcourt)] ([(#VAL{commandes:statut_#STATUT}|_T)])</h1>
+      <h1><:shop:votre_commande_du:> [(#DATE|affdate_jourcourt)] ([(#VAL{commandes:statut_#STATUT}|_T)])</h1>
       <INCLURE{fond=inclure/mes_adresses,id_auteur,id_commande,edit=oui}>
       <INCLURE{fond=inclure/commande,id_commande,statut}>
    
@@ -40,9 +40,9 @@
 	[(#REM) si commande payee ou/et commandes payees]
 	<BOUCLE_commande_verif(COMMANDES){id_auteur=#SESSION{id_auteur}}{statut=paye}{!par id_commande}{0,1}>
       [(#SET{statut_trad,[(#STATUT|commandes_lister_statuts|mb_strtolower{UTF-8})]})]
-      <h1><:zcommerce:commande_ref_statut{ref=#REFERENCE,statut=#GET{statut_trad}}:></h1>
+      <h1><:shop:commande_ref_statut{ref=#REFERENCE,statut=#GET{statut_trad}}:></h1>
       <INCLURE{fond=inclure/commande,id_commande=#ID_COMMANDE,statut=#STATUT}>
-      <p><a href="[(#URL_PAGE{facture}|parametre_url{id_commande,#ID_COMMANDE})]"><:zcommerce:acces_facture:></a></p>
+      <p><a href="[(#URL_PAGE{facture}|parametre_url{id_commande,#ID_COMMANDE})]"><:shop:acces_facture:></a></p>
 	</BOUCLE_commande_verif>
 
 <//B_commande>

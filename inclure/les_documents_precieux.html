@@ -1,7 +1,7 @@
 <B_documents_precieux>
 	<div class="vente liste_documents_precieux">
 		#ANCRE_PAGINATION
-	<h2><:zcommerce:les_documents_precieux:></h2>
+	<h2><:shop:les_documents_precieux:></h2>
 	<table class="spip">
 		<BOUCLE_documents_precieux(DOCUMENTS spip_documents_liens){prix!=''}{prix>0}{stock=oui}{pagination}>
 		[(#OBJET|=={article}|oui) #SET{uri,#URL_ARTICLE{#ID_OBJET}}

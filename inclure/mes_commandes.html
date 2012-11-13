@@ -1,4 +1,4 @@
-<h1><:zcommerce:mes_commandes:></h1>
+<h1><:shop:mes_commandes:></h1>
 <B_liste_commandes>
 #ANCRE_PAGINATION
 <div class="liste-elements commandes">
@@ -20,9 +20,9 @@
 			<td class='date'>[(#DATE|affdate_jourcourt)][ (#DATE|affdate{H:i})]</td>
 			<td class='montant'>#PRIX</td>
 			<td class='action'>
-            [(#URL_PAGE{z-commerce}|parametre_url{appel,mes_commandes_details}|parametre_url{id_commande,#ID_COMMANDE}|lien_ou_expose{<:zcommerce:detail_commande:>})]
+            [(#URL_PAGE{z-commerce}|parametre_url{appel,mes_commandes_details}|parametre_url{id_commande,#ID_COMMANDE}|lien_ou_expose{<:shop:detail_commande:>})]
          	[(#STATUT|=={paye}|oui)
-					| [(#URL_PAGE{facture}|parametre_url{id_commande,#ID_COMMANDE}|lien_ou_expose{<:zcommerce:acces_facture:>})]]
+					| [(#URL_PAGE{facture}|parametre_url{id_commande,#ID_COMMANDE}|lien_ou_expose{<:shop:acces_facture:>})]]
 			</td>
 		</tr>
 	</BOUCLE_liste_commandes>
@@ -31,5 +31,5 @@
 [<p class='pagination'>(#PAGINATION)</p>]
 </div>
 </B_liste_commandes>
-   <:zcommerce:aucune_commande_valide:>
+   <:shop:aucune_commande_valide:>
 <//B_liste_commandes>
