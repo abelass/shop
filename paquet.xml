@@ -21,9 +21,6 @@
 
 		
 	<pipeline nom="autoriser" inclure="shop_autorisations.php" /> 
-	<pipeline nom="declarer_tables_principales" inclure="base/shop.php" /> 
-	<pipeline nom="declarer_tables_interfaces" inclure="base/shop.php" />
-	<pipeline nom="declarer_tables_auxiliaires" inclure="base/shop.php" />	
 	<pipeline nom="affiche_milieu" inclure="shop_pipelines.php" /> 
 	<pipeline nom="I2_cfg_form" inclure="shop_pipelines.php" /> 	 
 	<pipeline nom="objets_shop" inclure="shop_pipelines.php" /> 	 
