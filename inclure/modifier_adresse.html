@@ -1,0 +1,3 @@
+<h1><:zcommerce:nouvelle_adresse_de:> #ENV{type_adresse}</h1>
+#FORMULAIRE_EDITER_ADRESSE{#ENV{_id_adresse},commande,#ENV{_id_commande},#ENV{retour}}
+[(#URL_PAGE{z-commerce}|parametre_url{appel,paiement}|lien_ou_expose{<:zcommerce:annuler:>,'',annuler})]	

@@ -1,10 +1,9 @@
 [(#REM) inclure le menu avec identifiant zcommerce ]
-	[(#INCLURE{fond=inclure/menu, env, identifiant=zcommerce}|trim|sinon{
-		[(#REM) sinon inclure le menuzcommerce ]
-		[(#INCLURE{fond=inclure/menuzcommerce,env})]
-	})]
 
-<div id="contenu_zcommerce">
+	[(#INCLURE{fond=inclure/menu_shop,env})]
+
+
+<div id="contenu_shop">
 	[(#REM) 1 -la boutique ]
 	<BOUCLE_test(CONDITION){si #ENV{appel}|=={""}|oui}>
 		[(#PLUGIN{produits}|oui)

@@ -1,0 +1,19 @@
+[(#REM) Mon Panier ]
+[(#ENV{appel}|=={""}|oui|ou{#ENV{appel}|=={"mes_coordonnees"}|oui})
+   <div class="menu panier">
+      <h1><:paniers:mon_panier:></h1>
+      <div class="ajax">#FORMULAIRE_PANIER</div>
+   </div>
+]
+[(#REM) Mon Compte ]
+[(#SESSION{id_auteur}|oui)
+   <div class="menu mon_compte">
+      <h1><:zcommerce:mon_compte:></h1>
+      <ul>
+      	<li>[(#URL_PAGE{z-commerce}|parametre_url{appel,mes_commandes}|lien_ou_expose{<:zcommerce:mes_commandes:>})]</li>
+			<li><a href="#URL_LOGOUT"><:icone_deconnecter:></a></li>
+      </ul>
+   </div>
+]
+      
+

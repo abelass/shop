@@ -1,0 +1,78 @@
+ul.menu-zcommerce{
+	margin:0;
+	padding:0;
+	list-style-type:none;
+	text-transform:lowercase;
+}
+.menu-zcommerce li{
+	display: inline;
+	margin-right:1.2em;
+}
+#contenu_zcommerce{
+	margin-top:2em;
+}
+#contenu_zcommerce h2{
+	margin-top:2em;
+}
+#extra .menu {
+    border: 1px solid #DDDDDD;
+    padding: 0.5em;
+}
+#extra .menu.panier .formulaire_panier{
+	 font-size:0.8em;
+}
+.liste_commande .row_even{
+	font-weight:bold;
+}
+.continuer, .annuler{
+	border:1px solid #999;
+	background:#F7F7F7;
+	padding:1em;
+	float:right;
+	width:90px;
+	text-align:center
+}
+.annuler{
+	border:1px solid #F93;
+}
+.submit:hover{
+	background:#B9ED9A
+}
+.commande thead tr th{
+	background:#ccc;
+	border:1px solid #fff;
+	border-width:0 1px 0 1px;
+}
+.adresses{
+	clear:both;
+}
+.adresses h3{
+	background:#ccc;
+}
+.adresses .adresse {
+    border: 1px solid #DDDDDD;
+    padding: 0.5em;
+	 float:left;
+	 margin:10px;
+}
+
+.vente .prix{white-space:nowrap;}
+.vente .ajouter_au_panier{height:50px; width:100px}
+
+.page_facture #bloc-a h5{
+	margin: 1em 0 0.3em 0;
+}
+.page_facture #bloc-de .adresse{
+	margin-bottom: 1em ;
+}
+
+/* =Print Style
+-------------------------------------------------------------- */
+
+@media print {
+	#contenu_zcommerce .formulaire_spip{
+		display:block;
+	}
+	.menu-conteneur, .liste_panier, .menu-zcommerce, .paypal, .submit, submit, .bouton, .mon_compte, .pied, .copyleft{display:none;}
+	.formulaire_spip input.text, .formulaire_spip select {border:none}
+}

@@ -1,0 +1,14 @@
+<BOUCLE_commande(COMMANDES){id_auteur=#SESSION{id_auteur}}{id_commande}>
+	<h1><:zcommerce:votre_commande_du:>[(#DATE|affdate_jourcourt)][ (#DATE|affdate{H:i})]</h1>
+	<p><:commandes:reference:> : #REFERENCE</p>
+	<p><:commandes:montant:> : #PRIX</p>
+	<p><:commandes:etat:> : [(#STATUT|commandes_lister_statuts)]</p>
+   <INCLURE{fond=inclure/mes_adresses,id_auteur,id_commande}>
+	<h2><:zcommerce:detail_commande:></h2>
+   <INCLURE{fond=inclure/commande,id_commande}>
+   [(#STATUT|=={paye}|oui)
+   	<p>[(#URL_PAGE{facture}|parametre_url{id_commande,#ID_COMMANDE}|lien_ou_expose{<:zcommerce:acces_facture:>})]</p>]
+
+</BOUCLE_commande>
+   <:zcommerce:commande_invalide:>
+<//B_commande>

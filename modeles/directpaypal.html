@@ -1,0 +1,62 @@
+[(#REM) si le client n'a pas a laisser ses coordonnees sur votre site
+ce raccourci genere le bouton de paiement paypal des la constitution du panier
+<directpaypal|id_panier>
+mettez le dans le texte d'un article unique (cf plugin pages uniques) dont le champ page se nomme "suitepanier"
+et modifiez le menu zcommerce (cf plugin Menus) 
+]
+<BOUCLE_panier(PANIERS){id_panier=#SESSION{id_panier}}>
+   <div class="liste_panier">
+   
+      #SET{details, #ARRAY}
+      <BOUCLE_details(PANIERS_LIENS){id_panier}>
+      
+      <BOUCLE_is_produit(CONDITION){si #OBJET|=={produit}|oui}>
+      		<BOUCLE_panier_produits(PRODUITS?){id_produit=#ID_OBJET}>       
+      		[(#SET{detail#ID_OBJET#OBJET,
+         		  [(#ARRAY{
+                     descriptif, [(#TITRE*|supprimer_numero)],
+                     quantite, #QUANTITE,
+                     prix, [(#PRIX*|mult{#TAXE}|plus{#PRIX*})],
+                     })]})]
+                </BOUCLE_panier_produits>
+      </BOUCLE_is_produit>
+      <BOUCLE_is_article(CONDITION){si #OBJET|=={article}|oui}>
+            	<BOUCLE_panier_articles(ARTICLES){id_article=#ID_OBJET}>
+      		[(#SET{detail#ID_OBJET#OBJET,
+         		  [(#ARRAY{
+                     descriptif, [(#TITRE*|supprimer_numero)],
+                     quantite, #QUANTITE,
+                     prix, [(#PRIX*|mult{#TAXE}|plus{#PRIX*})],
+                     })]})]           	
+            	</BOUCLE_panier_articles>
+      </BOUCLE_is_article>
+      <BOUCLE_is_document(CONDITION){si #OBJET|=={document}|oui}>
+            	<BOUCLE_panier_documents(DOCUMENTS){id_document=#ID_OBJET}>
+      		[(#SET{detail#ID_OBJET#OBJET,
+         		  [(#ARRAY{
+                     descriptif, [(#TITRE*|supprimer_numero)],
+                     quantite, #QUANTITE,
+                     prix, [(#PRIX*|mult{#TAXE}|plus{#PRIX*})],
+                     })]})]
+            	</BOUCLE_panier_documents>
+      </BOUCLE_is_document>
+         
+         [(#SET{details,#GET{details}|push{#GET{detail#ID_OBJET#OBJET}}})]
+      </BOUCLE_details>
+      
+      [(#FORMULAIRE_PAYPAL{#ARRAY{
+         custom,payer_panier,
+         libelle,Panier #ID_PANIER,
+         identifiant,#ID_PANIER,
+         redirect_ok, #URL_ACTION_AUTEUR{
+                        supprimer_panier_encours,
+                        "",
+                        #URL_SITE_SPIP},
+         details,#GET{details},
+      }})]
+      </B_details>
+   
+   </div>
+</BOUCLE_panier>
+Oups, vous n'avez pas de panier en cours!
+<//B_panier>

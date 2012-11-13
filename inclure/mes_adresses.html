@@ -1,0 +1,19 @@
+<div class="adresses">
+<BOUCLE_adresses_commande(ADRESSES adresses_liens commandes){id_commande}>
+   <div class="adresse">
+   	<h3><:zcommerce:adresse_de:> #TYPE</h3>
+      <INCLURE{fond=inclure/adresse,id_adresse}>
+      [(#ENV{edit}|oui)
+         <div class="modifier_adresse">
+             [(#BOUTON_ACTION{ <:zcommerce:modifier_adresse:>, 
+             					  #URL_PAGE{z-commerce}|parametre_url{appel,modifier_adresse}|
+                             parametre_url{type_adresse,#TYPE}|
+                             parametre_url{_id_commande,#ID_COMMANDE}|
+                             parametre_url{_id_adresse,#ID_ADRESSE}|
+                             parametre_url{retour,#SELF}})]
+         </div>
+      ]
+   </div>
+</BOUCLE_adresses_commande>
+</div>
+<br class="nettoyeur" />

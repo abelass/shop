@@ -1,0 +1,10 @@
+<BOUCLE_adresses_auteur(ADRESSES){id_adresse}>
+   <div class="adresse">
+      [<div class="titre">(#TITRE)</div>]
+      [<div class="voie">(#VOIE)</div>]
+      [<div class="complement">(#COMPLEMENT)</div>]
+      [<div class="boite_postale">(#BOITE_POSTALE)</div>]
+      [<div class="ville">[(#CODE_POSTAL) ](#VILLE)</div>]
+      <div class="pays"><BOUCLE_pays(PAYS){code=#PAYS}>#NOM</BOUCLE_pays></div>
+   </div>
+</BOUCLE_adresses_auteur>

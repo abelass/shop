@@ -1,0 +1,35 @@
+<h1><:zcommerce:mes_commandes:></h1>
+<B_liste_commandes>
+#ANCRE_PAGINATION
+<div class="liste-elements commandes">
+<table class='spip liste'>
+	<thead>
+		<tr class='first_row'>
+			<th class='reference'><:commandes:reference:></th>
+			<th class='etat'><:commandes:etat:></th>
+			<th class='date'><:commandes:commande_date:></th>
+			<th class='montant'><:commandes:montant:></th>
+			<th class='action'></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_commandes(COMMANDES){id_auteur=#SESSION{id_auteur}}{!par id_commande}{pagination 10}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='reference'>#REFERENCE</td>
+			<td class='etat'>[(#STATUT|commandes_lister_statuts)]</td>
+			<td class='date'>[(#DATE|affdate_jourcourt)][ (#DATE|affdate{H:i})]</td>
+			<td class='montant'>#PRIX</td>
+			<td class='action'>
+            [(#URL_PAGE{z-commerce}|parametre_url{appel,mes_commandes_details}|parametre_url{id_commande,#ID_COMMANDE}|lien_ou_expose{<:zcommerce:detail_commande:>})]
+         	[(#STATUT|=={paye}|oui)
+					| [(#URL_PAGE{facture}|parametre_url{id_commande,#ID_COMMANDE}|lien_ou_expose{<:zcommerce:acces_facture:>})]]
+			</td>
+		</tr>
+	</BOUCLE_liste_commandes>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION)</p>]
+</div>
+</B_liste_commandes>
+   <:zcommerce:aucune_commande_valide:>
+<//B_liste_commandes>

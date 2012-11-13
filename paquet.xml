@@ -18,7 +18,7 @@
 	<necessite nom="saisies" compatibilite="[1.24.0;]" /> 
 	<necessite nom="paniers" compatibilite="[0.3.3;]" /> 	
 	<necessite nom="shop_commandes" compatibilite="[1.0.0;]" /> 	
-	<necessite nom="zcommerce" compatibilite="[0.3.2;]" />
+
 		
 	<pipeline nom="autoriser" inclure="shop_autorisations.php" /> 
 	<pipeline nom="declarer_tables_principales" inclure="base/shop.php" /> 
@@ -28,6 +28,7 @@
 	<pipeline nom="I2_cfg_form" inclure="shop_pipelines.php" /> 	 
 	<pipeline nom="objets_shop" inclure="shop_pipelines.php" /> 	 
 	<pipeline nom="insert_head" inclure="shop_pipelines.php" /> 
+	<pipeline nom="formulaire_traiter" inclure="shop_pipelines.php" /> 	
 
 	
 	<menu nom="shop" titre="shop:shop" parent="menu_edition" icone="images/logo_shop_16.png" action="shop" /> 

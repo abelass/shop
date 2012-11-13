@@ -1,0 +1,23 @@
+<B_documents_precieux>
+	<div class="vente liste_documents_precieux">
+		#ANCRE_PAGINATION
+	<h2><:zcommerce:les_documents_precieux:></h2>
+	<table class="spip">
+		<BOUCLE_documents_precieux(DOCUMENTS spip_documents_liens){prix!=''}{prix>0}{stock=oui}{pagination}>
+		[(#OBJET|=={article}|oui) #SET{uri,#URL_ARTICLE{#ID_OBJET}}
+		<tr class="row_[(#COMPTEUR_BOUCLE|alterner{odd, even})]">
+		<td>[(#LOGO_DOCUMENT|image_reduire{100})]</td>
+		<td><a href="#GET{uri}">#TITRE</a><br />
+		<a title="En savoir plus" class="openbox" id="lien#ID_OBJET" href="#GET{uri}">Détail</a>
+		</td>
+		<td class="prix">#PRIX</td>
+		<td class="ajouter_au_panier">
+		[(#BOUTON_ACTION{<:ajouter_au_panier:>,#URL_ACTION_AUTEUR{remplir_panier,document-#ID_DOCUMENT,#SELF},ajax})] 
+		</td>
+		</tr>
+		]
+		</BOUCLE_documents_precieux>
+	</table>
+	[<p class="pagination">(#PAGINATION)</p>]
+	</div>
+</B_documents_precieux>

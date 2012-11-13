@@ -1,0 +1,9 @@
+<h1><:paniers:mon_panier:></h1>
+<div class="ajax">#FORMULAIRE_PANIER</div>
+	
+<BOUCLE_ispanier(CONDITION){si #SESSION{id_panier}|oui}>
+	[(#BOUTON_ACTION{<:zcommerce:vider_le_panier:>,#URL_ACTION_AUTEUR{supprimer_panier_encours,'',#SELF},ajax})]
+	<BOUCLE_article_suitepanier(ARTICLES){id_rubrique=-1}>[(#PAGE|=={suitepanier}|oui)<div class="texte #EDIT{texte}">#TEXTE</div>]</BOUCLE_article_suitepanier>
+	[(#URL_PAGE{z-commerce}|parametre_url{appel,mes_coordonnees}|lien_ou_expose{<:zcommerce:passer_la_commande:>,'',continuer})]
+	<//B_article_suitepanier>
+</BOUCLE_ispanier>

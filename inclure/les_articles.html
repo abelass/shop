@@ -1,0 +1,28 @@
+		#SET{articles_restreints,#ARRAY}
+<BOUCLE_restreints(ARTICLES){tout_voir}>
+		[(#ID_ARTICLE|AccesRestreint_article_restreint|oui)
+		#SET{articles_restreints, #GET{articles_restreints}|push{#ID_ARTICLE}}
+		]
+</BOUCLE_restreints>
+<B_articles>
+	<div class="liste_articles">
+		#ANCRE_PAGINATION
+	<h2><:les_articles_en_acces_restreint:></h2>
+	<table class="spip">
+		<BOUCLE_articles(ARTICLES){tout_voir}{id_article IN #GET{articles_restreints}}{pagination}>
+		<tr class="row_[(#COMPTEUR_BOUCLE|alterner{odd, even})]">
+			<td>[(#LOGO_ARTICLE|image_reduire{100}|sinon{#ID_ARTICLE})]</td>
+			
+		<td><a href="#URL_ARTICLE">#TITRE</a></td>
+		<td style="display:none">#DESCRIPTIF</td>
+		<td style="white-space:nowrap;">#PRIX</td>
+		<td style='height:50px; width:100px'>
+		[(#BOUTON_ACTION{<:ajouter_au_panier:>,#URL_ACTION_AUTEUR{remplir_panier,article-#ID_ARTICLE,#SELF},ajax})] 
+		</td>
+		</tr>
+		
+		</BOUCLE_articles>
+	</table>
+	[<p class="pagination">(#PAGINATION)</p>]
+	</div>
+</B_articles><//B_articles>
