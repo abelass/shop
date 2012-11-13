@@ -1,0 +1,24 @@
+<B_produits>
+	<div class="vente liste_produits">
+	<h2><:shop:les_produits:></h2>
+	<table class="spip">
+		<BOUCLE_produits(PRODUITS){id_rubrique?}>
+		<tr class="row_[(#COMPTEUR_BOUCLE|alterner{odd, even})]">
+			<td>
+            <BOUCLE_documents(DOCUMENTS){id_produit}{0,1}>
+            	[(#URL_DOCUMENT|lien_ou_expose{#FICHIER|image_reduire{100}|inserer_attribut{alt, #TITRE|attribut_html}})]
+            </BOUCLE_documents>
+			</td>
+         <td>#TITRE</td>
+         <td>#DESCRIPTIF</td>
+         <td class="prix">#PRIX</td>
+         <td class="ajouter_au_panier">
+         [(#BOUTON_ACTION{<:shop:ajouter_au_panier:>,#URL_ACTION_AUTEUR{remplir_panier,produit-#ID_PRODUIT-1,#SELF},ajax})] 
+         </td>
+		</tr>
+		</BOUCLE_produits>
+	</table>
+	</div>
+</B_produits><!--<:shop:aucun_produit:>--><//B_produits>
+
+
