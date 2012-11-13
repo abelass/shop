@@ -5,7 +5,6 @@
 	$GLOBALS['spip_pipeline']['shop_form_commande_afficher_general'] = '';	
 	$GLOBALS['spip_pipeline']['shop_form_commande_charger'] = '';	
 	$GLOBALS['spip_pipeline']['shop_form_commande_traiter'] = '';
-	$GLOBALS['spip_pipeline']['shop_form_commande_afficher_prev_prix'] = '';	
 	$GLOBALS['spip_pipeline']['shop_form_cfg'] = '';	
     $GLOBALS['spip_pipeline']['objets_shop'] = '';    
 		
