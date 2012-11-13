@@ -1,4 +1,4 @@
-[(#REM) inclure le menu avec identifiant shop ]
+[(#REM) inclure le menu avec identifiant zcommerce ]
 
 	[(#INCLURE{fond=inclure/menu_shop,env})]
 
@@ -27,7 +27,7 @@
 			<INCLURE{fond=inclure/les_documents_precieux}{env}>]
 		</B_documents>			
 				
-		[(#URL_PAGE{shop}|parametre_url{appel,mon_panier}|lien_ou_expose{<:shop:continuer:>,'',continuer})]	
+		[(#URL_PAGE{z-commerce}|parametre_url{appel,mon_panier}|lien_ou_expose{<:zcommerce:continuer:>,'',continuer})]	
 	      #SET{stop,oui}
       </BOUCLE_test>
 	
@@ -43,7 +43,7 @@
       #SET{stop,oui}
 	]
    [(#ENV{appel}|=={""}|non|et{#ENV{appel}|=={"mon_panier"}|non}|et{#ENV{appel}|=={"mes_coordonnees"}|non}|et{#SESSION{id_auteur}|non})
-      <h4>[(#URL_PAGE{z-commerce}|parametre_url{appel,mes_coordonnees}|lien_ou_expose{<:shop:veuillez_vous_connecter:>})]</h4>
+      <h4>[(#URL_PAGE{z-commerce}|parametre_url{appel,mes_coordonnees}|lien_ou_expose{<:zcommerce:veuillez_vous_connecter:>})]</h4>
       #SET{stop,oui}
    ]
 	[(#GET{stop}|=={oui}|non)

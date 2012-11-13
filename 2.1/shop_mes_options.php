@@ -7,7 +7,7 @@
 	$GLOBALS['spip_pipeline']['shop_form_commande_traiter'] = '';
 	$GLOBALS['spip_pipeline']['shop_form_commande_afficher_prev_prix'] = '';	
 	$GLOBALS['spip_pipeline']['shop_form_cfg'] = '';	
-    $GLOBALS['spip_pipeline']['objets_shop'] = '';    
+		
 		
 	// Affichage interfacen interne
 	$GLOBALS['spip_pipeline']['shop_affiche_gauche_shortcuts'] = '';	
@@ -27,10 +27,10 @@
 	    //elseif()
     return false;
 }
-    function autoriser_article_id_produit_voirextra_dist($faire, $type, $id, $qui, $opt) {
-        return autoriser('modifierextra', $type, $id, $qui, $opt);
-    }
-    	
+function autoriser_article_id_produit_voirextra_dist($faire, $type, $id, $qui, $opt) {
+    return autoriser('modifierextra', $type, $id, $qui, $opt);
+}
+	
 	
 			
 			

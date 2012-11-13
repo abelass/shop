@@ -1,0 +1,49 @@
+[(#ENV{message_ok}|non)
+	<div id="inscription3" class="page_inscription" >
+	<h3><:pg:devis:> : [(#ENV{titre_produit})]</h3>
+
+		<form id="form_abo" name="form_abo" action="#SELF#tabs-4" method="post" enctype="multipart/form-data">
+			
+    		#ACTION_FORMULAIRE{#ENV{action}}
+
+		<h4><:pg:infos_personnelles:></h4>
+		<fieldset>
+    			<ul>
+				[(#SAISIE{input,nom,label=<:pg:nom:>,datas=#ENV{nom}})]
+				[(#SAISIE{input,prenom,label=<:pg:prenom:>,datas=#ENV{prenom}})]    		
+				[(#SAISIE{input,email,label=<:pg:email:>,datas=#ENV{email}})]
+				[(#SAISIE{input,telephone,label=<:pg:telephone:>,datas=#ENV{telephone}})]
+				[(#SAISIE{input,organisation,label=<:pg:organisation:>,datas=#ENV{organisation}})]    			
+			</ul>			
+		</fieldset>
+		<h4><:pg:produit:></h4>
+		<fieldset>
+    			<ul>		
+
+			[(#SAISIE{input,quantite,label=<:pg:quantite:>,datas=#ENV{quantite}})]
+
+		<INCLURE{fond=formulaires/inc-options_devis}{env}/>
+		
+		<li>
+		<label><:pg:logo:></label>
+		<input type="file" name="attachment" size="50" />
+		</li>
+
+			[(#SAISIE{textarea,commentaires,label=<:pg:commentaires:>,datas=[(#ENV{commentaires}|propre)]})]  			 		 	
+					
+			</ul>			
+		</fieldset>
+			<p><input type="submit"  class="submit" value="<:pg:envoyer:>" /></p>
+			</form>
+
+]
+[<p class="reponse_formulaire_ok" id="ok">(#ENV{message_ok})</p>]
+
+				<!-- After the availability test, we ask for personal data-->
+				
+		
+		
+
+	
+	
+

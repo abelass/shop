@@ -1,0 +1,24 @@
+#CACHE{0}
+[(#ENV{voir}|non)
+<h1><:shop:shop:></h1>
+
+#INCLURE{fond=prive/squelettes/contenu/shop_milieu_commande_traitement,env}
+
+#INCLURE{fond=prive/squelettes/contenu/shop_milieu_commande_traite,env}
+]
+
+[(#ENV{voir}|oui)
+    [(#CHEMIN{prive/squelettes/contenu/#ENV{voir}.html}|oui)
+        [(#INCLURE{fond=prive/squelettes/contenu/#ENV{voir},env,exec=#ENV{voir}}|replace{'\?exec=','?exec=shop&voir='})]
+    ]
+    [(#ENV{voir}|match{_edit}|oui)
+    #SET{objet,#ENV{voir}|replace{_edit,''}}
+    #SET{retour,#SELF|parametre_url{voir,#GET{objet}}}
+    #SET{retourajax,oui}    
+    [(#ENV{new}|oui)
+         #SET{retour,#SELF|parametre_url{new,''}}
+         #SET{retourajax,''}   
+         ]
+    [(#INCLURE{fond=prive/squelettes/contenu/#ENV{voir},env,redirect=#GET{retour},retourajax=#GET{retourajax}})]
+    ]
+]

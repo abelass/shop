@@ -1,0 +1,59 @@
+<h1><:shop:detail_commande:></h1>
+	<div class="cadre cadre-r">
+	<B_commande>
+	<div id="commande" class="cadre_padding">
+		<BOUCLE_commande(COMMANDES){id_commande}>
+		
+		<h2><:shop:info_generales:></h2>
+		[<div id="commande_info4">	
+			<span class="titre"><:shop:comment:> :</span> <span class="valeur">(#COMMENTAIRE)</span>	
+		</div>]
+		<div id="commande_info5">	
+			<span class="titre"><:shop:produit:> :</span> 
+				<B_art>
+		<ul>
+	<BOUCLE_art(spip_paniers_liens){id_panier}>
+			<li>[(#ID_OBJET|titre_objet{#OBJET}|supprimer_numero)]  <:shop:quantite:> : #QUANTITE</li>
+	</BOUCLE_art>
+		</ul>
+	</B_art>
+		</div>
+		<div id="commande_info6">
+			<span class="titre"><:shop:info_prix:> :</span> <span class="valeur">#MONTANT [(#CODE_DEVISE|traduire_devise)]</span>	
+		</div>
+		<div id="commande_info8">
+			<span class="titre"><:shop:email:> :</span> <span class="valeur"><a href="mailto:#EMAIL">#EMAIL</a></span>	
+		</div>
+		<div id="commande_info9">
+			<span class="titre"><:shop:statut:> <:shop:paiement:> :</span> <span class="valeur"> [(#STATUT_PAIEMENT)]</span>	
+		</div>						
+		<div id="commande_info10">	
+			<span class="titre"><:shop:date_vente:> :</span> <span class="valeur">[(#DATE_CREATION|affdate{'d-m-Y'})]</span>	
+		</div>
+		
+		<h2><:shop:infos_livraison:></h2>
+		
+		<div id="commande_info11">	
+			<span class="titre"><:nom:> :</span> <span class="valeur">#PRENOM</span>	
+		</div>		
+		<div id="commande_info12">
+			<span class="titre"><:shop:adresse:> :</span><br />
+			<span class="valeur adresse">
+			#ADRESSE
+			</span><br />
+		 	[<span class="valeur cp">(#CODE_POSTAL)</span>] [<span class="valeur ville">(#VILLE)</span><br />]
+		 	[<span class="valeur pays">
+				(#INCLURE{fond=formulaires/inc_pays}{pays})
+			</span>]
+		</div>
+		
+		<p><strong><a href="[(#URL_ACTION_AUTEUR{gestion_commande,envoye,#URL_ECRIRE{shop}}|parametre_url{id_commande,#ID_COMMANDE})]"><img src="#CHEMIN{img/tick_16.png}" title="<:shop:commande_traite:>"/> <:shop:commande_traite:></a></strong></p>	
+		</p>
+							
+		<div>	
+			</BOUCLE_commande>
+	</B_commande>
+	</ul>
+	</div>
+	</B_commande>
+</div>

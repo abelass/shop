@@ -5,13 +5,14 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('base/abstract_sql');
 
+//Liste les objets gérés par ce plugin
+function objets_shop(){
+    
+    $objets_shop=charger_fonction('objets_shop','inc');
+    
+    return $objets_shop();
+}
 
-<<<<<<< HEAD:shop_fonctions.php
-function titre_mot($id_mot){
-	$titre=sql_fetsel('titre','spip_mots','id_mot='.$id_mot);
-
-	return extraire_multi($titre['titre']);
-=======
 function devises(){
     $devises=array(
     
@@ -217,12 +218,41 @@ function devise_defaut($id_objet,$objet='article'){
 	else $defaut=$prix;
 
 	return $defaut;
->>>>>>> b82f96885917e579b0f5bd5dfe68c536c22a8629:shop_prix_fontions.php
+}
+
+function titre_mot($id_mot){
+	$titre=sql_fetsel('titre','spip_mots','id_mot='.$id_mot);
+
+	return extraire_multi($titre['titre']);
 }
 
 
+function titre_objet($id_objet,$objet='article'){
+	$titre=sql_fetsel('titre','spip_'.$objet.'s','id_'.$objet.'='.$id_objet);
 
-<<<<<<< HEAD:shop_fonctions.php
+	return $titre['titre'];
+}
+
+function donnees_objet($id_objet='',$objet='article',$champs='*'){
+
+    if(!$id_objet)$id_objet=_request('id_'.$objet);
+	if($id_objet)$donnees=sql_fetsel($champs,'spip_'.$objet.'s','id_'.$objet.'='.$id_objet);
+
+	return $donnees;
+}
+
+function traduire_code_devise($code_devise,$id_objet,$objet='article',$option=""){
+
+	$prix=sql_fetsel('prix','spip_prix','id_objet='.$id_objet.' AND objet='.sql_quote($objet).' AND code_devise ='.sql_quote($code_devise));
+
+	$return =$prix['prix'].' '. traduire_devise($code_devise);
+	
+	if($option=='prix') $return =$prix['prix'];
+	
+	
+	return $return;
+}
+
 // Cherche le id_produit correspondant
 function traduire_numero_article($id_objet,$objet='article'){
 
@@ -326,17 +356,4 @@ function api_paypal($objet=''){
 	return $donnes_api;
 	}
 
-=======
-function traduire_code_devise($code_devise,$id_objet,$objet='article',$option=""){
-
-	$prix=sql_fetsel('prix','spip_prix','id_objet='.$id_objet.' AND objet='.sql_quote($objet).' AND code_devise ='.sql_quote($code_devise));
-
-	$return =$prix['prix'].' '. traduire_devise($code_devise);
-	
-	if($option=='prix') $return =$prix['prix'];
-	
-	
-	return $return;
-}
->>>>>>> b82f96885917e579b0f5bd5dfe68c536c22a8629:shop_prix_fontions.php
 ?>

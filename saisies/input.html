@@ -1,0 +1,20 @@
+[(#REM) 
+
+  Parametres supplementaire :
+  - defaut : valeur par defaut du parametre
+  - type : type de l'input (defaut: text)
+  - class : classe(s) css ajoutes a l'input
+  - size : taille du champ
+  - maxlength : nombre de caracteres maximum
+  - disable : champ insaisissable ? 'oui' (defaut : '')
+  
+  Exemple d'appel :
+	[(#SAISIE{input,couleur_foncee,
+		label=<:spa:couleur_foncee:>,
+		size=7})]
+		
+]
+
+
+#SET{type,#ENV{type,text}}
+<input type="#GET{type}" name="#ENV{nom}" class="#GET{type}[ (#ENV{class})]" id="champ_#ENV{nom}"[ value="(#ENV{valeur,#ENV{defaut}})"][ size="(#ENV{size})"][ maxlength="(#ENV{maxlength})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"][(#ENV{obligatoire}|et{#HTML5}|oui) required="required"][ onfocus="if (this.value=='(#ENV{defaut})'){this.value=''};"] />

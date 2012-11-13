@@ -1,0 +1,34 @@
+[(#REM) il faudrait le faire completement modulable construt depuis le array du contexte]
+
+<h1 style="font-size: 22px;"><:shop:bonjour:></h1>
+
+<p><:shop:commande_enregistre:></p>
+
+<h2><:shop:infos_personnelles:> : </h2>
+
+<p><:nom:> : #ENV{prenom} </p>
+
+<p><:shop:email:> : <a href="mailto:#ENV{email}">#ENV{email}</a></p>
+
+<p><:shop:adresse:> : #ENV{adresse}[,&nbsp; (#ENV{code_postal})][&nbsp; (#ENV{ville})]</p>
+
+[<p><:shop:info_pays:> : (#INCLURE{fond=formulaires/inc_pays}{pays})</p>]
+
+<h2><:shop:produit:></h2>
+	
+	<BOUCLE_art(spip_paniers_liens){id_panier}>
+			<li>[(#ID_OBJET|titre_objet{#OBJET}|supprimer_numero)]  <:paniers:panier_quantite:> : #QUANTITE</li>
+	</BOUCLE_art>
+	
+[<p><:paniers:conteneur:> : (#ENV{conteneur})</p>]	
+
+[<p><:shop:info_prix:> : (#ENV{montant}) [(#ENV{code_devise})]</p>]
+
+[<p><:paniers:panier_taxes:> : (#ENV{taxes}) [(#ENV{code_devise})]</p>]
+
+[<p><:shop:frais_livraison:> : (#ENV{frais_livraison}) [(#ENV{code_devise})]</p>]
+
+[<p><:shop:comment:> : (#ENV{commentaire})</p>]
+
+
+

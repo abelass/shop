@@ -1,0 +1,54 @@
+[(#REM)Tableau des objets gérés par ce plugin]
+#SET{objets,#VAL|objets_shop}
+
+[(#REM)Déterminer l'objet]
+ #SET{objet,#ENV{voir}}
+[(#ENV{voir}|match{_edit}|oui)
+    #SET{objet,#ENV{voir}|replace{_edit,''}}
+    ]
+
+[(#REM)Les infos de l'objet]
+#SET{donnees_objets,#VAL|donnees_objet{#GET{objet}}}
+
+[(#REM)La boite info]
+[(#BOITE_OUVRIR{
+    [(#CHEMIN_IMAGE{logo_shop_24.png}|balise_img{'','cadre-icone'})],'simple personnel infos'})]
+
+<h3 style="text-align:center;"><:shop:shop:></h3>
+     [(#SET{texte_objet,#GET{objets}|table_valeur{#GET{objet}s}|table_valeur{nom_objet}})]
+[<div class='numero'><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>(#GET{donnees_objets}|table_valeur{id_#GET{objet}})</p></div>]
+    [(#GET{donnees_objets}|table_valeur{id_#GET{objet}}|non)
+    [<h4>(#GET{objets}|table_valeur{#GET{objet}}|table_valeur{nom_action})</h4>]
+    ]
+     [(#ENV{exec}|=={configurer_shop}|oui)<strong><:spip:icone_configuration_site:></strong>]
+     [(#ENV{exec}|=={shop}|oui|et{#ENV{voir}|non})<strong><:shop:liste_de_commandes:></strong>]
+#BOITE_FERMER
+
+[(#REM)Les raccoursis]
+
+[(#BOITE_OUVRIR{
+    [(#CHEMIN_IMAGE{logo_shop_24.png}|balise_img{'','cadre-icone'})]
+    
+,'simple personnel'})]
+<h3 style="text-align:center;"><:spip:titre_cadre_raccourcis:></h3>
+<ol class="shortcut">
+
+<B_objets>  
+<ol class="shortcut">
+   [(#ENV{voir}|oui)
+    <li><a href="#URL_ECRIRE{shop}"class="cellule-h">[(#CHEMIN_IMAGE{logo_shop_24.png}|image_reduire{16})] &nbsp;<:shop:retour_panel:> <:shop:shop:></a></li>
+    ]
+<BOUCLE_objets(DATA) {source tableau,#GET{objets}}{par cle} >
+        [(#CHEMIN{prive/squelettes/contenu/#VALEUR{action}.html}|oui)<li><a href="[(#URL_ECRIRE{shop}|parametre_url{voir,#VALEUR{action}})]" class="cellule-h" title="#VALEUR{nom_action}"><img src="#CHEMIN_IMAGE{#VALEUR{icone}}" alt="#VALEUR{nom_action}" align="absmiddle"/> &nbsp;#VALEUR{nom_action}</a></li>]
+</BOUCLE_objets> 
+</ol>
+</B_objets> 
+
+[(#PIPELINE{shop_affiche_gauche_shortcuts})]
+
+</div>
+#BOITE_FERMER
+
+
+    
+

@@ -1,0 +1,23 @@
+<form action="[(#CONFIG{echoppe/squelette_panier, echoppe_panier}|generer_url_public|abs_url)]" method="post">
+	<fieldset>
+	<input type="hidden" name="retour_validation" value="reussi" />
+	<input type="hidden" name="token_panier" value="#SESSION{echoppe_token_panier}" />
+	<input type="hidden" name="id_auteur" value="#SESSION{id_auteur}" />
+	
+	
+	<p><:echoppe:explication_du_systeme_par_virement:></p>
+	<p>-----------------------------------------------------------------------<br />
+	<BOUCLE_LePanier(SPIP_ECHOPPE_PANIERS){id_panier?}{token_panier = #SESSION{echoppe_token_panier}}>
+		<BOUCLE_LeProduit(SPIP_ECHOPPE_PRODUITS_DESCRIPTIONS spip_echoppe_produits){id_produit}>
+		#QUANTITE x <strong>#TITRE</strong> - #PRIX_TVAC&nbsp;#CONFIG{echoppe/devise, euro}<br />
+		</BOUCLE_LeProduit>
+		</B_LeProduit>
+	</BOUCLE_LePanier>
+	-----------------------------------------------------------------------<br />
+	<:echoppe:total:> : <strong>#TOTAL_PANIER_TVAC&nbsp;#CONFIG{echoppe/devise, euro}&nbsp;TVAC</strong>
+						(#TOTAL_PANIER_HTVA&nbsp;#CONFIG{echoppe/devise, euro}&nbsp;HTVA)<br />
+	<:echoppe:numero_de_compte_du_beneficiaire:> : <strong>[(#CONFIG{echoppe/numero_de_compte_beneficiaire})]</strong><br />
+	<:echoppe:commentaire:> : <strong>(info a venir)</strong></p>
+    </fieldset>
+	<div class="spip_bouton"><input type="submit" value="<:valider:>" ></div>
+</form>
