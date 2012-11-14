@@ -87,6 +87,7 @@ function myUrlEncode($string) {
 }*/
     
 function rubrique_produits($id,$objet='article',$sousrubriques=false){
+        include_spip('inc/config');
 
      	$rubrique_produit=picker_selected(lire_config('shop/rubrique_produits'),'rubrique');
 
@@ -104,7 +105,8 @@ function rubrique_produits($id,$objet='article',$sousrubriques=false){
 	else echo '<div class="erreur">veuillez configurer une rubrique produit</div>';
 return $valide;
 } 
-   
+
+
 function rubriques_enfant($id_parent,$rubriques=array()){
 	//echo serialize($id_parent);
 $id_p='';
@@ -121,6 +123,14 @@ $id_p='';
 
     if(count($id_p)>0)$rubriques=rubriques_enfant($id_p,$rubriques);
 return $rubriques;
+}
+
+//teste si l'objet est un produit
+
+function objet_produit($id_rubrique,$objet,$id_objet){
+    include_spip('inc/config');
+    $rubrique_produit=picker_selected(lire_config('shop/rubrique_produits'),'rubrique');
+    
 }
 
 // Fournis les données pour l'api selon l'environnemnt (teste ou production)

@@ -78,6 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'pendant' => "En cours",
 'prix_choisis' => "Prix choisi",
 'prix_ht' => "Prix ht",
+'prix_ttc' => "Prix ttc",
 'prix_devises' => "Prix",
 'produit' => "Produit",
 'paiement_description' => "Veuillez sélectionner le mode de paiement",
@@ -102,6 +103,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'titre_produit' => "Nom du produit",
 'traitement' => "Traitement",
 'taxes' => "Taxes",
+'taxes_inclus' => "Taxes compris dans le prix ?",
 
 // v
 'ville' => "Ville",
