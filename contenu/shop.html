@@ -1,4 +1,3 @@
-[(#REM) inclure le menu avec identifiant zcommerce ]
 
 	[(#INCLURE{fond=inclure/menu_shop,env})]
 
@@ -15,9 +14,13 @@
 		[(#PLUGIN{zaboarticle}|oui)
 			<INCLURE{fond=inclure/les_articles}{env}>
 			]
-        [(#REM) articles avec un champ prix non vide. Tester d'abord l'existence du champ prix dans la table articles]
-        <BOUCLE_articles(PRIX)>[(#PRIX_HT*|>{0}|oui) #SET{article_prix,#PRIX_HT}]</BOUCLE_articles>
-        [(#GET{article_prix}|oui)dsds
+        [(#REM) Plugin shop_prix]
+        [(#PLUGIN{shop_prix}|oui)
+        <INCLURE{fond=inclure/les_objets_precieux}{env}>
+        ]
+        
+        <BOUCLE_articles(PRIX)>[(#PRIX*|>{0}|oui) #SET{article_prix,#PRIX}]</BOUCLE_articles>
+        [(#GET{article_prix}|oui)
             <INCLURE{fond=inclure/les_articles_precieux}{env}>]
         </B_articles>
 	
