@@ -4,14 +4,15 @@
         #ANCRE_PAGINATION
     <h2><:shop:les_articles_precieux:></h2>
     <table class="spip">
-        <BOUCLE_articles_precieux(PRIX){pagination}>
-            [(#PRIX_HT|?{
-                #SET{prix,#PRIX_HT}
-                #SET{taxe,ht},
+        <BOUCLE_objets_precieux(PRIX){pagination}>
+            [(#PRIX_HT|>{0}|?{
                 #SET{prix,#PRIX_TTC}
                 #SET{tax,ttc}
+                ,
+                #SET{prix,#PRIX_HT}
+                #SET{taxe,ht}
             })]
-            <INCLURE{fond=les_objets_precieux_#OBJET,id_objet,prix=#GET{prix},ht=#GET{ht},id_declinaison}
+            <INCLURE{fond=inclure/les_objets_precieux_#OBJET,id_objet,prix=#GET{prix},ht=#GET{ht},id_declinaison}/>
         </BOUCLE_objets_precieux>
     </table>
     [<p class="pagination">(#PAGINATION)</p>]
