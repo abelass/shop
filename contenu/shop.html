@@ -16,10 +16,11 @@
 			]
         [(#REM) Plugin shop_prix]
         [(#PLUGIN{shop_prix}|oui)
-        <INCLURE{fond=inclure/les_objets_precieux}{env}>
+        
+            <INCLURE{fond=inclure/les_objets_precieux}{env}>
         ]
         
-        <BOUCLE_articles(PRIX)>[(#PRIX*|>{0}|oui) #SET{article_prix,#PRIX}]</BOUCLE_articles>
+        <BOUCLE_articles(ARTICLES)>[(#PRIX*|>{0}|oui) #SET{article_prix,#PRIX}]</BOUCLE_articles>
         [(#GET{article_prix}|oui)
             <INCLURE{fond=inclure/les_articles_precieux}{env}>]
         </B_articles>
