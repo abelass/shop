@@ -86,7 +86,7 @@ function myUrlEncode($string) {
      	return $rubriques;
 }*/
     
-function rubrique_produits($id,$objet='article',$sousrubriques=false){
+function rubrique_produits($id='',$objet='article',$sousrubriques=false){
         include_spip('inc/config');
 
      	$rubrique_produit=picker_selected(lire_config('shop/rubrique_produits'),'rubrique');
@@ -100,10 +100,13 @@ function rubrique_produits($id,$objet='article',$sousrubriques=false){
 		else $rubriques=array();
 
 		$rubriques=rubriques_enfant($id_parent,$rubriques);
-		$valide=sql_getfetsel('id_'.$objet, 'spip_'.$objet.'s', 'id_'.$objet.'='.$id.' AND id_rubrique IN ('.implode(',',$rubriques).')');
-	}
+		if($id){
+		    $retour=sql_getfetsel('id_'.$objet, 'spip_'.$objet.'s', 'id_'.$objet.'='.$id.' AND id_rubrique IN ('.implode(',',$rubriques).')');
+            }
+        else $retour=$rubriques;
+	   }
 	else echo '<div class="erreur">veuillez configurer une rubrique produit</div>';
-return $valide;
+return $retour;
 } 
 
 
