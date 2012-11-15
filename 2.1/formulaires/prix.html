@@ -5,7 +5,7 @@
 		<ul style="list-style:none;">
 		<BOUCLE_prix(POUR){tableau #ENV{prix_choisis}}>
 			<li>
-				<span>[(#VALEUR|table_valeur{prix})]</span>&nbsp;<span>[(#VALEUR|table_valeur{code_devise}|traduire_devise)]</span><a href="[(#URL_ACTION_AUTEUR{eliminer_prix,[(#VALEUR|table_valeur{id_prix})],[(#SELF|parametre_url{retour_action,oui})]})]#prix"> <img src="#CHEMIN{prive/images/croix-rouge.gif}" /></a>
+				<span>[(#VALEUR|table_valeur{prix})]</span>&nbsp;<span>[(#VALEUR|table_valeur{code_devise}|traduire_devise)]</span><a href="[(#URL_ACTION_AUTEUR{eliminer_prix,[(#VALEUR|table_valeur{id_prix_objet})],[(#SELF|parametre_url{retour_action,oui})]})]#prix"> <img src="#CHEMIN{prive/images/croix-rouge.gif}" /></a>
 			</li>
 
 		</BOUCLE_prix>
