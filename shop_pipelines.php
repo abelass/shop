@@ -53,7 +53,8 @@ function shop_objets_shop($flux){
  */
 function shop_formulaire_traiter($flux){
     // Si on est sur le formulaire client qui est sur la page identification
-    if( $flux['args']['form'] == 'editer_client'
+    $form=$flux['args']['form'];
+    if($form == 'editer_client'
          and _request('page') == 'shop'
          and _request('appel') == 'mes_coordonnees'
          and include_spip('inc/paniers')
@@ -94,5 +95,21 @@ function shop_formulaire_traiter($flux){
                                 'type' => 'livraison' ) );
     }
     return($flux);
+}
+
+function shop_formulaire_charger($flux){
+ $form=$flux['args']['form'];
+ 
+ // cré un contact si pas encore existant
+ if($form == 'inscription_client'
+         and _request('page') == 'shop'
+         and _request('appel') == 'mes_coordonnees'
+       ){
+    if($id_auteur = verifier_session()){
+        $inscrire_client = charger_fonction('traiter','formulaires/inscription_client');
+        $inscrire_client();
+        }
+    }
+     return($flux);
 }
 ?>
