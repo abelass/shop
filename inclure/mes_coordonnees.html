@@ -6,13 +6,13 @@
 ]
 
 
-<BOUCLE_contact(CONTACTS){id_auteur=#SESSION{id_auteur}}{id_auteur>0}>1
+<BOUCLE_contact(CONTACTS){id_auteur=#SESSION{id_auteur}}{id_auteur>0}>
 	[<div id="abonne_coord">	
 		<h1><:shop:verifiez_vos_coordonnees:></h1>
 		(#FORMULAIRE_EDITER_CLIENT{#SESSION{id_auteur},[(#URL_PAGE{z-commerce}|parametre_url{appel,paiement})]})
 	</div>]
 </BOUCLE_contact>
-2
+
 	[<div id="abonne_coord" [class="(#ENV{mail}|=={oui}|oui)mailhide"]>	
 		<h1><:shop:vos_coordonnees:></h1>
 		<div class="ajax">(#FORMULAIRE_INSCRIPTION_CLIENT)</div>
