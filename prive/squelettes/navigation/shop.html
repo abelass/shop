@@ -10,9 +10,15 @@
 [(#REM)Les infos de l'objet]
 #SET{donnees_objets,#VAL|donnees_objet{#GET{objet}}}
 
+[(#CHEMIN{prive/squelettes/navigation/#ENV{voir}.html}|oui|et{#ENV{voir}|=={configurer_shop}|non}) #SET{info,oui}
+       <INCLURE{fond=prive/squelettes/navigation/#ENV{voir},env}/>
+       ]
+[(#GET{info}|non)
 [(#REM)La boite info]
 [(#BOITE_OUVRIR{
     [(#CHEMIN_IMAGE{logo_shop_24.png}|balise_img{'','cadre-icone'})],'simple personnel infos'})]
+
+
 
 <h3 style="text-align:center;"><:shop:shop:></h3>
      [(#SET{texte_objet,#GET{objets}|table_valeur{#GET{objet}s}|table_valeur{nom_objet}})]
@@ -23,6 +29,12 @@
      [(#ENV{exec}|=={configurer_shop}|oui)<strong><:spip:icone_configuration_site:></strong>]
      [(#ENV{exec}|=={shop}|oui|et{#ENV{voir}|non})<strong><:shop:liste_de_commandes:></strong>]
 #BOITE_FERMER
+]
+
+[(#CHEMIN{prive/squelettes/extra/#ENV{voir}.html}|oui)
+    <INCLURE{fond=prive/squelettes/extra/#ENV{voir},env}/>
+       ]
+
 
 [(#REM)Les raccoursis]
 
@@ -48,6 +60,13 @@
 
 </div>
 #BOITE_FERMER
+
+
+
+
+
+
+
 
 
     
