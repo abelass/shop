@@ -8,7 +8,19 @@ function inc_objets_shop_dist(){
     /* On cherche d'abord ceux qui on contienn un shp_dan leur nom*/
     $sql=sql_select('prefixe','spip_paquets','installe="oui"');
     
-    $objets_shop=array();
+    $objets_shop=array(
+        'configurer_shop'=>array(
+            'action'=>'configurer_shop',
+            'nom_action'=>_T('spip:icone_configuration_site'),
+            'icone'=>'cfg-16.png'
+            ),
+         'commandes'=>array(
+            'action'=>'commandes',
+            'nom_action'=>_T('commandes:commandes_titre'),
+            'icone'=>'commande-16.png'
+            ),
+        );
+
     
     while($data=sql_fetch($sql)){
         $plugin=strtolower($data['prefixe']);
@@ -32,7 +44,8 @@ function inc_objets_shop_dist(){
     
    
      /*Possibilité de rajouter de plugin ou de modifier leur définition*/
-    $objets_shop=pipeline('objets_shop',$objets_shop);
+    $objets_shop=pipeline('shop_objets',$objets_shop);
+
     
     return $objets_shop;
 }
