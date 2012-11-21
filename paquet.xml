@@ -16,7 +16,7 @@
 
 	<necessite nom="saisies" compatibilite="[1.24.0;]" /> 
 	<necessite nom="paniers" compatibilite="[0.3.3;]" /> 	
-	<!--<necessite nom="shop_commandes" compatibilite="[1.0.0;]" /> -->	
+	<necessite nom="shop_commandes" compatibilite="[1.0.0;]" /> 	
 
 		
 	<pipeline nom="autoriser" inclure="shop_autorisations.php" /> 
