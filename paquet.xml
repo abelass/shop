@@ -18,6 +18,7 @@
 	<necessite nom="paniers" compatibilite="[0.3.3;]" /> 	
 	<!--<necessite nom="shop_commandes" compatibilite="[1.0.0;]" /> -->	
 	<necessite nom="commandes" compatibilite="[0.5.3;]" />
+	<necessite nom="clients" compatibilite="[0.5.3;]" />	
 		
 	<pipeline nom="autoriser" inclure="shop_autorisations.php" /> 
 	<pipeline nom="I2_cfg_form" inclure="shop_pipelines.php" /> 	 
