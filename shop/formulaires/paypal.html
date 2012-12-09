@@ -1,0 +1,38 @@
+<div capi_paypallass="formulaire_spip formulaire_commande">
+<h3><:shop:paiement:></h3>
+<p class="shop_paiement no-ajax"><:shop:paiement_description:></p>
+
+#SET{api_paypal,#VAL|api_paypal}
+<BOUCLE_art(SHOP_COMMANDE){id_commande}>
+
+<form action="https://[(#GET{api_paypal}|table_valeur{url_paypal})]/#ENV{lang}/cgi-bin/webscr" method="post" id="formulaire_prestataire_paiement">
+	<input TYPE="hidden" name="charset" value="#CHARSET"/>
+	<input type="hidden" name="cmd" value="_cart" />	
+	<input type="hidden" name="amount" value="#MONTANT" /> 
+	<input type="hidden" name="image_url" value="#LOGO_SITE_SPIP" /> 
+	<input type="hidden" name="upload" value="1" /> 
+	<input type="hidden" name="return" value="[(#SELF|parametre_url{retour,paypal}|parametre_url{id_commande,#ENV{id_commande}}|url_absolue)]" /> 	
+	<input type="hidden" name="notify_url" value="[(#ID_COMMANDE|generer_url_retour_paiement{paypal})]" />	
+	<input type="hidden" name="rm" value="2" /> 
+	<input type="hidden" name="currency_code" value="#CODE_DEVISE" /> 
+	<input type="hidden" name="business" value="[(#GET{api_paypal}|table_valeur{email_paypal})]" /> 
+	<BOUCLE_panier(spip_paniers_liens){id_panier}>
+	<input type="hidden" name="item_name_#COMPTEUR_BOUCLE" value="[(#ID_OBJET|titre_objet{#OBJET})]" />
+	<input type="hidden" name="item_number_#COMPTEUR_BOUCLE" value="#ID_OBJET" /> 
+	<input type="hidden" name="amount_#COMPTEUR_BOUCLE" value="[(#ID_OBJET|prix_objet{#OBJET,#CODE_DEVISE,TRUE})]" /> 
+	<input type="hidden" name="quantity_#COMPTEUR_BOUCLE" value="#QUANTITE" /> 
+	</BOUCLE_panier>
+	#SET{total,#TOTAL_BOUCLE|plus{1}}
+	<//B_panier>	
+	[(#FRAIS_LIVRAISON|>{0}|oui)	
+	<input type="hidden" name="item_name_#GET{total}" value="<:shop:frais_livraison:>" /> 
+	<input type="hidden" name="amount_#GET{total}" value="[(#FRAIS_LIVRAISON)]" />
+	<input type="hidden" name="quantity_#GET{total}" value="1" /> ]
+	<p class="boutons paypal">
+	<input type="submit" 	class="submit" value="<:shop:payer_paypal:>" />
+	</p>
+
+</form>
+</BOUCLE_art>
+</div>
+

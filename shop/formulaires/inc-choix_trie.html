@@ -1,0 +1,15 @@
+[(#REM)prepare les titres de tabeles pour permettre des trie]
+
+[(#ENV{tri}|=={[(#ENV{champ})]}|?{
+
+	[(#ENV{senstri}|?{
+	<a class="ajax"  href="[(#SELF|parametre_url{tri,[(#ENV{champ})]}|parametre_url{senstri,0})]">[(#ENV{titre})]</a><img src="[(#CHEMIN{images/deplierbas.gif})]"/>
+		,<a class="ajax" href="[(#SELF|parametre_url{tri,[(#ENV{champ})]}|parametre_url{senstri,1})]">[(#ENV{titre})]</a><img src="[(#CHEMIN{img/depliertop.gif})]"/>
+			})]
+		,<a class="ajax" href="[(#SELF|parametre_url{tri,[(#ENV{champ})]})]">[(#ENV{titre})]</a>
+			[(#ENV{defaut}|=={bas}|oui)
+				[(#ENV{tri}|non)<img src="[(#CHEMIN{images/deplierbas.gif})]"/>]
+				]
+			})
+	]
+	
