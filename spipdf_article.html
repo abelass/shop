@@ -1,0 +1,38 @@
+<BOUCLE_principale(ARTICLES) {id_article}>
+<page lib_pdf="mpdf" orientation="P" format="A4" backtop="7mm" backbottom="7mm" backleft="10mm" backright="10mm">
+
+	[(#REM) Les styles de spip,  il est possible d'utiliser sa propre feuille de style !]
+	[<link rel="stylesheet" href="(#CHEMIN{spip_style.css}|direction_css)" type="text/css" media="all" />]
+	[<link rel="stylesheet" href="(#CHEMIN{habillage.css}|direction_css)" type="text/css" media="all" />]
+
+	<style type="text/css">
+		/* quelques styles en plus */
+		table { margin-top: 10px; }
+		img { margin: 10px; }
+		.bloc_simple h2 {
+		   font-size: 16px;
+		   font-weight: bold;
+		   margin: 0;
+		   margin-bottom: 5px;
+		}
+		.bloc_simple {
+			border-top: 1px solid #ccc;
+			padding-top: 5px;
+			margin-top: 10px;
+			margin-bottom: 10px;
+		}
+		.chapo_simple { font-weight: bold; }
+		.notes h2 { margin-bottom: 10px; }
+		.notes p { margin: 10px; }
+        /* pour le float des images avec mPDF surtout */
+        .pdf_img_float_left { float: left; }
+        .pdf_img_float_right { float: right; }
+        .pdf_img_float_center { float: center; }
+        td.info{width:20px;}
+	</style>
+
+	<h1><:paniers:panier:></h1>
+	#FORMULAIRE_PANIER	
+
+</page>
+</BOUCLE_principale>

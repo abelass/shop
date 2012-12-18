@@ -1,0 +1,62 @@
+#SET{senstri,#ENV{senstri,1}}
+
+[(#ENV{tri}|oui)
+	#SET{senstri,#ENV{senstri,0}}
+]
+
+<B_commande_traite>
+	<h2><:shop:commandes_traite:></h2>
+	<div id="traite" class="cadre cadre-liste" style="">
+		
+			<table class="arial2" style="width: 100%; border: 0px none;" cellpadding="2" cellspacing="0">
+				
+				<tbody><tr class="titrem">
+						<th>
+							<INCLURE{fond=formulaires/inc-choix_trie}{env}{champ=id_commande}{titre=id}/>
+						</th>
+						
+						<th><b>
+								<INCLURE{fond=formulaires/inc-choix_trie}{env}{champ=date_creation}{titre=<:date:>}{defaut=bas}/>
+								</b></th>
+							<th><b>
+									<INCLURE{fond=formulaires/inc-choix_trie}{env}{champ=nom}{titre=<:nom:>}/>
+									</b></th>
+								<th><b>
+										<INCLURE{fond=formulaires/inc-choix_trie}{env}{champ=email}{titre=<:shop:email:>}/></b></th>
+									<th><b>
+										<INCLURE{fond=formulaires/inc-choix_trie}{env}{champ=id_produit}{titre=<:shop:produit:>}/>
+										</b>
+									</th>
+									<th>
+										<b>
+										<INCLURE{fond=formulaires/inc-choix_trie}{env}{champ=statut_paiement}{titre=<:shop:statut:>}/>
+										</b>
+									</th>
+									
+
+										<th></th>
+									</tr>
+									[<tr><td colspan="8" class="pagination">(#PAGINATION)</td></tr>]
+									<BOUCLE_commande_traite(BOUTIQUE_COMMANDE){par #ENV{tri,date_creation}}{statut!=supprime}{traitement=envoye}{inverse #GET{senstri}}{pagination 20}>
+										<tr class="tr_liste[ (#COMPTEUR_BOUCLE|alterner{row_even, row_odd})]">
+										<td class="arial1">#ID_COMMANDE</td>
+										<td class="arial1">[(#DATE_CREATION|affdate{'d-m-Y'})]</td>
+										<td class="arial1"><a href="[(#SELF|parametre_url{voir,detail_commande}|parametre_url{id_commande,#ID_COMMANDE})]">#PRENOM</a></td>
+										<td class="arial1">#EMAIL</td>
+										<td class="arial1">
+										<BOUCLE_art_traite(ARTICLES){id_article=#ID_PRODUIT}>
+										[(#TITRE|supprimer_numero)]
+									</BOUCLE_art_traite>
+								</td>		
+								<td class="arial1">#STATUT_PAIEMENT</td>	
+								<td>
+									<a class="ajax" href="[(#URL_ACTION_AUTEUR{gestion_commande,eliminer,#SELF}|parametre_url{id_commande,#ID_COMMANDE})]"><img src="#CHEMIN{img/delete_16.png}" title="<:spip:lien_supprimer:>"  onclick="return confirm('<:shop:alerte_action:>');"/></a>
+								</td>					
+							</tr>
+						</BOUCLE_commande_traite>
+						
+						
+					</tbody></table>
+			</div>
+		</div>
+</B_commande_traite>
