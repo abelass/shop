@@ -20,11 +20,11 @@
 	<necessite nom="clients" compatibilite="[0.5.3;]" />	
 	<necessite nom="notifavancees" compatibilite="[0.2.1;]" />		
 		
-	<pipeline nom="autoriser" inclure="shop_autorisations.php" /> 
-	<pipeline nom="I2_cfg_form" inclure="shop_pipelines.php" /> 	 
+	<pipeline nom="autoriser" inclure="shop_autorisations.php" />  
 	<pipeline nom="insert_head" inclure="shop_pipelines.php" /> 
 	<pipeline nom="formulaire_traiter" inclure="shop_pipelines.php" /> 	
 	<pipeline nom="formulaire_charger" inclure="shop_pipelines.php" /> 	
+	<pipeline nom="traitement_paypal" inclure="shop_pipelines.php" /> 	
 
 	
 	<menu nom="shop" titre="shop:shop" parent="menu_edition" icone="images/logo_shop_16.png" action="shop" /> 
