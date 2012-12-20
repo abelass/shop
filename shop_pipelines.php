@@ -102,7 +102,7 @@ function shop_formulaire_charger($flux){
 function shop_traitement_paypal($flux){
    
     $reference = $flux['args']['paypal']['invoice'];
-   $commande = sql_fetsel('id_commande, statut, id_auteur', 'spip_commandes', 'reference = '.sql_quote($reference));
+    $commande = sql_fetsel('id_commande, statut, id_auteur', 'spip_commandes', 'reference = '.sql_quote($reference));
     $objet=sql_fetsel('objet,id_objet','spip_commandes_details','id_commande='.$commande['id_commande']);
     $id_panier=sql_getfetsel('id_panier','spip_paniers_liens','id_objet='.$objet['id_objet'].' AND objet='.sql_quote($objet['objet']));
     sql_delete('spip_paniers_liens','id_panier='.$id_panier);
