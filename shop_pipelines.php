@@ -110,4 +110,6 @@ function shop_traitement_paypal($flux){
     spip_log("Retour paypal eliminer panier $id_panier",'paypal' . _LOG_INFO);
     return $flux;
 }
+
+
 ?>
