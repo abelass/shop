@@ -1,0 +1,22 @@
+[(#REM)
+	Tous les details de qui emet la facture
+	Nom de l'orga, siret, tva...
+]
+<div id="bloc-de">
+[<h4>(#CONFIG{shop_paiements/nom_societe})</h4>]
+
+[<p class='adresse'>
+(#CONFIG{shop_paiements/adresse}|propre)
+</p>]
+
+<p class='telephone'>
+[(#CONFIG{shop_paiements/telephone})<br/>]
+[(#CONFIG{shop_paiements/mobile})]
+</p>
+
+<p class='legal'>
+[<:shop_paiements:titre_nr_entreprise:> (#CONFIG{shop_paiements/nr_entreprise})<br/>]
+[<:shop_paiements:titre_tva:> (#CONFIG{shop_paiements/tva})<br/>]
+</p>
+
+</div>
