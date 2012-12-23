@@ -7,6 +7,7 @@
       <INCLURE{fond=inclure/commande,id_commande,statut}>
    
       #SET{details, #ARRAY}
+      #SET{prix, #ARRAY}      
       <BOUCLE_details(COMMANDES_DETAILS){id_commande}{par id_commandes_detail}>   
          [(#SET{ detail#COMPTEUR_BOUCLE,
          		  [(#ARRAY{
@@ -14,15 +15,16 @@
                      quantite, #QUANTITE,
                      prix, [(#PRIX_UNITAIRE_HT*|mult{#TAXE}|plus{#PRIX_UNITAIRE_HT*})],
          })]})]
-         
+         #SET{prix,#GET{prix}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,(#PRIX_UNITAIRE_HT*|mult{#TAXE}|plus{#PRIX_UNITAIRE_HT*})}}}
          [(#SET{ details,
          		  #GET{details}|push{ #GET{detail#COMPTEUR_BOUCLE} } })]
       </BOUCLE_details>
-      
+      #SET{prix_total,#GET{prix}|array_sum}
        [(#FORMULAIRE_PAIEMENTS{#ARRAY{
          id_commande,#ID_COMMANDE,
          reference,#REFERENCE,
          details,#GET{details},
+         prix_total,#GET{prix_total},
          }})]
 
    
