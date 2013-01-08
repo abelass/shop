@@ -1,0 +1,57 @@
+<div class="instituer_commande">
+	[(#ENV{_publiable}|non|et{#ENV{statut}|=={prepa}|oui})
+	<p class="small"><:texte_proposer_publication:></p>
+	]
+	<div class="formulaire_spip formulaire_editer formulaire_instituer formulaire_#FORM formulaire_#FORM formulaire_#FORM-#ENV{_id_commande}">
+		[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+		[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+		[(#ENV{editable})
+		<form method='post' action='#ENV{action}'><div>
+			[(#REM) declarer les hidden qui declencheront le service du formulaire
+			parametre : url d'action ]
+			#ACTION_FORMULAIRE{#ENV{action}}
+		]
+			#SET{obli,'obligatoire'}#SET{erreurs,#ENV**{erreurs}|table_valeur{statut}}
+			<ul>
+				<li class="editer editer_statut statut_#ENV{statut}[ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="formulaire_commande-#ENV{_id_commande}-statut">[(#ENV{_label}|_T)][(#ENV{_aide}|oui)#AIDER{#ENV{_aide}}]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<span class="show">
+					[(#ENV{editable})
+						<select class="select statut" name="statut" id="formulaire_commande-#ENV{_id_commande}-statut">
+						[(#ENV{_statuts}|table_valeur{#ENV{statut}}|non)
+							<option value="#ENV{statut}">&nbsp;&nbsp;&nbsp;#ENV{statut}</option>
+						]
+					]
+						<BOUCLE_choix(POUR){tableau #ENV{_statuts}}{si #ENV{editable}}>
+							<option value="#CLE"[(#ENV{statut}|=={#CLE}|oui)selected="selected"]
+								style="background-image:url([(#CLE|puce_statut{commande}|extraire_attribut{src})]);">&nbsp;&nbsp;&nbsp;[(#VALEUR|_T)]</option>
+						</BOUCLE_choix>
+					[(#ENV{editable})
+					</select>
+					]
+					[(#ENV{editable}|non)
+						<span class="statut">[(#ENV{statut}|puce_statut{commande})] [(#ENV{_statuts}|table_valeur{#ENV{statut}}|_T)]</span>
+					]
+				</span>
+				</li>
+			</ul>
+			<!--extra-->
+			[(#ENV{editable})
+			<p class='boutons'><span class='image_loading'>&nbsp;</span>
+				<input type='submit' class='submit' value='<:bouton_changer:>' /></p>
+		</div></form>
+		]
+	</div>
+</div>
+<script type="text/javascript">
+	function update_select(statut_default){
+		jQuery(this).attr('style',jQuery(this.options[this.selectedIndex]).attr('style')).closest('form').find('.boutons').css('visibility',this.options[this.selectedIndex].value==statut_default?'hidden':'visible');
+	}
+	jQuery(function(){
+		jQuery(".formulaire_#FORM .show select")
+						.each(function(){update_select.apply(this,['#ENV{statut}']);})
+						.bind('change',function(){update_select.apply(this,['#ENV{statut}']);})
+						.bind('keyup',function(){update_select.apply(this,['#ENV{statut}']);});
+	});
+</script>

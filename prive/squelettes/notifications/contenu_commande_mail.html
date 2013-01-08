@@ -1,0 +1,49 @@
+[(#REM)
+
+  Squelette
+  (c) 2009 SPIP
+  Distribue sous licence GPL
+
+][(#HTTP_HEADER{Content-type: text/#ENV{format_envoi}[; charset=(#CHARSET)]})]#CACHE{0}
+<BOUCLE_art(COMMANDES){id_commande}{statut?}{tout}>
+
+<BOUCLE_contact(CONTACTS){id_auteur}>#SET{nom_client,#CIVILITE #NOM #PRENOM}</BOUCLE_contact>
+
+[(#ENV{qui}|=={client}|oui)
+<p><:commandes:bonjour:> #GET{nom_client}</p>
+<p><:commandes:merci_de_votre_commande:></p>]
+[(#ENV{qui}|=={client}|non)
+<p><:commandes:une_commande_de:>#GET{nom_client}</p>]
+
+<h3><:commandes:recapitulatif:></h3>
+
+<p><:commandes:commande_numero:>#REFERENCE</p>
+<p><:commandes:commande_date:> : #DATE</p>
+<p><:commandes:modifier_commande_statut:> [(#STATUT|commandes_lister_statuts)]</p>
+
+<p><:commandes:details_commande:></p>
+<INCLURE{fond=inclure/commande,id_commande=#ID_COMMANDE,statut=#STATUT,format_envoi=#ENV{format_envoi}}>
+
+<BOUCLE_commande(COMMANDES_DETAILS){id_commande}{par id_commandes_detail}{si #ENV{qui}|=={client}|et{#STATUT|=={paye}}|oui}>
+    <BOUCLE_prix(PRIX_OBJETS){id_prix_objet=#ID_OBJET=#ID_COMMANDE}>
+        <BOUCLE_docs(DOCUMENTS){id_article=#ID_OBJET}{extension=pdf}{tous}>
+       <p> <:telecharger:> <a href="#URL_DOCUMENT">[(#TITRE|sinon{#FICHIER|replace{#EXTENSION/,''}})]</a></p>
+        </BOUCLE_docs>
+    </BOUCLE_prix>
+</BOUCLE_commande>
+    [(#ENV{qui}|=={client}|et{#STATUT|!={paye}}|oui)
+        [(#CHEMIN{inclure/message_paiement_#TYPE_PAIEMENT.html}|oui)
+        <h3><:shop_paiements:message_paiement:></h3>
+         [(#INCLURE{fond=inclure/message_paiement_#TYPE_PAIEMENT,env})]
+         ]
+       ]
+<//B_commande>
+<hr />
+
+<p><a href="#URL_SITE_SPIP">#URL_SITE_SPIP</a></p>
+
+</BOUCLE_art>
+[(#ENV{format_envoi}|=={plain}|oui)
+	#FILTRE{supprimer_tags|filtrer_entites|trim}]
+[(#ENV{format_envoi}|=={plain}|non)
+	#FILTRE{filtrer_entites|trim}]
