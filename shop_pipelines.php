@@ -15,8 +15,8 @@ function shop_affiche_gauche($flux){
 }*/
 
 
-function shop_header_prive($flux){
-       $flux .= '<link rel="stylesheet" href="'.find_in_path('css/styles_shop_admin.css').'" type="text/css" media="all" />';
+function shop_insert_head($flux){
+       $flux .= '<link rel="stylesheet" href="'.find_in_path('css/styles_shop_public.css').'" type="text/css" media="all" />';
  	return $flux;	
 }
 
