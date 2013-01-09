@@ -16,8 +16,6 @@ function shop_affiche_gauche($flux){
 
 
 function shop_header_prive($flux){
-	// affichage du formulaire d'activation désactivation projets	
-
        $flux .= '<link rel="stylesheet" href="'.find_in_path('css/styles_shop_admin.css').'" type="text/css" media="all" />';
  	return $flux;	
 }
