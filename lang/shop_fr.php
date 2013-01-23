@@ -19,8 +19,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // c
 'choisir' => "Sélectionner",
-'choix_devises' => "Choix des devises",
-'choix_devise' => "Devise",
 'choix_prix' => "Le prix du produit",
 'choix_rubrique' => "Choix la rubrique",
 'code_postal' => "Code postal",
@@ -40,8 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_vente' => "Date de vente",
 'de_la_part_de' => "De la part de",
 'detail_commande' => "Détails de la commande",
-'devises_choisis' => "Devises choisis",
-'devise_default' => "Devise par défaut",
+
 
 // e
 'email' => "Email",
@@ -76,10 +73,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'payer_paypal' => "Payer via Paypal",
 'paiement' => "Paiement de la commande",
 'pendant' => "En cours",
-'prix_choisis' => "Prix choisi",
-'prix_ht' => "Prix ht",
-'prix' => "Prix ttc",
-'prix_devises' => "Prix",
 'produit' => "Produit",
 'paiement_description' => "Veuillez sélectionner le mode de paiement",
 'paiement_probleme' => "Votre paiement n'a pas encore été validé, veuillez vérifier dans votre compte Paypal ou contacter le webmaster du site",
@@ -89,7 +82,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // r
 'rembourse_partiellement' => "Remboursé partiellement",
-'rubrique_produits' => "Rubrique des produits",
 'rejete' => "Rejeté",
 'rembourse' => "Remboursé",
 'retour_panel' => "Retour au panel",
@@ -102,8 +94,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'titre_confirmation' => "Confirmation de votre commande",
 'titre_produit' => "Nom du produit",
 'traitement' => "Traitement",
-'taxes' => "Taxes",
-'taxes_inclus' => "Taxes compris dans le prix ?",
 
 // v
 'ville' => "Ville",
