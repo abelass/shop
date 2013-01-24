@@ -1,4 +1,20 @@
-<h1><:spip:icone_configuration_site:></h1>
-<div class="ajax">
-#FORMULAIRE_CONFIGURER_SHOP
+#SET{defaut,prive/squelettes/contenu/configurer_commandes}
+
+<B_objets>
+<div class="barre_onglet clearfix">
+    <ul>
+<BOUCLE_objets(DATA){source tableau, #VAL|objets_shop}>
+    <BOUCLE_config(DATA){source tableau, #VALEUR}{cle=configurer}>
+    <li>
+         [(#ENV{config,#GET{defaut}}|=={#VALEUR{chemin}}|oui)
+             <strong class="on">[(#VALEUR{titre})]</strong>]
+         [(#ENV{config,#GET{defaut}}|=={#VALEUR{chemin}}|non)    
+             <a href="[(#URL_ECRIRE{shop}|parametre_url{voir,configurer_shop}|parametre_url{config,[(#VALEUR{chemin})]})]">#VALEUR{titre}</a>
+         ]
+        </li>
+    </BOUCLE_config>
+</BOUCLE_objets>
+    </ul>
 </div>
+</B_objets>
+[(#INCLURE{fond=#ENV{config,#GET{defaut}},env})]

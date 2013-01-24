@@ -1,8 +1,7 @@
 #CACHE{0}
 [(#ENV{voir}|non)
 <h1><:shop:shop:></h1>
-
-
+[(#INCLURE{fond=prive/squelettes/contenu/commandes,env,exec=#ENV{voir}}|replace{'\?exec=','?exec=shop&voir='})]
 ]
 
 [(#ENV{voir}|oui)
