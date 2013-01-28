@@ -20,12 +20,11 @@ function inc_objets_shop_dist(){
                 'titre'=>_T('commandes:commandes_titre'),
                 'chemin'=>'prive/squelettes/contenu/configurer_commandes')
             ),
-         'paypal'=>array(
+         'clients'=>array(
             'configurer'=>array(
-                'titre'=>_T('paypal:configuration_paypal'),
-                'chemin'=>'prive/exec/configurer_paypal'
-                )
-            ),  
+                'titre'=>_T('clients:clients_titre'),
+                'chemin'=>'prive/exec/configurer_clients')
+            ),               
          'contacts'=>array(
             'configurer'=>array(
                 'titre'=>_T('contacts:contact'),
@@ -40,7 +39,13 @@ function inc_objets_shop_dist(){
             'configurer'=>array(
                 'titre'=>_T('coordonnees:titre_coordonnees'),
                 'chemin'=>'prive/exec/configurer_coordonnees')
-            ),                                                
+            ),
+         'paypal'=>array(
+            'configurer'=>array(
+                'titre'=>_T('paypal:configuration_paypal'),
+                'chemin'=>'prive/exec/configurer_paypal'
+                )
+            ),                                                            
         );
     
     /* On cherche d'abord ceux qui on contiennent un shop_dan leur nom*/
