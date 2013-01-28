@@ -9,7 +9,7 @@
          [(#ENV{config,#GET{defaut}}|=={#VALEUR{chemin}}|oui)
              <strong class="on">[(#VALEUR{titre})]</strong>]
          [(#ENV{config,#GET{defaut}}|=={#VALEUR{chemin}}|non)    
-             <a href="[(#URL_ECRIRE{shop}|parametre_url{voir,configurer_shop}|parametre_url{config,[(#VALEUR{chemin})]})]">#VALEUR{titre}</a>
+             <a class="ajax nocache" href="[(#URL_ECRIRE{shop}|parametre_url{voir,configurer_shop}|parametre_url{config,[(#VALEUR{chemin})]})]">#VALEUR{titre}</a>
          ]
         </li>
     </BOUCLE_config>
