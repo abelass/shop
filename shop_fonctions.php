@@ -74,59 +74,7 @@ function myUrlEncode($string) {
     return str_replace($entities, $replacements, urlencode($string));
     }
     
-/*function rubrique_config($rubrique_produit){
 
-	$rubriques=array();
-	foreach($rubrique_produit AS $rubrique){
-		$explode="";
-		$explode=explode('|',$rubrique);
-		$rubriques[]=$explode[1];
-		}
-
-     	return $rubriques;
-}*/
-    
-function rubrique_produits($id='',$objet='article',$sousrubriques=false){
-        include_spip('inc/config');
-
-     	$rubrique_produit=picker_selected(lire_config('shop/rubrique_produits'),'rubrique');
-
-     	if($rubrique_produit){
-		$id_parent=$rubrique_produit;
-
-     	if(!$sousrubriques){
-			$rubriques=$id_parent;
-			}
-		else $rubriques=array();
-
-		$rubriques=rubriques_enfant($id_parent,$rubriques);
-		if($id){
-		    $retour=sql_getfetsel('id_'.$objet, 'spip_'.$objet.'s', 'id_'.$objet.'='.$id.' AND id_rubrique IN ('.implode(',',$rubriques).')');
-            }
-        else $retour=$rubriques;
-	   }
-	else echo '<div class="erreur">veuillez configurer une rubrique produit</div>';
-return $retour;
-} 
-
-
-function rubriques_enfant($id_parent,$rubriques=array()){
-	//echo serialize($id_parent);
-$id_p='';
-	if (is_array($id_parent))$id_parent=implode(',',$id_parent);
-
-
-	if($id_parent)$sql=sql_select('id_rubrique','spip_rubriques','id_parent IN ('.$id_parent.')');
-	
-    $id_p=array();
-	while($row=sql_fetch($sql)){
-		$id_p[]=$row['id_rubrique'];
-        $rubriques[]=$row['id_rubrique'];
-		}
-
-    if(count($id_p)>0)$rubriques=rubriques_enfant($id_p,$rubriques);
-return $rubriques;
-}
 
 //teste si l'objet est un produit
 

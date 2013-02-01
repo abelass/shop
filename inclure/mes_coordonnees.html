@@ -6,16 +6,22 @@
 ]
 
 
-<BOUCLE_contact(CONTACTS){id_auteur=#SESSION{id_auteur}}{id_auteur>0}>
-	[<div id="abonne_coord">	
-		<h1><:shop:verifiez_vos_coordonnees:></h1>
-		(#FORMULAIRE_EDITER_CLIENT{#SESSION{id_auteur},[(#URL_PAGE{shop}|parametre_url{appel,paiement})]})
-	</div>]
+<BOUCLE_contact(CONTACTS){id_auteur=#SESSION{id_auteur}}{id_auteur>0}{0,1}>
+    [<div id="abonne_coord">    
+        <h2><:shop:verifiez_vos_coordonnees:></h2>
+        (#FORMULAIRE_EDITER_CLIENT{#SESSION{id_auteur},[(#URL_PAGE{shop}|parametre_url{appel,paiement})]})
+    </div>]
 </BOUCLE_contact>
-
-	[<div id="abonne_coord" [class="(#ENV{mail}|=={oui}|oui)mailhide"]>	
-		<h1><:shop:vos_coordonnees:></h1>
-		<div class="ajax">(#FORMULAIRE_INSCRIPTION_CLIENT)</div>
-	</div>]
-
+        [<div id="abonne_coord" [class="(#ENV{mail}|=={oui}|oui)mailhide"]> 
+            <h2><:shop:vos_coordonnees:></h2>
+            <div>(#FORMULAIRE_INSCRIPTION_CLIENT)</div>
+        </div>]
+        
+    [(#SESSION{id_auteur}|oui)
+        [<div id="abonne_coord">    
+            <h2><:shop:verifiez_vos_coordonnees:></h2>
+            (#FORMULAIRE_EDITER_CLIENT{#SESSION{id_auteur},[(#URL_PAGE{shop}|parametre_url{appel,paiement})]})
+        </div>
+        ]
+    ]
 <//B_contact>

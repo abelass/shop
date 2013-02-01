@@ -2,9 +2,10 @@
    <tr class="row_[(#COMPTEUR_BOUCLE|alterner{odd, even})]">
         <td>[(#LOGO_ARTICLE|image_reduire{100}|sinon{#ID_ARTICLE})]</td>
         <td><a href="#URL_ARTICLE">#TITRE</a></td>
-        <td class="prix">#GET{prix}</td>
+        <td class="prix">#ENV{prix}</td>
+        <td class="taxe">#ENV{taxe}</td>        
         <td class="ajouter_au_panier">
-        [(#BOUTON_ACTION{<:ajouter_au_panier:>,#URL_ACTION_AUTEUR{remplir_panier,prix-#ID_PRIX,#SELF},ajax})] 
+        [(#BOUTON_ACTION{<:paniers:action_ajouter:>,#URL_ACTION_AUTEUR{remplir_panier,prix-#ID_PRIX_OBJET,#SELF},ajax})] 
         </td>
    </tr>
 </BOUCLE_art>
