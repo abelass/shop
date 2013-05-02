@@ -82,6 +82,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'paiement_description' => "Please select payment method",
 'paiement_probleme' => "Your payment has not yet been confirmed, please check your PayPal account or contact",
 'paiement_valide' => "Your payment has been validated",
+'passer_la_commande' => 'Checkout',
 
 
 
