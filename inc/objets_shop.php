@@ -33,7 +33,7 @@ function inc_objets_shop_dist(){
          'paniers'=>array(
             'configurer'=>array(
                 'titre'=>_T('paniers:titre_panier'),
-                'chemin'=>'prive/exec/configurer_paniers')
+                'chemin'=>'prive/squelettes/contenu/configurer_paniers')
             ),   
          'coordonnes'=>array(
             'configurer'=>array(
