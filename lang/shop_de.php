@@ -21,6 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'choisir' => "Auswählen",
 'choix_devises' => "Choix des devises",
 'choix_devise' => "Devise",
+'choix_produit' => "Wählen Sie ein Produkt aus",
 'choix_rubrique' => "Auswahl der Rubrik",
 'code_postal' => "Postleitzahl",
 'confirmation_paiement' => "Bestellungsbestätigung",

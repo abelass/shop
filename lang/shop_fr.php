@@ -20,6 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // c
 'choisir' => "Sélectionner",
 'choix_prix' => "Le prix du produit",
+'choix_produit' => "Choissisez un produit",
 'choix_rubrique' => "Choix la rubrique",
 'code_postal' => "Code postal",
 'commande' => "Commande",
