@@ -74,6 +74,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'paiement' => "Paiement de la commande",
 'pendant' => "En cours",
 'produit' => "Produit",
+'produits' => "Produits",
 'paiement_description' => "Veuillez sélectionner le mode de paiement",
 'paiement_probleme' => "Votre paiement n'a pas encore été validé, veuillez vérifier dans votre compte Paypal ou contacter le webmaster du site",
 'paiement_valide' => "Votre paiement a été validé",

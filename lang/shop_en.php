@@ -79,6 +79,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'pendant' => "in progress",
 'prix_devises' => "Price",
 'produit' => "Product",
+'produits' => "Products",
 'paiement_description' => "Please select payment method",
 'paiement_probleme' => "Your payment has not yet been confirmed, please check your PayPal account or contact",
 'paiement_valide' => "Your payment has been validated",

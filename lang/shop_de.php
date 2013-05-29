@@ -89,6 +89,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'pendant' => "In Behandlung",
 'prix_devises' => "Preis",
 'produit' => "Produkt",
+'produits' => "Produkte",
 'paiement_description' => "Wählen Sie ihr Zahlungsmitttel aus",
 'paiement_probleme' => "Votre paiement n'a pas encore été validé, veuillez vérifier dans votre compte Paypal ou contacter le webmaster du site",
 'paiement_valide' => "Ihre Bezahlung wurde akzeptiert",
