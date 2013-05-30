@@ -14,7 +14,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // b
 'bonjour' => "Bonjour",
-'shop' => "Shop",
 'byby' => "Nous vous remercions pour votre commande.<br />Bien à vous,",
 
 // c
@@ -89,6 +88,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'retour_panel' => "Retour au panel",
 
 // s
+'shop' => "Shop",
 'statut_paiement' => "Statut",
 'supprimer' => "Supprimer",
 
