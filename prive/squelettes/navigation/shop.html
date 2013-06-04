@@ -11,7 +11,7 @@
 #SET{donnees_objets,#VAL|donnees_objet{#GET{objet}}}
 
 [(#CHEMIN{prive/squelettes/navigation/#ENV{voir}.html}|oui|et{#ENV{voir}|=={configurer_shop}|non}) #SET{info,oui}
-       <INCLURE{fond=prive/squelettes/navigation/#ENV{voir},env}/>
+       [(#INCLURE{fond=prive/squelettes/navigation/#ENV{voir},env}|replace{'\?exec=','?exec=shop&voir='})]
        ]
 [(#GET{info}|non)
 [(#REM)La boite info]
