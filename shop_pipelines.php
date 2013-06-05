@@ -20,11 +20,7 @@ function shop_insert_head($flux){
  	return $flux;	
 }
 
-// ajout configuration Inscription2
-function shop_I2_cfg_form($flux){
-    $flux .= recuperer_fond('fonds/inscription2_shop');
-	return $flux;	
-}
+
 /*
  * Salement pique dans z-commerce
  * S'inscruster apres le traitement classique du formulaire d'edition des coordonnees (etape 3) pour
