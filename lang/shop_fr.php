@@ -17,6 +17,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'byby' => "Nous vous remercions pour votre commande.<br />Bien à vous,",
 
 // c
+'cfg_titre_shop' => "Configuration Shop",
+'cfg_titre_champs_commandes'=>'Champs formulaire commandes',
 'choisir' => "Sélectionner",
 'choix_prix' => "Le prix du produit",
 'choix_produit' => "Choissisez un produit",
@@ -30,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'commande_traite' => "Archiver la commande",
 'commandes_traitement' => "Commandes à traiter",
 'comment' => "Message",
-'constellation' => "Constellation",
+
 
 
 // d
@@ -44,6 +46,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'email' => "Email",
 'echoue' => "Echoué",
 'expire' => "Expiré",
+'explication_champs_commandes' => "Choissisez les champs suivant si vous voulez les inclure dans le formulaire de commande",
 'explication_confirmation' => "voici les informations que vous avez encodées",
 
 // f
@@ -58,6 +61,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_produit' => "Informations produits",
 
 //l
+'label_commentaire'=>'Commentaire :',
 'liste_de_commandes'=>'Liste des commandes',
 
 // m
@@ -109,8 +113,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'ajouter_au_panier'=>'Ajouter au panier',
 'annuler'=>'<< Annuler',
 
-//B
-'boutique'=>'Boutique',
 
 //C
 'commande'=>'Commande',

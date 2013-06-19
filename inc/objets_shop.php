@@ -10,7 +10,10 @@ function inc_objets_shop_dist(){
         'configurer_shop'=>array(
             'action'=>'configurer_shop',
             'nom_action'=>_T('spip:icone_configuration_site'),
-            'icone'=>'cfg-16.png'
+            'icone'=>'cfg-16.png',
+            'configurer'=>array(
+                'titre'=>_T('shop:shop'),
+                'chemin'=>'prive/squelettes/contenu/inc-configurer_shop')            
             ),
          'commandes'=>array(
             'action'=>'commandes',

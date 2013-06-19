@@ -20,6 +20,38 @@ function shop_insert_head($flux){
  	return $flux;	
 }
 
+function shop_header_prive($flux){
+           $flux .= '<link rel="stylesheet" href="'.find_in_path('css/styles_shop_admin.css').'" type="text/css" media="all" />';
+    return $flux;
+}
+
+function shop_recuperer_fond($flux){
+    $fond=$flux['args']['fond'];
+    if ($fond== 'formulaires/editer_client'){
+        $champs=recuperer_fond('formulaires/champs_commandes_extras',$flux['contexte']);
+        $flux['data']['texte'] = str_replace("<!--extra-->",  $champs.'<!--extra-->',$flux['data']['texte']);
+    }
+    return $flux;
+}
+
+
+function shop_formulaire_charger($flux){
+ $form=$flux['args']['form'];
+ 
+ // cré un contact si pas encore existant
+ if($form == 'inscription_client'
+         and _request('page') == 'shop'
+         and _request('appel') == 'mes_coordonnees'
+       ){
+       
+    $flux['data']['commentaire']='';
+    if($id_auteur = verifier_session()){
+        $inscrire_client = charger_fonction('traiter','formulaires/inscription_client');
+        $inscrire_client();
+        }
+    }
+     return($flux);
+}
 
 /*
  * Salement pique dans z-commerce
@@ -47,6 +79,12 @@ function shop_formulaire_traiter($flux){
         // On cree la commande ici
         include_spip('inc/commandes');
         $id_commande = creer_commande_encours();
+        
+        //on rajoute les champs extras de la commande
+        
+        $valeurs=array('commentaire'=>_request('commentaire'));
+        
+        sql_updateq('spip_commandes', $valeurs,'id_commande='.$id_commande);
         
         // On cherche l'adresse principale du visiteur
         $id_adresse = sql_getfetsel( 'id_adresse',  'spip_adresses_liens',
@@ -76,21 +114,7 @@ function shop_formulaire_traiter($flux){
     return($flux);
 }
 
-function shop_formulaire_charger($flux){
- $form=$flux['args']['form'];
- 
- // cré un contact si pas encore existant
- if($form == 'inscription_client'
-         and _request('page') == 'shop'
-         and _request('appel') == 'mes_coordonnees'
-       ){
-    if($id_auteur = verifier_session()){
-        $inscrire_client = charger_fonction('traiter','formulaires/inscription_client');
-        $inscrire_client();
-        }
-    }
-     return($flux);
-}
+
 
 // Eliminer le panier après le retour paypal
 function shop_traitement_paypal($flux){
@@ -103,6 +127,18 @@ function shop_traitement_paypal($flux){
     sql_delete('spip_paniers','id_panier='.$id_panier);
     spip_log("Retour paypal eliminer panier $id_panier",'paypal' . _LOG_INFO);
     return $flux;
+}
+
+function shop_afficher_contenu_objet($args) {
+echo serialize($args["args"]);
+    if ($args["args"]["type"]  == "commande" OR ($args["args"]["type"]=='shop' AND _request('voir')=='commande')) {
+        $champs_extras=array('commentaire');
+        $champs=sql_fetsel($champs_extras,'spip_commandes','id_commande='.$args["args"]['contexte']['id']);
+        
+        $args["data"] .= recuperer_fond("prive/squelettes/inclure/champs_extras_commande",
+            array('commentaire' =>$champs['commentaire'] ));
+    }
+    return $args;
 }
 
 

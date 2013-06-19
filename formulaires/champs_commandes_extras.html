@@ -1,0 +1,11 @@
+#SET{config,#CONFIG{shop}}
+    [<ul>(#GET{config}|table_valeur{commentaire}|=={on}|oui)
+        #SET{obligatoire,#GET{config}|table_valeur{commentaire_obligatoire}|sinon{''}}
+        [(#SAISIE{textarea,commentaire,
+            label=<:shop:label_commentaire:>,
+            obligatoire=#GET{obligatoire}
+            })]
+     </ul>
+    ]
+    
+[(#GET{config}|table_valeur{commentaire_obligatoire}|?{oui,''})]
