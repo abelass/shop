@@ -25,15 +25,6 @@ function shop_header_prive($flux){
     return $flux;
 }
 
-function shop_recuperer_fond($flux){
-    $fond=$flux['args']['fond'];
-    if ($fond== 'formulaires/editer_client'){
-        $champs=recuperer_fond('formulaires/champs_commandes_extras',$flux['contexte']);
-        $flux['data']['texte'] = str_replace("<!--extra-->",  $champs.'<!--extra-->',$flux['data']['texte']);
-    }
-    return $flux;
-}
-
 
 function shop_formulaire_charger($flux){
  $form=$flux['args']['form'];
@@ -43,15 +34,39 @@ function shop_formulaire_charger($flux){
          and _request('page') == 'shop'
          and _request('appel') == 'mes_coordonnees'
        ){
-       
-    $flux['data']['commentaire']='';
     if($id_auteur = verifier_session()){
         $inscrire_client = charger_fonction('traiter','formulaires/inscription_client');
         $inscrire_client();
         }
     }
+    
+ if($form == 'editer_client'
+         and _request('page') == 'shop'
+         and _request('appel') == 'mes_coordonnees'
+       ){
+    include_spip('inc/config');
+    $config=lire_config('shop',array($config));
+
+    $flux['data']['champs_extras']=shop_champs_extras_presents($config,'','par_objets');
+    
+
+    }    
+
      return($flux);
 }
+
+function shop_recuperer_fond($flux){
+    $fond=$flux['args']['fond'];
+    if ($fond== 'formulaires/editer_client'){
+            if(isset($flux['args']['contexte']['champs_extras']['commande'])){
+                $champs=recuperer_fond('formulaires/champs_commandes_extras',array('champs_extras'=>$flux['args']['contexte']['champs_extras']['commande']));
+            }
+
+        $flux['data']['texte'] = str_replace("<!--extra-->",  $champs.'<!--extra-->',$flux['data']['texte']);
+    }
+    return $flux;
+}
+
 
 /*
  * Salement pique dans z-commerce

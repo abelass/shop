@@ -27,4 +27,9 @@ function shop_upgrade($nom_meta_base_version, $version_cible) {
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
 
+function shop_vider_tables($nom_meta_base_version) {
+
+    effacer_meta($nom_meta_base_version);
+}
+
 ?>
