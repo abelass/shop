@@ -44,28 +44,23 @@ function shop_formulaire_charger($flux){
          and _request('page') == 'shop'
          and _request('appel') == 'mes_coordonnees'
        ){
-    include_spip('inc/config');
-    $config=lire_config('shop',array($config));
-
-    $flux['data']['champs_extras']=shop_champs_extras_presents($config,'','par_objets');
+        include_spip('inc/config');
+        $config=lire_config('shop',array($config));
     
-
-    }    
-
+        $flux['data']['champs_extras']=shop_champs_extras_presents($config,'','par_objets','',$form);
+        include_spip('inc/shop');
+    
+        foreach($flux['data']['champs_extras'] AS $objet=>$champs){
+            $noms=noms_champs_extras_presents($champs);
+            foreach($noms AS $nom=>$label){
+                $flux['data'][$nom]=_request($nom);
+                }
+            }   
+        }    
      return($flux);
 }
 
-function shop_recuperer_fond($flux){
-    $fond=$flux['args']['fond'];
-    if ($fond== 'formulaires/editer_client'){
-            if(isset($flux['args']['contexte']['champs_extras']['commande'])){
-                $champs=recuperer_fond('formulaires/champs_commandes_extras',array('champs_extras'=>$flux['args']['contexte']['champs_extras']['commande']));
-            }
 
-        $flux['data']['texte'] = str_replace("<!--extra-->",  $champs.'<!--extra-->',$flux['data']['texte']);
-    }
-    return $flux;
-}
 
 
 /*
@@ -129,7 +124,19 @@ function shop_formulaire_traiter($flux){
     return($flux);
 }
 
+function shop_recuperer_fond($flux){
+    $fond=$flux['args']['fond'];
+    if ($fond== 'formulaires/editer_client'){
+            if(isset($flux['args']['contexte']['champs_extras']['commande'])){
 
+                $champs=recuperer_fond('formulaires/champs_commandes_extras',$flux['args']['contexte']);
+
+            }
+
+        $flux['data']['texte'] = str_replace("<!--extra-->",  $champs.'<!--extra-->',$flux['data']['texte']);
+    }
+    return $flux;
+}
 
 // Eliminer le panier après le retour paypal
 function shop_traitement_paypal($flux){
