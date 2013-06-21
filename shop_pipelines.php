@@ -50,6 +50,7 @@ function shop_formulaire_charger($flux){
         $flux['data']['champs_extras']=shop_champs_extras_presents($config,'','par_objets','',$form);
         include_spip('inc/shop');
     
+   // echo serialize($flux['data']['champs_extras']);
         foreach($flux['data']['champs_extras'] AS $objet=>$champs){
             $noms=noms_champs_extras_presents($champs);
             foreach($noms AS $nom=>$label){

@@ -4,7 +4,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Retourne la liste des plugins type shop
 function inc_shop_champs_extras_dist($defaut=array()){
-
+    
      $champs_extras=array(
         array(
             'saisie' => 'fieldset',
@@ -27,11 +27,18 @@ function inc_shop_champs_extras_dist($defaut=array()){
                     'saisie' => 'oui_non',// Pour la configuration
                     'saisie_2' => 'textarea', // Pour le formulaire public                   
                     'formulaires' => array('configuer_shop','editer_client'),
+                    'tables'=>array(
+                        'spip_commandes'=>array(
+                            'field'=>array(
+                                'commentaire'=>"text NOT NULL"
+                                )
+                             )
+                        ),
                     'options' => array(
                         'nom' => 'commande_commentaire',// Pour la configuration
                         'nom_2' => 'commentaire',// Pour le formulaire public                          
                         'label' => _T('shop:label_commentaire'),
-                        'defaut' => $defaut['commande_commentaire']
+                        'defaut' => isset($defaut['commande_commentaire'])?$defaut['commande_commentaire']:''
                     )
                 ),
                 array(
@@ -42,8 +49,38 @@ function inc_shop_champs_extras_dist($defaut=array()){
                         'datas'=>array('on'=>_T('item_oui')),
                         'nom' => 'commande_commentaire_obligatoire',
                         'label' => _T('saisies:option_obligatoire_label'),
-                        'defaut' => $defaut['commande_commentaire_obligatoire'],
+                        'defaut' => isset($defaut['commande_commentaire_obligatoire'])?$defaut['commande_commentaire_obligatoire']:'',
                         'afficher_si' => '@commande_commentaire@ == "on"',
+                    )
+                ), 
+                array(
+                    'saisie' => 'oui_non',// Pour la configuration
+                    'saisie_2' => 'textarea', // Pour le formulaire public                   
+                    'formulaires' => array('configuer_shop','editer_client'),
+                    'tables'=>array(
+                        'spip_commandes'=>array(
+                            'field'=>array(
+                                'teste'=>"text NOT NULL"
+                                )
+                             )
+                        ),
+                    'options' => array(
+                        'nom' => 'commande_teste',// Pour la configuration
+                        'nom_2' => 'teste',// Pour le formulaire public                          
+                        'label' => _T('shop:label_teste'),
+                        'defaut' => $defaut['commande_teste']
+                    )
+                ),
+                array(
+                    'saisie' => 'checkbox',
+                    'formulaires' => array('configuer_shop'),
+                    'options' => array(
+                        'class'=>'float_right',
+                        'datas'=>array('on'=>_T('item_oui')),
+                        'nom' => 'commande_teste_obligatoire',
+                        'label' => _T('saisies:option_obligatoire_label'),
+                        'defaut' => $defaut['commande_teste_obligatoire'],
+                        'afficher_si' => '@commande_teste@ == "on"',
                     )
                 ), 
               

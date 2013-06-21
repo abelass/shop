@@ -103,6 +103,7 @@ function api_paypal($objet=''){
 
 function shop_champs_extras_presents($champs_actifs,$defaut=array(),$option='',$objet='',$form=''){
     include_spip('inc/shop');
+
     //Charger la définition des champs extras
     $champs_extras=charger_fonction('shop_champs_extras','inc');
     $champs_extras=$champs_extras(); 
@@ -110,8 +111,10 @@ function shop_champs_extras_presents($champs_actifs,$defaut=array(),$option='',$
     
     foreach($champs_extras as $key=>$value){
         if($option=='par_objets'){
-            if(!$objet) 
-                $champs[$value['objet']]=shop_champs_extras_nettoyes($champs_actifs,$value['saisies'],$value['objet'],$defaut,$form);
+            if(!$objet){$champs[$value['objet']]=shop_champs_extras_nettoyes($champs_actifs,$value['saisies'],$value['objet'],$defaut,$form);
+
+            } 
+                
             elseif(!is_array($objet) AND $value['objet']==$objet)$champs[]=shop_champs_extras_nettoyes($champs_actifs,$value['saisies'],$value['objet'],$defaut,$form);
             } 
         else $champs[]=shop_champs_extras_nettoyes($champs_actifs,$value['saisies'],$value['objet'],$defaut,$form);
