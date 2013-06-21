@@ -57,10 +57,35 @@ function shop_formulaire_charger($flux){
                 }
             }   
         }    
-     return($flux);
+     return $flux;
 }
 
 
+function shop_formulaire_verifier($flux){
+ $form=$flux['args']['form'];
+ 
+
+ if($form == 'editer_client'
+         and _request('page') == 'shop'
+         and _request('appel') == 'mes_coordonnees'
+       ){
+        //Récupérer les champs extras choisis
+        include_spip('inc/config');
+        $config=lire_config('shop',array($config));
+        
+        //Déterminer les champs obligatoire
+        $obligatoires=array();
+        foreach($config AS $name=>$value){
+            $obligatoire='';
+            list($objet,$champ,$obligatoire)=explode('_',$name);
+            if($obligatoire)$obligatoires[]=$champ;
+            }
+        foreach($obligatoires AS $champ) {
+            if(!_request($champ))$flux['data'][$champ]=_T("info_obligatoire");
+        }  
+        }    
+     return $flux;
+}
 
 
 /*
