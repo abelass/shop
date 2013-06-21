@@ -102,6 +102,7 @@ function api_paypal($objet=''){
 //Retourne la définition des champs extras actifs
 
 function shop_champs_extras_presents($champs_actifs,$defaut=array(),$option='',$objet='',$form=''){
+    include_spip('inc/shop');
     //Charger la définition des champs extras
     $champs_extras=charger_fonction('shop_champs_extras','inc');
     $champs_extras=$champs_extras(); 
@@ -109,42 +110,15 @@ function shop_champs_extras_presents($champs_actifs,$defaut=array(),$option='',$
     
     foreach($champs_extras as $key=>$value){
         if($option=='par_objets'){
-           
-            if(!$objet)
-             { 
-             $champs[$value['objet']]=shop_champs_extras_nettoyes($champs_actifs,$value['saisies'],$value['objet'],$defaut,$form);
-            }
+            if(!$objet) 
+                $champs[$value['objet']]=shop_champs_extras_nettoyes($champs_actifs,$value['saisies'],$value['objet'],$defaut,$form);
             elseif(!is_array($objet) AND $value['objet']==$objet)$champs[]=shop_champs_extras_nettoyes($champs_actifs,$value['saisies'],$value['objet'],$defaut,$form);
-        } 
-    else $champs[]=shop_champs_extras_nettoyes($champs_actifs,$value['saisies'],$value['objet'],$defaut,$form);
-      }
+            } 
+        else $champs[]=shop_champs_extras_nettoyes($champs_actifs,$value['saisies'],$value['objet'],$defaut,$form);
+          }
 
     return $champs;
 }
 
-//Enlèves les champs utilitaires et remplace saisie par saisie_2 et nom_2 par nom et teste si obligatoire
-function shop_champs_extras_nettoyes($champs_actifs,$champs_extras,$objet,$defaut=array(),$form=''){
-    $champs=array();
-    
-     foreach($champs_extras as $key=>$value){
-        if(isset($value['options']['nom_2'])){
-            $value['options']['nom']=$value['options']['nom_2'];
-            unset($value['options']['nom_2']);
-        } 
-
-        if($value['type']!='champ_outil' AND $champs_actifs[$objet.'_'.$value['options']['nom']]=='on'){
-            if(isset($value['saisie_2'])){
-                $value['saisie']=$value['saisie_2'];
-                unset($value['saisie_2']);
-            }
-            if($champs_actifs[$objet.'_'.$value['options']['nom'].'_obligatoire'][0]=='on')$value['options']['obligatoire']='oui';
-            
-            //La valeur par défaut   
-            $value['options']['defaut']=isset($defaut[$value['options']['nom']])?$defaut[$value['options']['nom']]:'';
-            $champs[]=$value;
-            }
-        }
-    return $champs;
-}
 
 ?>
