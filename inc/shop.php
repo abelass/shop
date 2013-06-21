@@ -40,3 +40,15 @@ function noms_champs_extras_presents($champs_extras){
         }
     return $noms;
 }
+
+
+function objets_champs_extras($champs_actifs=array()){
+    $champs_extras=charger_fonction('shop_champs_extras','inc');
+    $champs_extras=$champs_extras();
+    $objets=array();
+    foreach($champs_extras AS $value) {
+        $objets[]=$value['objet'];
+        }
+    
+    return $objets;
+}
