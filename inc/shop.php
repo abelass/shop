@@ -93,4 +93,3 @@ function shop_champs_extras_definis(){
 
     return $champs;
 }
-

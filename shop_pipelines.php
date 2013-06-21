@@ -49,8 +49,7 @@ function shop_formulaire_charger($flux){
     
         $flux['data']['champs_extras']=shop_champs_extras_presents($config,'','par_objets','',$form);
         include_spip('inc/shop');
-    
-   // echo serialize($flux['data']['champs_extras']);
+
         foreach($flux['data']['champs_extras'] AS $objet=>$champs){
             $noms=noms_champs_extras_presents($champs);
             foreach($noms AS $nom=>$label){
@@ -79,7 +78,7 @@ function shop_formulaire_verifier($flux){
         foreach($config AS $name=>$value){
             $obligatoire='';
             list($objet,$champ,$obligatoire)=explode('_',$name);
-            if($obligatoire)$obligatoires[]=$champ;
+            if(isset($config[$name.'_obligatoire']))$obligatoires[]=$champ;
             }
         foreach($obligatoires AS $champ) {
             if(!_request($champ))$flux['data'][$champ]=_T("info_obligatoire");
