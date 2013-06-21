@@ -1,3 +1,3 @@
 .formulaire_configurer_shop li{clear:none}
 
-li.editer_commentaire, li.editer_commentaire_obligatoire {float:left}
+.formulaire_configurer_shop  li, .formulaire_configurer_shop  li{float:left}

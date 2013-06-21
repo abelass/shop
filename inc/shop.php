@@ -93,3 +93,19 @@ function shop_champs_extras_definis(){
 
     return $champs;
 }
+
+function champs_reduits(){
+     //Récupérer les champs extras choisis
+    
+    $c=shop_champs_extras_definis();
+
+    //Déterminer les champs à afficher
+    $champs_extras=array();
+    foreach($c[0] AS $name){
+       list($objet,$champ)=explode('_',$name);
+            if($champ)$champs_extras[]=$champ;
+        } 
+    return $champs_extras;
+
+    
+}

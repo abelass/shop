@@ -1,18 +1,5 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION")) return;
-/*
- * pas utilisé pour le moment
-function shop_affiche_gauche($flux){
-     $exec = $flux["args"]["exec"];
-     $args=$flux['args'];
-    if (autoriser('shop_modifie') AND $exec=='shop'){
-        $id_document=$args['id_document'];
-        $voir=$args['voir'];
-        //$flux['data'] .= recuperer_fond('prive/squelettes/navigation/shop',array('voir'=>$voir,'id_document'=>$id_document),array('ajax'=>true));
-    }
-
-    return $flux;
-}*/
 
 
 function shop_insert_head($flux){
@@ -178,6 +165,48 @@ function shop_recuperer_fond($flux){
 
         $flux['data']['texte'] = str_replace("<!--extra-->",  $champs.'<!--extra-->',$flux['data']['texte']);
     }
+    
+
+    if ($fond== 'prive/objets/contenu/commande'){
+
+        $id=$flux["data"]['contexte']['id'];
+        include_spip('inc/shop');
+        include_spip('inc/config'); 
+        
+        //On chercher les champs prévus
+        $champs_extras=champs_reduits();
+               
+        //Les valeurs de la commande
+        $champs=sql_fetsel('*','spip_commandes','id_commande='.$id);
+
+        //On détermine les valeurs qui sont des champs extras
+        $champs = array_intersect_key($champs,array_flip($champs_extras));
+
+        $c .= recuperer_fond("prive/squelettes/inclure/champs_extras_commande",array('champs_extras' =>$champs));
+
+        $flux['data']['texte'] .= $c;
+    }
+    
+    if ($fond== 'notifications/contenu_commande_mail'){
+
+        $id=$flux["data"]['contexte']['id'];
+        include_spip('inc/shop');
+        include_spip('inc/config'); 
+        
+        //On chercher les champs prévus
+        $champs_extras=champs_reduits();
+               
+        //Les valeurs de la commande
+        $champs=sql_fetsel('*','spip_commandes','id_commande='.$id);
+
+        //On détermine les valeurs qui sont des champs extras
+        $champs = array_intersect_key($champs,array_flip($champs_extras));
+
+        $c .= recuperer_fond("prive/squelettes/inclure/champs_extras_commande",array('champs_extras' =>$champs));
+
+        $flux['data']['texte'] = str_replace("<!--extra_commande-->",  $c.'<!--extra_commande-->',$flux['data']['texte']);
+    }    
+        
     return $flux;
 }
 

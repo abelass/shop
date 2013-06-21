@@ -1,6 +1,10 @@
-[<div class="champ contenu_commentaire[ (#COMMENTAIRE*|strlen|?{'',vide})]">
-    <label><:shop:label_commentaire:></label>
-    <span dir='#LANG_DIR' class='#EDIT{commentaire} commentaire'>
-            (#COMMENTAIRE)
+#ENV
+<BOUCLE_extras(DATA){source tableau, #ENV{champs_extras}}>
+[<div class="champ contenu_#CLE[ (#VALEUR*|strlen|?{'',vide})]">
+    <label>[(#VAL{shop:label_#CLE}|_T)]</label>
+    <span dir='#LANG_DIR' class='#EDIT{#CLE} #CLE'>
+            (#VALEUR)
     </span>
 </div>]
+
+</BOUCLE_extras>
