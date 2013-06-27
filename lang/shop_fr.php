@@ -17,8 +17,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'byby' => "Nous vous remercions pour votre commande.<br />Bien à vous,",
 
 // c
-'cfg_titre_shop' => "Configuration Shop",
+
+'cfg_titre_authentification_automatique'=>'Authentifiaction automatique après l\'inscription',
 'cfg_titre_champs_commandes'=>'Champs formulaire commandes',
+'cfg_titre_shop' => "Configuration Shop",
 'choisir' => "Sélectionner",
 'choix_prix' => "Le prix du produit",
 'choix_produit' => "Choissisez un produit",
@@ -46,6 +48,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'email' => "Email",
 'echoue' => "Echoué",
 'expire' => "Expiré",
+'explication_authentification_automatique' => "Pouvoir accéder directement à la confirmation des données enregistrés lors d'une nouvelle inscription sans devoir se connecter préablement",
 'explication_champs_commandes' => "Choissisez les champs suivant si vous voulez les inclure dans le formulaire de commande",
 'explication_confirmation' => "voici les informations que vous avez encodées",
 

@@ -8,7 +8,7 @@ function inc_shop_champs_extras_dist($defaut=array()){
      $champs_extras=array(
         array(
             'saisie' => 'fieldset',
-            'objet' => 'commande', //Objet concerné par ce champ
+            'objet' => 'commande', //Objet concerné par les champs suivants
             'options' => array(
                 'nom' => 'champs_extras',
                 'label' => _T('shop:cfg_titre_champs_commandes')
@@ -35,29 +35,51 @@ function inc_shop_champs_extras_dist($defaut=array()){
                              )
                         ),
                     'options' => array(
-                        'nom' => 'commande_commentaire',// Pour la configuration
+                        'li_class'=>'conditionnel',
+                        'nom' => 'commande-commentaire',// Pour la configuration
                         'nom_2' => 'commentaire',// Pour le formulaire public                          
                         'label' => _T('shop:label_commentaire'),
-                        'defaut' => isset($defaut['commande_commentaire'])?$defaut['commande_commentaire']:''
+                        'defaut' => isset($defaut['commande-commentaire'])?$defaut['commande_commentaire']:''
                     )
                 ),
                 array(
                     'saisie' => 'checkbox',
                     'formulaires' => array('configuer_shop'),
                     'options' => array(
-                        'class'=>'float_right',
+                        'li_class'=>'conditionnel last',
                         'datas'=>array('on'=>_T('item_oui')),
-                        'nom' => 'commande_commentaire_obligatoire',
+                        'nom' => 'commande-commentaire-obligatoire',
                         'label' => _T('saisies:option_obligatoire_label'),
-                        'defaut' => isset($defaut['commande_commentaire_obligatoire'])?$defaut['commande_commentaire_obligatoire']:'',
-                        'afficher_si' => '@commande_commentaire@ == "on"',
+                        'defaut' => isset($defaut['commande-commentaire-obligatoire'])?$defaut['commande_commentaire_obligatoire']:'',
+                        'afficher_si' => '@commande-commentaire@ == "on"',
                     )
                 ), 
               
               )
-                               
+        ),
+        array(
+            'saisie' => 'fieldset',
+            'options' => array(
+                'nom' => 'authentification',
+                'label' => _T('shop:cfg_titre_authentification'),            
+            ),
+            'saisies' => array(
+                            array(
+                    'saisie' => 'checkbox',
+                    'formulaires' => array('configuer_shop'),
+                    'options' => array(
+                        'class'=>'float_right',
+                        'datas'=>array('on'=>_T('item_oui')),
+                        'nom' => 'authentification_automatique',
+                'label' => _T('shop:cfg_titre_authentification_automatique'),
+                'explication' => _T('shop:explication_authentification_automatique'), 
+                        'defaut' => isset($defaut['authentification_automatique'])?$defaut['authentification_automatique']:'',
+                    )
+                ), 
             )
-        );
+                                           
+          )
+       );
      /*Possibilité de rajouter de plugin ou de modifier leur définition*/
     $champs_extras =pipeline('shop_champs_extras',$champs_extras);
 

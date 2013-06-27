@@ -24,11 +24,17 @@ function formulaires_configurer_shop_traiter_dist(){
     $res = array('editable'=>true);
 
     include_spip('inc/shop');
-    $champs=shop_champs_extras_definis();
+    $champs_extras=shop_champs_extras_definis();
+    
+    
 
-    foreach ($champs[0] as $k) {
-           $config[$k] =  _request($k);
+    foreach ($champs_extras AS $types) {
+        foreach($types AS $champ){
+           $config[$champ] =  _request($champ);
+            }
         }
+    
+    echo serialize($config);
     ecrire_meta('shop',serialize($config));
     $res['message_ok'] = _T('config_info_enregistree');
 

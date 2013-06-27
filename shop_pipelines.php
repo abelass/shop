@@ -64,7 +64,7 @@ function shop_formulaire_verifier($flux){
         $obligatoires=array();
         foreach($config AS $name=>$value){
             $obligatoire='';
-            list($objet,$champ,$obligatoire)=explode('_',$name);
+            list($objet,$champ,$obligatoire)=explode('-',$name);
             if(isset($config[$name.'_obligatoire']))$obligatoires[]=$champ;
             }
         foreach($obligatoires AS $champ) {
@@ -87,6 +87,27 @@ function shop_formulaire_verifier($flux){
 function shop_formulaire_traiter($flux){
     // Si on est sur le formulaire client qui est sur la page identification
     $form=$flux['args']['form'];
+    
+    if($form == 'inscription_client'
+         and _request('page') == 'shop'
+         and _request('appel') == 'mes_coordonnees'
+         and include_spip('inc/paniers')
+         and paniers_id_panier_encours()
+       ){
+      //si autentification automatique activé on authentifie
+      include_spip('inc/config');
+      $config=lire_config('shop/authentification_automatique',array());
+
+      if($config[0]=='on'){
+          if($auteur=sql_fetsel('*','spip_auteurs','email='.sql_quote(_request('mail_inscription')))){
+                include_spip('inc/auth');
+                //$edition_dist = charger_fonction('traiter', 'formulaires/editer_client');
+                //$erreurs = $edition_dist($auteur['id_auteur'],'');
+                auth_loger($auteur);
+          }
+      }
+    }
+    
     if($form == 'editer_client'
          and _request('page') == 'shop'
          and _request('appel') == 'mes_coordonnees'
@@ -116,7 +137,7 @@ function shop_formulaire_traiter($flux){
         $champs=array();
         $ids=array('commande'=>$id_commande);
         foreach($config AS $name=>$value){
-            list($objet,$champ,$obligatoire)=explode('_',$name);
+            list($objet,$champ,$obligatoire)=explode('-',$name);
             if(in_array($objet,$objets_possibles))$champs[$objet][$champ]=_request($champ);
             }
         
@@ -222,18 +243,5 @@ function shop_traitement_paypal($flux){
     spip_log("Retour paypal eliminer panier $id_panier",'paypal' . _LOG_INFO);
     return $flux;
 }
-
-function shop_afficher_contenu_objet($args) {
-
-    if ($args["args"]["type"]  == "commande" OR ($args["args"]["type"]=='shop' AND _request('voir')=='commande')) {
-        $champs_extras=array('commentaire');
-        $champs=sql_fetsel($champs_extras,'spip_commandes','id_commande='.$args["args"]['contexte']['id']);
-        
-        $args["data"] .= recuperer_fond("prive/squelettes/inclure/champs_extras_commande",
-            array('commentaire' =>$champs['commentaire'] ));
-    }
-    return $args;
-}
-
 
 ?>

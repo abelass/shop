@@ -34,7 +34,6 @@
 	<pipeline nom="traitement_paypal" inclure="shop_pipelines.php" /> 
 	<pipeline nom="traitement_paiements_forms" inclure="shop_pipelines.php" /> 	
 	<pipeline nom="traitement_paiements_retours" inclure="shop_pipelines.php" />
-	<pipeline nom="afficher_contenu_objet" inclure="shop_pipelines.php" />
 	<pipeline nom="declarer_tables_principales" inclure="base/shop.php" /> 		
 
 	

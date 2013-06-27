@@ -1,3 +1,4 @@
-.formulaire_configurer_shop li{clear:none}
+.formulaire_configurer_shop li.conditionnel.last{clear:none}
 
-.formulaire_configurer_shop  li, .formulaire_configurer_shop  li{float:left}
+.formulaire_configurer_shop  li.conditionnel {float:left}
+

@@ -29,7 +29,7 @@ function shop_champs_extras_nettoyes($champs_actifs=array(),$champs_extras,$obje
 
 }
 
-function shop_champs_extras_nom($champs_actifs=array(),$champs_extras,$objet,$defaut=array(),$form=''){
+function shop_champs_extras_nom($champs_actifs=array(),$champs_extras){
     $champs=array();
     
      foreach($champs_extras as $key=>$value){
@@ -88,7 +88,7 @@ function shop_champs_extras_definis(){
     $champs=array();
     
     foreach($champs_extras as $key=>$value){
-        $champs[]=shop_champs_extras_nom('',$value['saisies'],$value['objet'],$defaut,$form);
+        $champs[]=shop_champs_extras_nom('',$value['saisies']);
           }
 
     return $champs;
@@ -102,7 +102,7 @@ function champs_reduits(){
     //Déterminer les champs à afficher
     $champs_extras=array();
     foreach($c[0] AS $name){
-       list($objet,$champ)=explode('_',$name);
+       list($objet,$champ)=explode('-',$name);
             if($champ)$champs_extras[]=$champ;
         } 
     return $champs_extras;
