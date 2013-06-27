@@ -74,8 +74,6 @@ function myUrlEncode($string) {
     return str_replace($entities, $replacements, urlencode($string));
     }
     
-
-
 //teste si l'objet est un produit
 
 function objet_produit($id_rubrique,$objet,$id_objet){
@@ -99,5 +97,31 @@ function api_paypal($objet=''){
 	
 	return $donnes_api;
 	}
+
+
+//Retourne la définition des champs extras actifs
+
+function shop_champs_extras_presents($champs_actifs,$defaut=array(),$option='',$objet='',$form=''){
+    include_spip('inc/shop');
+
+    //Charger la définition des champs extras
+    $champs_extras=charger_fonction('shop_champs_extras','inc');
+    $champs_extras=$champs_extras(); 
+    $champs=array();
+    
+    foreach($champs_extras as $key=>$value){
+        if($option=='par_objets'){
+            if(!$objet){$champs[$value['objet']]=shop_champs_extras_nettoyes($champs_actifs,$value['saisies'],$value['objet'],$defaut,$form);
+
+            } 
+                
+            elseif(!is_array($objet) AND $value['objet']==$objet)$champs[]=shop_champs_extras_nettoyes($champs_actifs,$value['saisies'],$value['objet'],$defaut,$form);
+            } 
+        else $champs[]=shop_champs_extras_nettoyes($champs_actifs,$value['saisies'],$value['objet'],$defaut,$form);
+          }
+
+    return $champs;
+}
+
 
 ?>

@@ -1,14 +1,3 @@
-.cadre-liste table tr.row_even{background-color: #FFF;}
-.cadre-liste table tr.row_odd td{background-color: #EEEEEE;}
+.formulaire_configurer_shop li{clear:none}
 
-ol.shortcut{
-	list-style:none;
-	padding-left:0;
-}
-ol.shortcut li{margin:5px 0;font-weight:bold;}
-
-#commande div{font-size:12px;margin:5px 0;}
-#commande div#commande_info10,
-#commande div#commande_info12{border-bottom:1px solid #EEEEEE;padding-bottom: 5px;}
-#commande span.titre{color:#666;}
-#commande span.valeur{color:#000;}
+.formulaire_configurer_shop  li, .formulaire_configurer_shop  li{float:left}

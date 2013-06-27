@@ -11,7 +11,7 @@
 #SET{donnees_objets,#VAL|donnees_objet{#GET{objet}}}
 
 [(#CHEMIN{prive/squelettes/navigation/#ENV{voir}.html}|oui|et{#ENV{voir}|=={configurer_shop}|non}) #SET{info,oui}
-       <INCLURE{fond=prive/squelettes/navigation/#ENV{voir},env}/>
+       [(#INCLURE{fond=prive/squelettes/navigation/#ENV{voir},env}|replace{'\?exec=','?exec=shop&voir='})]
        ]
 [(#GET{info}|non)
 [(#REM)La boite info]
@@ -30,11 +30,6 @@
      [(#ENV{exec}|=={shop}|oui|et{#ENV{voir}|non})<strong><:shop:liste_de_commandes:></strong>]
 #BOITE_FERMER
 ]
-
-[(#CHEMIN{prive/squelettes/extra/#ENV{voir}.html}|oui)
-    <INCLURE{fond=prive/squelettes/extra/#ENV{voir},env}/>
-       ]
-
 
 [(#REM)Les raccoursis]
 
@@ -58,14 +53,3 @@
 
 [(#PIPELINE{shop_affiche_gauche_shortcuts})]
 #BOITE_FERMER
-
-
-
-
-
-
-
-
-
-    
-

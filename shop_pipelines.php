@@ -1,18 +1,5 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION")) return;
-/*
- * pas utilisé pour le moment
-function shop_affiche_gauche($flux){
-     $exec = $flux["args"]["exec"];
-     $args=$flux['args'];
-    if (autoriser('shop_modifie') AND $exec=='shop'){
-        $id_document=$args['id_document'];
-        $voir=$args['voir'];
-        //$flux['data'] .= recuperer_fond('prive/squelettes/navigation/shop',array('voir'=>$voir,'id_document'=>$id_document),array('ajax'=>true));
-    }
-
-    return $flux;
-}*/
 
 
 function shop_insert_head($flux){
@@ -20,11 +7,74 @@ function shop_insert_head($flux){
  	return $flux;	
 }
 
-// ajout configuration Inscription2
-function shop_I2_cfg_form($flux){
-    $flux .= recuperer_fond('fonds/inscription2_shop');
-	return $flux;	
+function shop_header_prive($flux){
+           $flux .= '<link rel="stylesheet" href="'.find_in_path('css/styles_shop_admin.css').'" type="text/css" media="all" />';
+    return $flux;
 }
+
+
+function shop_formulaire_charger($flux){
+ $form=$flux['args']['form'];
+ 
+ // cré un contact si pas encore existant
+ if($form == 'inscription_client'
+         and _request('page') == 'shop'
+         and _request('appel') == 'mes_coordonnees'
+       ){
+    if($id_auteur = verifier_session()){
+        $inscrire_client = charger_fonction('traiter','formulaires/inscription_client');
+        $inscrire_client();
+        }
+    }
+    
+ if($form == 'editer_client'
+         and _request('page') == 'shop'
+         and _request('appel') == 'mes_coordonnees'
+       ){
+        include_spip('inc/config');
+        $config=lire_config('shop',array($config));
+    
+        $flux['data']['champs_extras']=shop_champs_extras_presents($config,'','par_objets','',$form);
+        include_spip('inc/shop');
+
+        foreach($flux['data']['champs_extras'] AS $objet=>$champs){
+            $noms=noms_champs_extras_presents($champs);
+            foreach($noms AS $nom=>$label){
+                $flux['data'][$nom]=_request($nom);
+                }
+            }   
+        }    
+     return $flux;
+}
+
+
+function shop_formulaire_verifier($flux){
+ $form=$flux['args']['form'];
+ 
+
+ if($form == 'editer_client'
+         and _request('page') == 'shop'
+         and _request('appel') == 'mes_coordonnees'
+       ){
+        //Récupérer les champs extras choisis
+        include_spip('inc/config');
+        $config=lire_config('shop',array($config));
+        
+        //Déterminer les champs obligatoire
+        $obligatoires=array();
+        foreach($config AS $name=>$value){
+            $obligatoire='';
+            list($objet,$champ,$obligatoire)=explode('_',$name);
+            if(isset($config[$name.'_obligatoire']))$obligatoires[]=$champ;
+            }
+        foreach($obligatoires AS $champ) {
+            if(!_request($champ))$flux['data'][$champ]=_T("info_obligatoire");
+            }  
+        }    
+     return $flux;
+}
+
+
 /*
  * Salement pique dans z-commerce
  * S'inscruster apres le traitement classique du formulaire d'edition des coordonnees (etape 3) pour
@@ -51,6 +101,30 @@ function shop_formulaire_traiter($flux){
         // On cree la commande ici
         include_spip('inc/commandes');
         $id_commande = creer_commande_encours();
+        
+        //On rajoute les champs extras de la commande
+        
+        //Récupérer les champs extras choisis
+        include_spip('inc/config');
+        $config=lire_config('shop',array($config));
+        
+        //Déterminer les champs choisis
+        include_spip('inc/shop');
+        $objets_possibles=objets_champs_extras();
+        
+        //preparer les valeurs pour chaque objet
+        $champs=array();
+        $ids=array('commande'=>$id_commande);
+        foreach($config AS $name=>$value){
+            list($objet,$champ,$obligatoire)=explode('_',$name);
+            if(in_array($objet,$objets_possibles))$champs[$objet][$champ]=_request($champ);
+            }
+        
+        //Actualiser les tables
+        foreach($champs AS $objet=>$valeurs) {
+            sql_updateq('spip_'.$objet.'s',$valeurs,'id_'.$objet.'='.$ids[$objet]);
+            }  
+        
         
         // On cherche l'adresse principale du visiteur
         $id_adresse = sql_getfetsel( 'id_adresse',  'spip_adresses_liens',
@@ -80,20 +154,60 @@ function shop_formulaire_traiter($flux){
     return($flux);
 }
 
-function shop_formulaire_charger($flux){
- $form=$flux['args']['form'];
- 
- // cré un contact si pas encore existant
- if($form == 'inscription_client'
-         and _request('page') == 'shop'
-         and _request('appel') == 'mes_coordonnees'
-       ){
-    if($id_auteur = verifier_session()){
-        $inscrire_client = charger_fonction('traiter','formulaires/inscription_client');
-        $inscrire_client();
-        }
+function shop_recuperer_fond($flux){
+    $fond=$flux['args']['fond'];
+    if ($fond== 'formulaires/editer_client'){
+            if(isset($flux['args']['contexte']['champs_extras']['commande'])){
+
+                $champs=recuperer_fond('formulaires/champs_commandes_extras',$flux['args']['contexte']);
+
+            }
+
+        $flux['data']['texte'] = str_replace("<!--extra-->",  $champs.'<!--extra-->',$flux['data']['texte']);
     }
-     return($flux);
+    
+
+    if ($fond== 'prive/objets/contenu/commande'){
+
+        $id=$flux["data"]['contexte']['id'];
+        include_spip('inc/shop');
+        include_spip('inc/config'); 
+        
+        //On chercher les champs prévus
+        $champs_extras=champs_reduits();
+               
+        //Les valeurs de la commande
+        $champs=sql_fetsel('*','spip_commandes','id_commande='.$id);
+
+        //On détermine les valeurs qui sont des champs extras
+        $champs = array_intersect_key($champs,array_flip($champs_extras));
+
+        $c .= recuperer_fond("prive/squelettes/inclure/champs_extras_commande",array('champs_extras' =>$champs));
+
+        $flux['data']['texte'] .= $c;
+    }
+    
+    if ($fond== 'notifications/contenu_commande_mail'){
+
+        $id=$flux["data"]['contexte']['id'];
+        include_spip('inc/shop');
+        include_spip('inc/config'); 
+        
+        //On chercher les champs prévus
+        $champs_extras=champs_reduits();
+               
+        //Les valeurs de la commande
+        $champs=sql_fetsel('*','spip_commandes','id_commande='.$id);
+
+        //On détermine les valeurs qui sont des champs extras
+        $champs = array_intersect_key($champs,array_flip($champs_extras));
+
+        $c .= recuperer_fond("prive/squelettes/inclure/champs_extras_commande",array('champs_extras' =>$champs));
+
+        $flux['data']['texte'] = str_replace("<!--extra_commande-->",  $c.'<!--extra_commande-->',$flux['data']['texte']);
+    }    
+        
+    return $flux;
 }
 
 // Eliminer le panier après le retour paypal
@@ -107,6 +221,18 @@ function shop_traitement_paypal($flux){
     sql_delete('spip_paniers','id_panier='.$id_panier);
     spip_log("Retour paypal eliminer panier $id_panier",'paypal' . _LOG_INFO);
     return $flux;
+}
+
+function shop_afficher_contenu_objet($args) {
+
+    if ($args["args"]["type"]  == "commande" OR ($args["args"]["type"]=='shop' AND _request('voir')=='commande')) {
+        $champs_extras=array('commentaire');
+        $champs=sql_fetsel($champs_extras,'spip_commandes','id_commande='.$args["args"]['contexte']['id']);
+        
+        $args["data"] .= recuperer_fond("prive/squelettes/inclure/champs_extras_commande",
+            array('commentaire' =>$champs['commentaire'] ));
+    }
+    return $args;
 }
 
 

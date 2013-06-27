@@ -10,7 +10,10 @@ function inc_objets_shop_dist(){
         'configurer_shop'=>array(
             'action'=>'configurer_shop',
             'nom_action'=>_T('spip:icone_configuration_site'),
-            'icone'=>'cfg-16.png'
+            'icone'=>'cfg-16.png',
+            'configurer'=>array(
+                'titre'=>_T('shop:shop'),
+                'chemin'=>'prive/squelettes/contenu/inc-configurer_shop')            
             ),
          'commandes'=>array(
             'action'=>'commandes',
@@ -33,7 +36,7 @@ function inc_objets_shop_dist(){
          'paniers'=>array(
             'configurer'=>array(
                 'titre'=>_T('paniers:titre_panier'),
-                'chemin'=>'prive/exec/configurer_paniers')
+                'chemin'=>'prive/squelettes/contenu/configurer_paniers')
             ),   
          'coordonnes'=>array(
             'configurer'=>array(
@@ -64,9 +67,12 @@ function inc_objets_shop_dist(){
         'icone'=>$plugin_objet_sing.'-16.png'                      
         );
          if(find_in_path('configurer_'.$plugin.'.html','prive/squelettes/contenu/')){
-             if($plugin_objet=='prix')$plugin_objet='shopprix';
+             if($plugin_objet=='prix'){
+                 $plugin_objet='shopprix';
+                 $plugin_objet_sing=$plugin_objet;
+             }
              $objets_shop[$plugin_objet]['configurer']=array(
-            'titre' =>_T($plugin_objet.':titre_'.$plugin_objet),
+            'titre' =>_T($plugin_objet_sing.':titre_'.$plugin_objet),
             'chemin'=>'prive/squelettes/contenu/configurer_'.$plugin); 
             }
        unset($plugin_objet);  

@@ -4,18 +4,18 @@
 [(#INCLURE{fond=prive/squelettes/contenu/commandes,env,exec=#ENV{voir}}|replace{'\?exec=','?exec=shop&voir='})]
 ]
 
-[(#ENV{voir}|oui)
+[(#ENV{voir}|oui|et{#ENV{voir}|match{_edit}|non})
     [(#CHEMIN{prive/squelettes/contenu/#ENV{voir}.html}|oui|et{#ENV{voir}|match{_edit}|non})
-        [(#INCLURE{fond=prive/squelettes/contenu/#ENV{voir},env,ajax,exec=#ENV{voir}}|replace{'\?exec=','?exec=shop&voir='})]
+        [(#INCLURE{fond=prive/squelettes/contenu/#ENV{voir},env,exec=#ENV{voir}}|replace{'\?exec=','?exec=shop&voir='})]
     ]
-    [(#ENV{voir}|match{_edit}|oui)
+]
+[(#ENV{voir}|match{_edit}|oui)
         #SET{objet,#ENV{voir}|replace{_edit,''}}
         #SET{retour,#SELF|parametre_url{voir,#GET{objet}}}
         #SET{retourajax,oui}    
         [(#ENV{new}|oui)
-             #SET{retour,#SELF|parametre_url{new,''}}
+             #SET{retour,#ENV{redirect,#SELF|parametre_url{new,''}}}
              #SET{retourajax,''}   
              ]
-        [(#INCLURE{fond=prive/squelettes/contenu/#ENV{voir},env,redirect=#GET{retour},retourajax=#GET{retourajax}}|replace{'\?exec=','?exec=shop&voir='})]
+        [(#INCLURE{fond=prive/squelettes/contenu/#ENV{voir},env,redirect=#GET{retour},retourajax=#GET{retourajax},exec=#ENV{voir}}|replace{'\?exec=','?exec=shop&voir='})]
     ]
-]
