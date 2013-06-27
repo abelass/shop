@@ -15,8 +15,8 @@ function shop_champs_extras_nettoyes($champs_actifs=array(),$champs_extras,$obje
                 $value['saisie']=$value['saisie_2'];
                 unset($value['saisie_2']);
             }
-        if($value['type']!='champ_outil' AND $champs_actifs[$objet.'_'.$value['options']['nom']]=='on'){
-            if($champs_actifs[$objet.'_'.$value['options']['nom'].'_obligatoire'][0]=='on')$value['options']['obligatoire']='oui';
+        if($value['type']!='champ_outil' AND $champs_actifs[$objet.'-'.$value['options']['nom']]=='on'){
+            if($champs_actifs[$objet.'-'.$value['options']['nom'].'-obligatoire'][0]=='on')$value['options']['obligatoire']='oui';
             
             //La valeur par défaut   
             $value['options']['defaut']=isset($defaut[$value['options']['nom']])?$defaut[$value['options']['nom']]:'';

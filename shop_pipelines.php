@@ -38,8 +38,10 @@ function shop_formulaire_charger($flux){
         include_spip('inc/shop');
 
         foreach($flux['data']['champs_extras'] AS $objet=>$champs){
+           // echo serialize($objet);
             $noms=noms_champs_extras_presents($champs);
             foreach($noms AS $nom=>$label){
+               // echo serialize($nom);
                 $flux['data'][$nom]=_request($nom);
                 }
             }   
