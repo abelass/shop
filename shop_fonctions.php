@@ -123,5 +123,22 @@ function shop_champs_extras_presents($champs_actifs,$defaut=array(),$option='',$
     return $champs;
 }
 
+// Surcharge des autorisations, avoir pourqioi cela bloquait sous spip 3.0.10
+function autoriser_inscrireauteur_dist($faire, $quoi, $id, $qui, $opt){
+
+    if(_request('page')=='shop' AND _request('appel')=='mes_coordonnees') return true;
+    $s = array_search($quoi, $GLOBALS['liste_des_statuts']);
+    switch ($s) {
+
+        case 'info_redacteurs' :
+          return ($GLOBALS['meta']['accepter_inscriptions'] == 'oui');
+
+        case 'info_visiteurs' :
+          return ($GLOBALS['meta']['accepter_visiteurs'] == 'oui' OR $GLOBALS['meta']['forums_publics'] == 'abo');
+
+    }
+
+    return false;
+}
 
 ?>
