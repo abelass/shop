@@ -18,6 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // c
 
+'cfg_titre_authentification'=>'Authentifiaction',
 'cfg_titre_authentification_automatique'=>'Authentifiaction automatique après l\'inscription',
 'cfg_titre_champs_commandes'=>'Champs formulaire commandes',
 'cfg_titre_shop' => "Configuration Shop",
