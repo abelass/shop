@@ -124,7 +124,7 @@ function shop_champs_extras_presents($champs_actifs,$defaut=array(),$option='',$
 }
 
 // Surcharge des autorisations, avoir pourqioi cela bloquait sous spip 3.0.10
-function autoriser_inscrireauteur_dist($faire, $quoi, $id, $qui, $opt){
+function autoriser_inscrireauteur($faire, $quoi, $id, $qui, $opt){
 
     if(_request('page')=='shop' AND _request('appel')=='mes_coordonnees') return true;
     $s = array_search($quoi, $GLOBALS['liste_des_statuts']);
