@@ -34,7 +34,6 @@ function formulaires_configurer_shop_traiter_dist(){
             }
         }
     
-    echo serialize($config);
     ecrire_meta('shop',serialize($config));
     $res['message_ok'] = _T('config_info_enregistree');
 
