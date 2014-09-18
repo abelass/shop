@@ -45,7 +45,7 @@
    [(#ENV{voir}|oui)
     <li><a href="#URL_ECRIRE{shop}"class="cellule-h">[(#CHEMIN_IMAGE{logo_shop_24.png}|image_reduire{16})] &nbsp;<:shop:retour_panel:> <:shop:shop:></a></li>
     ]
-<BOUCLE_objets(DATA) {source tableau,#GET{objets}}{par cle} >
+<BOUCLE_objets(DATA) {source tableau,#GET{objets}}>
         [(#CHEMIN{prive/squelettes/contenu/#VALEUR{action}.html}|oui)<li><a href="[(#URL_ECRIRE{shop}|parametre_url{voir,#VALEUR{action}})]" class="cellule-h" title="#VALEUR{nom_action}"><img src="#CHEMIN_IMAGE{#VALEUR{icone}}" alt="#VALEUR{nom_action}" align="absmiddle"/> &nbsp;#VALEUR{nom_action}</a></li>]
 </BOUCLE_objets> 
 </ol>
