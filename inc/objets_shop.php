@@ -22,7 +22,7 @@ function inc_objets_shop_dist(){
             'configurer'=>array(
                 'titre'=>_T('commandes:commandes_titre'),
                 'chemin'=>'prive/squelettes/contenu/configurer_commandes')
-            ),
+            ),          
          'clients'=>array(
             'configurer'=>array(
                 'titre'=>_T('clients:clients_titre'),
@@ -80,10 +80,11 @@ function inc_objets_shop_dist(){
         }
 
      /*Possibilité de rajouter de plugin ou de modifier leur définition*/
-    $objets_shop=pipeline('shop_objets',$objets_shop);
+    $objets_shop=pipeline('shop_objets',array('data'=>$objets_shop));
+
 
     
-    return $objets_shop;
+    return $objets_shop['data'];
 }
 
 ?>
