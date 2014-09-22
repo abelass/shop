@@ -22,7 +22,8 @@
 	<necessite nom="clients" compatibilite="[0.5.3;]" />		
 	<necessite nom="shop_paiements" compatibilite="[1.0.0;]" />	
 	<utilise nom="Z5" compatibilite="[2.0.0;]" />	
-		
+	<utilise nom="Z" compatibilite="[1.7.27;]" />
+	<utilise nom="spipr_dist" compatibilite="[0.4.8;]" />				
 		
 	<pipeline nom="autoriser" inclure="shop_autorisations.php" />  
 	<pipeline nom="insert_head" inclure="shop_pipelines.php" /> 
