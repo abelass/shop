@@ -1,25 +1,17 @@
 <B_objets_precieux>
-    <div class="prix_produit">
+    <div class="prix_produit ajax">
         <BOUCLE_objets_precieux(PRIX_OBJETS){pagination}{objet}{id_objet}>
         #SET{prix_unitaire,#PRIX*{prix_objet,#ID_PRIX_OBJET}}
         #SET{devise,#ID_OBJET|devise_defaut{#OBJET}|traduire_devise}
         [(#SET{taxe,[(#GET{prix_unitaire}|moins{#PRIX_HT*{prix_objet,#ID_PRIX_OBJET}})]})]        
-        <div class="prix"><:shopprix:prix_devises:> : #GET{prix_unitaire}[ (#GET{devise})]</div>
-        [<div class="taxe"><:shopprix:taxes:> : (#GET{taxe}) [ (#GET{devise})]</div>]     
+        <div class="prix"><:prix_objets:prix_devises:> : #GET{prix_unitaire}[ (#GET{devise})]</div>
+        [<div class="taxe"><:prix_objets:taxes:> : (#GET{taxe}) [ (#GET{devise})]</div>]     
         <div class="ajouter_au_panier">
-        [(#BOUTON_ACTION{<:paniers:action_ajouter:>,#URL_ACTION_AUTEUR{remplir_panier,prix_objet-#ID_PRIX_OBJET,''},ajax})] 
+        [(#BOUTON_ACTION{<:paniers:action_ajouter:>,#URL_ACTION_AUTEUR{remplir_panier,prix_objet-#ID_PRIX_OBJET,#SELF},ajax})] 
         </div>
         </BOUCLE_objets_precieux>
     </div>
 </B_objets_precieux>
+<br class="nettoyeur"/>
 
- <script type="text/javascript">
 
-$(".ajouter_au_panier .submit").click(function() {
- ajaxReload('mon_panier',{
-     callback:function(){ ajaxReload('ajouter',{
-
-    });},
-    });
-});
-</script>   
