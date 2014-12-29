@@ -10,6 +10,7 @@
 	<BOUCLE_article_suitepanier(ARTICLES){id_rubrique=-1}>[(#PAGE|=={suitepanier}|oui)<div class="texte #EDIT{texte}">#TEXTE</div>]</BOUCLE_article_suitepanier>
 	[(#BOUTON_ACTION{<:shop:passer_la_commande:>,[(#URL_PAGE{shop}|parametre_url{appel,mes_coordonnees})],continuer})]
 	<//B_article_suitepanier>
+	
 </BOUCLE_ispanier>
 </div>
 

@@ -12,3 +12,11 @@
     [<p class="pagination">(#PAGINATION)</p>]
     </div>
 </B_objets_precieux>
+
+[(#ENV{retour}|=={ok}|oui)
+<script type="text/javascript">
+    $(function(){
+        ajaxReload('mon_panier', {args:{voir:'oui',action:''},history:false });
+        });      
+</script>
+]
