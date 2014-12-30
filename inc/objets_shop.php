@@ -41,7 +41,7 @@ function inc_objets_shop_dist(){
          'coordonnes'=>array(
             'configurer'=>array(
                 'titre'=>_T('coordonnees:titre_coordonnees'),
-                'chemin'=>'prive/exec/configurer_coordonnees')
+                'chemin'=>'prive/squelettes/contenu/configurer_coordonnees')
             ),
          'paypal'=>array(
             'configurer'=>array(
