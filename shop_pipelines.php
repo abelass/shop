@@ -205,7 +205,7 @@ function shop_recuperer_fond($flux){
         //On détermine les valeurs qui sont des champs extras
         $champs = array_intersect_key($champs,array_flip($champs_extras));
 
-        $c .= recuperer_fond("prive/squelettes/inclure/champs_extras_commande",array('champs_extras' =>$champs));
+        $c = recuperer_fond("prive/squelettes/inclure/champs_extras_commande",array('champs_extras' =>$champs));
 
         $flux['data']['texte'] .= $c;
     }
