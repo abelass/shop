@@ -15,12 +15,12 @@
 
 	<licence>GNU/GPL</licence>
 
-	<necessite nom="saisies" compatibilite="[1.24.0;]" /> 
-	<necessite nom="paniers" compatibilite="[0.3.3;]" /> 	
-	<necessite nom="commandes" compatibilite="[0.9.1;]" />
-	<necessite nom="panier2commande" compatibilite="[0.1.2;]" />	
-	<necessite nom="clients" compatibilite="[0.5.3;]" />		
-	<necessite nom="shop_paiements" compatibilite="[1.0.0;]" />	
+	<necessite nom="saisies" compatibilite="[2.0.3;]" /> 
+	<necessite nom="paniers" compatibilite="[1.0.1;]" /> 	
+	<necessite nom="commandes" compatibilite="[ 1.2.1;]" />
+	<necessite nom="panier2commande" compatibilite="[0.1.5;]" />	
+	<necessite nom="clients" compatibilite="[0.6.5;]" />		
+	<necessite nom="shop_paiements" compatibilite="[1.2.1;]" />	
 	<utilise nom="Z5" compatibilite="[2.0.0;]" />	
 	<utilise nom="Z" compatibilite="[1.7.27;]" />
 	<utilise nom="spipr_dist" compatibilite="[0.4.8;]" />				
