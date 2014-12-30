@@ -153,7 +153,7 @@ function shop_formulaire_traiter($flux){
         $id_adresse = sql_getfetsel( 'id_adresse',  'spip_adresses_liens',
                          array( 'objet = '.sql_quote('auteur'),
                         'id_objet = '.intval($id_auteur),
-                        'type = '.sql_quote('principale') ) );
+                        'type = '.sql_quote('pref') ) );
         
         $adresse = sql_fetsel('*', 'spip_adresses', 'id_adresse = '.$id_adresse);
         unset($adresse['id_adresse']);
