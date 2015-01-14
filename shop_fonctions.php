@@ -153,7 +153,7 @@ function montant_formater($montant,$devise=0){
         $prix = numfmt_format_currency($fmt, $montant,$devise);
     }
     //Sinon on formate à la française
-    else $montant=$montant.'&nbsp;'.traduire_devise($devise);
+    else $montant=$montant.'&nbsp;'.$devise;
 
     return $montant;
 }
