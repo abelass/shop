@@ -150,9 +150,10 @@ function montant_formater($montant,$devise=0){
     // Si PECL intl est présent on dermine le format de l'affichage de la devise selon la langue du contexte
     if(function_exists('numfmt_create')){
         $fmt = numfmt_create($lang, NumberFormatter::CURRENCY );
-        $prix = numfmt_format_currency($fmt, $montant,$devise);
+        $montant = numfmt_format_currency($fmt, $montant,$devise);
     }
     //Sinon on formate à la française
+    elseif(function_exists('traduire_devise')) $montant=$montant.'&nbsp;'.traduire_devise($devise);
     else $montant=$montant.'&nbsp;'.$devise;
 
     return $montant;
