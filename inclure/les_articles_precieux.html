@@ -3,6 +3,14 @@
         #ANCRE_PAGINATION
     <h2><:shop:les_articles_precieux:></h2>
     <table class="spip">
+    <thead>
+    	<tr>
+	    	<th colspan="2"><:shop:produit:></th>
+	    	<th><:prix:label_prix_ht:></th>
+	    	<th><:prix:label_taxes:></th>
+	    	<th> </th>
+     	</tr>	
+    </thead>
         <BOUCLE_articles_precieux(ARTICLES prix){prix!=''}{prix>0}{pagination}>
         <tr class="row_[(#COMPTEUR_BOUCLE|alterner{odd, even})]">
         <td>[(#LOGO_ARTICLE|image_reduire{100}|sinon{#ID_ARTICLE})]</td>
