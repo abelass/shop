@@ -68,11 +68,6 @@ function generer_url_retour_paiement($id_commande,$prestataire_paiement,$url_enc
 	
 }
 
-function myUrlEncode($string) {
-    $replacements = array('%21', '%2A', '%27', '%28', '%29', '%3B', '%3A', '%40', '%26', '%3D', '%2B', '%24', '%2C', '%2F', '%3F', '%25', '%23', '%5B', '%5D');
-    $entities = array('!', '*', "'", "(", ")", ";", ":", "@", "&", "=", "+", "$", ",", "/", "?", "%", "#", "[", "]");
-    return str_replace($entities, $replacements, urlencode($string));
-    }
     
 //teste si l'objet est un produit
 
@@ -121,5 +116,45 @@ function shop_champs_extras_presents($champs_actifs,$defaut=array(),$option='',$
           }
 
     return $champs;
+}
+
+//Surcharge de la fonction filtres_prix_formater_dist du plugin prix
+function montant_formater($montant,$devise=0){
+    include_spip('inc/config');
+    include_spip('inc/cookie');
+    
+    //>Si prix objets isntallés on recupère ses configs    
+    $config=lire_config('prix_objets');
+    $devises=isset($config['devises'])?$config['devises']:array();
+    
+    //Si il y a un cookie 'geo_devise' et qu'il figure parmis les devises diponibles on le prend
+    if(!$devise){
+	    if(isset($_COOKIE['geo_devise']) AND in_array($_COOKIE['geo_devise'],$devises))$devise=$_COOKIE['geo_devise'];
+	    // Sinon on regarde si il ya une devise defaut valable
+	    elseif($config['devise_default'] AND in_array($config['devise_default'] ,$devises))$devise=$config['devise_default'];
+	     // Sinon on prend la première des devises choisies
+	    elseif(isset( $devises[0])) $devise=$devises[0];
+	     // Sinon on met l'Euro
+	    else $devise='EUR';
+	    
+	    //On met le cookie
+	    spip_setcookie('geo_devise',$devise, time() + 3660*24*365, '/');
+	    
+	    	    
+    	}
+
+    //On détermine la langue du contexte
+    if(isset($_COOKIE['spip_lang']))$lang=$_COOKIE['spip_lang'];
+    else $lang=lire_config('langue_site');
+
+    // Si PECL intl est présent on dermine le format de l'affichage de la devise selon la langue du contexte
+    if(function_exists('numfmt_create')){
+        $fmt = numfmt_create($lang, NumberFormatter::CURRENCY );
+        $prix = numfmt_format_currency($fmt, $montant,$devise);
+    }
+    //Sinon on formate à la française
+    else $montant=$montant.'&nbsp;'.traduire_devise($devise);
+
+    return $montant;
 }
 ?>
