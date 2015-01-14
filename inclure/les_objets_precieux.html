@@ -3,6 +3,14 @@
         #ANCRE_PAGINATION
     <h2><:shop:les_articles_precieux:></h2>
     <table class="spip">
+    <thead>
+    	<tr>
+	    	<th colspan="2"><:shop:produit:></th>
+	    	<th><:shop:produit:></th>
+	    	<th><:shop:produit:></th>
+	    	<th><:shop:produit:></th>
+     	</tr>	
+    </thead>	   	
         <BOUCLE_objets_precieux(PRIX_OBJETS){pagination}>
         #SET{prix_unitaire,#PRIX*{prix_objet,#ID_PRIX_OBJET}}
         [(#SET{taxe,[(#GET{prix_unitaire}|moins{#PRIX_HT*{prix_objet,#ID_PRIX_OBJET}})]})]        
