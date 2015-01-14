@@ -20,7 +20,8 @@
 	<necessite nom="commandes" compatibilite="[ 1.2.1;]" />
 	<necessite nom="panier2commande" compatibilite="[0.1.5;]" />	
 	<necessite nom="clients" compatibilite="[0.6.5;]" />		
-	<necessite nom="shop_paiements" compatibilite="[1.2.1;]" />	
+	<necessite nom="shop_paiements" compatibilite="[1.2.1;]" />
+		
 	<utilise nom="Z5" compatibilite="[2.0.0;]" />	
 	<utilise nom="Z" compatibilite="[1.7.27;]" />
 	<utilise nom="spipr_dist" compatibilite="[0.4.8;]" />				
