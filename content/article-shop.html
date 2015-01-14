@@ -1,13 +1,11 @@
 <BOUCLE_content(ARTICLES){id_article}>
 <article>
 	<header class="cartouche">
-		[(#LOGO_ARTICLE|image_reduire{200,200})]
 		[<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>]
 		<h1><span class="#EDIT{titre}">#TITRE</span>[
 			<small class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</small>
 		]</h1>
 
-		<p class="publication"><time pubdate="pubdate" datetime="[(#DATE|date_iso)]"><i class="icon-calendar"></i> [(#DATE|nom_jour) ][(#DATE|affdate)]</time>[<span class="authors"><span class="sep">, </span><i class="icon-user"></i> <:par_auteur:> (#LESAUTEURS)</span>]</p>
 		[(#REM) Inclure le modele des liens de traductions ]
 		<div class="postmeta">
 			#MODELE{article_traductions}
@@ -36,13 +34,13 @@
 			</span>
 			</B_tags>
 		</div>
-
+		
 	</header>
+	
 	<aside class="details_produit">
 		<INCLURE{fond=inclure/ajouter_panier,objet=article,id_objet=#ID_ARTICLE,env,ajax}/>
 	</aside>
-	
-
+	[(#LOGO_ARTICLE|image_reduire{200,200}|inserer_attribut{class,logo_produit})]	
 	<div class="main">
 		[<div class="#EDIT{chapo} chapo surlignable">(#CHAPO|adaptive_images)</div>]
 		[<div class="#EDIT{texte} texte surlignable">(#TEXTE|adaptive_images)</div>]

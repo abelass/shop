@@ -7,7 +7,7 @@
         <div class="prix"><:prix_objets:prix_devises:> : #GET{prix_unitaire}[ (#GET{devise})]</div>
         [<div class="taxe"><:prix_objets:taxes:> : (#GET{taxe}) [ (#GET{devise})]</div>]     
         <div class="ajouter_au_panier">
-        <a href="[(#URL_ACTION_AUTEUR{remplir_panier,prix_objet-#ID_PRIX_OBJET,#SELF|parametre_url{retour,ok}})]" rel="nofollow"><:paniers:action_ajouter:></a> 
+        <a  class="ajax nocache nohistory btn btn-danger" href="[(#URL_ACTION_AUTEUR{remplir_panier,prix_objets-#ID_PRIX_OBJET,#SELF|parametre_url{retour,ok}})]" rel="nofollow"><:paniers:action_ajouter:></a> 
         </div>
         </BOUCLE_objets_precieux>
     </div>

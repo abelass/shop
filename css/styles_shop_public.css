@@ -1,3 +1,7 @@
+/*
+* Menu Shop
+*/
+
 ul.menu-shop{
 	margin:0;
 	padding:0;
@@ -8,6 +12,8 @@ ul.menu-shop{
 	display: inline;
 	margin-right:1.2em;
 }
+
+/*Page Shop*/
 #contenu_shop{
 	margin-top:2em;
 }
@@ -47,7 +53,28 @@ ul.menu-shop{
 	margin-bottom: 1em ;
 }
 
+/*
+* Article Shop
+*/
+
+.logo_produit{
+	float:left;
+	margin:0 0.5em 0.5em 0
+	}
+
 /*Panier*/
+
+.details_produit{
+	float:right;
+	width:auto;
+	margin: 0 0 0.5em 0.5em;}
+
+.prix_produit {
+    background: none repeat scroll 0 0 #f5f5f5;
+    padding: 0.5em;
+}
+
+.ajouter_au_panier .btn {margin-top:0.8em}
 
 .bloc_panier, .mon_compte{
 	font-size:0.8em;
