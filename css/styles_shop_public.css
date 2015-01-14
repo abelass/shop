@@ -1,7 +1,10 @@
 /*
 * Menu Shop
 */
-
+.btn.on {
+    background-color: #dbdbdb;
+    background-image: none;
+}
 ul.menu-shop{
 	margin:0;
 	padding:0;
