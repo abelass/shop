@@ -144,8 +144,8 @@ function montant_formater($montant,$devise=0){
     	}
 
     //On détermine la langue du contexte
-    if(isset($_COOKIE['spip_lang']))$lang=$_COOKIE['spip_lang'];
-    else $lang=lire_config('langue_site');
+    $lang=$GLOBALS['spip_lang'];
+
 
     // Si PECL intl est présent on dermine le format de l'affichage de la devise selon la langue du contexte
     if(function_exists('numfmt_create')){
