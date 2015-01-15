@@ -78,7 +78,13 @@
 
 .ajouter_au_panier .btn {margin-top:0.8em}
 
-#aside .bloc_panier form{font-size:0.8em;}
+ #aside .bloc_panier button, #aside .bloc_panier input.submit {
+    font-size: 1.2em;
+}
+
+#aside .bloc_panier form {
+    font-size: 0.8em;
+}
 
 #aside .bloc_panier, .mon_compte{
 	margin-bottom:1em}
