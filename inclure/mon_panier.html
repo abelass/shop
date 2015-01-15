@@ -1,7 +1,7 @@
 #CACHE{0}
 <div class="bloc_panier">
 <B_ispanier>
-<h1><:paniers:mon_panier:></h1>
+<h2><:paniers:mon_panier:></h2>
 <div class="ajax">#FORMULAIRE_PANIER</div>
 	
 <BOUCLE_ispanier(CONDITION){si #SESSION{id_panier}|oui}>
@@ -12,6 +12,8 @@
 	<//B_article_suitepanier>
 	
 </BOUCLE_ispanier>
+[(#ENV{appel}|=={mon_panier}|oui)<p><:paniers:panier_vide:></p>]
+<//B_ispanier>
 </div>
 
 
