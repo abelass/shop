@@ -90,7 +90,6 @@ ul.menu-shop{
 }
 .continuer, .annuler{
 	float:right;
-	width:45%;
 	text-align:center
 }
 .annuler{
