@@ -1,10 +1,3 @@
-[(#REM) Mon Panier ]
-[(#ENV{appel}|=={""}|oui|ou{#ENV{appel}|=={"mes_coordonnees"}|oui})
-   <div class="menu bloc_panier">
-      <h1><:paniers:mon_panier:></h1>
-      <div class="ajax">#FORMULAIRE_PANIER</div>
-   </div>
-]
 [(#REM) Mon Compte ]
 [(#SESSION{id_auteur}|oui)
    <div class="menu mon_compte">
