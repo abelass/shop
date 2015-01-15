@@ -1,20 +1,19 @@
 /*
 * Menu Shop
 */
+
+
+.btn-group {
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
+}
+
 .btn.on {
     background-color: #dbdbdb;
     background-image: none;
 }
-ul.menu-shop{
-	margin:0;
-	padding:0;
-	list-style-type:none;
-	text-transform:lowercase;
-}
-.menu-shop li{
-	display: inline;
-	margin-right:1.2em;
-}
+
 
 /*Page Shop*/
 #contenu_shop{
@@ -79,8 +78,9 @@ ul.menu-shop{
 
 .ajouter_au_panier .btn {margin-top:0.8em}
 
-.bloc_panier, .mon_compte{
-	font-size:0.8em;
+#aside .bloc_panier form{font-size:0.8em;}
+
+#aside .bloc_panier, .mon_compte{
 	margin-bottom:1em}
 
 .supprimer_panier {width:45%;float:left}
