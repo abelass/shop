@@ -78,6 +78,9 @@
 
 .ajouter_au_panier .btn {margin-top:0.8em}
 
+#aside .formulaire_panier thead th,#aside  .formulaire_panier .emplette td {
+padding: 0.1em;
+}
  #aside .bloc_panier button, #aside .bloc_panier input.submit {
     font-size: 1.2em;
 }
