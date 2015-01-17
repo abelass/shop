@@ -62,7 +62,7 @@ function titre_objet_shop($objet,$contexte){
 	
     //Les exceptions du titre
     if(!$titre=$contexte[$exception_titre[$objet]] and isset($contexte['titre']))$titre=$contexte['titre'];
-    if(!$titre){
+	else{
         if($objet=='document'){
             $f=explode('/',$contexte['fichier']);
             $titre=$f[1];
