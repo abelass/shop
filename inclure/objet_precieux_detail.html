@@ -1,0 +1,9 @@
+<tr class="row">
+    <td>[(#ENV{logo_objet}|image_reduire{100})]</td>
+    <td><a href="#URL_ARTICLE">#TITRE</a></td>
+    <td class="prix">#PRIX</td>
+    <td class="taxe">[(#TAXE|montant_formater)] </td>        
+    <td class="ajouter_au_panier">
+    <a class="ajax nocache nohistory btn btn-danger" href="[(#URL_ACTION_AUTEUR{remplir_panier,prix_objets-#ID_PRIX_OBJET,#SELF|parametre_url{retour,ok}})]"><:paniers:action_ajouter:></a> 
+    </td>
+</tr>

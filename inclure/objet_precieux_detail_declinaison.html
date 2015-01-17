@@ -1,0 +1,12 @@
+   <tr class="row">
+        <td>[(#ENV{logo_objet}|image_reduire{100})]</td>
+        <td><a href="#URL_ARTICLE">#TITRE</a></td>
+        <td class="prix">#ENV{prix}</td>
+        <td class="taxe">[(#ENV{taxe}|montant_formater)] </td>        
+        <td class="ajouter_au_panier">
+        	<div class="ajax">
+            	#FORMULAIRE_PANIER_DECLINAISON{#ID_OBJET,#OBJET}
+    		</div>
+        </td>
+   </tr>
+
