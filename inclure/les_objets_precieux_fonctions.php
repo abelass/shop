@@ -49,7 +49,7 @@ function generer_objet_details($id_objet,$objet='article',$env=array(),$fichier=
     $logo=$chercher_logo($id_objet,$_id_objet,'on');
     $contexte['logo_objet']=$logo[0];
      
-    $fond=recuperer_fond($fichier,$contexte);
+    $fond=recuperer_fond($fichier,$contexte,array('ajax'=>'objet_precieux_'.$contexte['id_objet_prix']));
     
     return $fond;
 }

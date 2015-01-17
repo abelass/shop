@@ -16,9 +16,9 @@
         [(#GET{declinaisons}|?{
         	 [(#SET{prix_unitaire,#PRIX*{prix_objet,#ID_PRIX_OBJET}})]
         [(#SET{taxe,[(#GET{prix_unitaire}|moins{#PRIX_HT*{prix_objet,#ID_PRIX_OBJET}})]})] 
-        	[(#ID_OBJET|generer_objet_details{#OBJET,#ARRAY{id_objet,#ID_OBJET,taxe,#GET{taxe},id_prix_objet,ht=#GET{ht}}})] 
+        	[(#ID_OBJET|generer_objet_details{#OBJET,#ARRAY{id_objet,#ID_OBJET,taxe,#GET{taxe},id_prix_objet,#ID_PRIX_OBJET,ht,#GET{ht}}})] 
             ,
-            [(#ID_OBJET|generer_objet_details{#OBJET,#ARRAY{id_objet,taxe=#GET{taxe},id_prix_objet,ht=#GET{ht}},inclure/objet_precieux_detail_declinaison})]  
+            [(#ID_OBJET|generer_objet_details{#OBJET,#ARRAY{id_objet,#ID_OBJET,taxe,#GET{taxe},id_prix_objet,#ID_PRIX_OBJET,ht,#GET{ht}},inclure/objet_precieux_detail_declinaison})]  
         	})]
  		</BOUCLE_objets_precieux>
 
@@ -28,11 +28,16 @@
     [<p class="pagination">(#PAGINATION)</p>]
     </div>
 </B_objets_precieux>
-
-[(#ENV{retour}|=={ok}|oui)
 <script type="text/javascript">
+[(#ENV{retour}|=={ok}|oui)
     $(function(){
         ajaxReload('mon_panier', {args:{voir:'oui',action:''},history:false });
         });      
-</script>
 ]
+[(#GET{declinaison}|oui)
+$('.formulaire_panier_declinaison select').change(function(){
+	var id_prix_objet=$(this).attr('value');  
+    ajaxReload('objet_precieux_'+id_prix_objet, {args:{id_prix_objet:id_prix_objet},history:false });
+});
+]
+</script>
