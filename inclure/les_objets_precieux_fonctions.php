@@ -67,6 +67,7 @@ function titre_objet_shop($objet,$contexte){
             $f=explode('/',$contexte['fichier']);
             $titre=$f[1];
             }
+		// A vérifier
         else{
             $table_sql = table_objet_sql($objet);
             $tables=lister_tables_objets_sql();
