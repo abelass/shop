@@ -7,6 +7,6 @@
     <td class="prix">[(#GET{prix_unitaire,}|montant_formater)]</td>
     <td class="taxe">[(#GET{taxe}|montant_formater)] </td>        
     <td class="ajouter_au_panier">
-    <a class="ajax nocache nohistory btn btn-danger" href="[(#URL_ACTION_AUTEUR{remplir_panier,prix_objets-#ID_PRIX_OBJET,#SELF|parametre_url{retour,ok}})]"><:paniers:action_ajouter:></a> 
+    	<INCLURE{fond=inclure/ajouter_panier_lien,env,ajax}/>
     </td>
 </tr>
