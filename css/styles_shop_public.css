@@ -64,6 +64,10 @@
 	margin:0 0.5em 0.5em 0
 	}
 
+/* Les produits*/
+
+.liste_objets_precieux .formulaire_spip{background-color:transparent}
+
 /*Panier*/
 
 .details_produit{
