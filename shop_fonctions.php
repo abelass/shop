@@ -122,7 +122,9 @@ function shop_champs_extras_presents($champs_actifs,$defaut=array(),$option='',$
 function montant_formater($montant,$devise=0){
     include_spip('inc/config');
     include_spip('inc/cookie');
-    
+	
+	$montant=number_format($montant,2);
+	
     //>Si prix objets isntallés on recupère ses configs    
     $config=lire_config('prix_objets');
     $devises=isset($config['devises'])?$config['devises']:array();
@@ -138,9 +140,7 @@ function montant_formater($montant,$devise=0){
 	    else $devise='EUR';
 	    
 	    //On met le cookie
-	    spip_setcookie('geo_devise',$devise, time() + 3660*24*365, '/');
-	    
-	    	    
+	    spip_setcookie('geo_devise',$devise, time() + 3660*24*365, '/');	    
     	}
 
     //On détermine la langue du contexte

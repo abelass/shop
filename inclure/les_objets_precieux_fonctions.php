@@ -28,7 +28,7 @@ function generer_objet_details($id_objet,$objet='article',$env=array(),$fichier=
     }
     
    	if(!$cont=calculer_contexte())$cont=array();
-   	$contexte= array_merge($cont,$contexte);
+   	$contexte= array_merge($cont,$contexte,$env);
 
     $contexte['objet']=$objet;
     $contexte['id_objet']=$id_objet;
