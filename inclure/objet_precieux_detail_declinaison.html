@@ -1,18 +1,9 @@
-   <tr class="row">
-        <td>[(#ENV{logo_objet}|image_reduire{100})]</td>
-        <td><a href="#URL_ARTICLE">#TITRE</a></td>
-        <td class="taxe">
-       	<BOUCLE_objets_precieux(PRIX_OBJETS){id_prix_objet}{par titre}>
-        		 [(#SET{prix_unitaire,#PRIX*{prix_objet,#ID_PRIX_OBJET}})]
-        [(#SET{taxe,[(#GET{prix_unitaire}|moins{#PRIX_HT*{prix_objet,#ID_PRIX_OBJET}})]})] 
-        	<div><:prix:label_taxes:> [(#GET{taxe}|montant_formater)]</div>
-         	</BOUCLE_objets_precieux>  
-        	
-        	</td>        
-        <td class="ajouter_au_panier">
+<li class="item">
+        <div><a href="#URL_ARTICLE">#TITRE</a></div>	
+        <div>[(#ENV{logo_objet}|image_reduire{100})]</div>
+        <div class="panier">
         	<div class="ajax">
             	#FORMULAIRE_PANIER_DECLINAISON{#ID_OBJET,#OBJET}
-    		</div>
-        </td>
-   </tr>
-
+			</div>
+        </div>
+</li>
