@@ -109,7 +109,7 @@ ul.liste-items.objets_precieux {
 
 .details_produit{
 	float:right;
-	width:auto;
+	width:33%;
 	margin: 0 0 0.5em 0.5em;}
 
 .prix_produit {
