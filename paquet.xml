@@ -1,8 +1,8 @@
 <paquet
 	prefix="shop"
 	categorie="edition"
-	version="1.7.0"
-	etat="dev"
+	version="1.7.2"
+	etat="test"
 	compatibilite="[3.0.10;3.1.*]"
 	logo="prive/themes/spip/images/logo_shop_32.png"
 	documentation=""
@@ -37,7 +37,10 @@
 	<pipeline nom="traitement_paypal" inclure="shop_pipelines.php" /> 
 	<pipeline nom="traitement_paiements_forms" inclure="shop_pipelines.php" /> 	
 	<pipeline nom="traitement_paiements_retours" inclure="shop_pipelines.php" />
-	<pipeline nom="declarer_tables_principales" inclure="base/shop.php" /> 		
+	<pipeline nom="bank_traiter_reglement" inclure="shop_pipelines.php" /> 	
+	
+	<pipeline nom="declarer_tables_principales" inclure="base/shop.php" /> 
+			
 
 	
 	<menu nom="shop" titre="shop:shop" parent="menu_edition" icone="images/logo_shop_16.png" action="shop" /> 

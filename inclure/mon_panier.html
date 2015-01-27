@@ -4,12 +4,12 @@
 <h2><:paniers:mon_panier:></h2>
 <div class="ajax">#FORMULAIRE_PANIER</div>
 	
-<BOUCLE_ispanier(CONDITION){si #SESSION{id_panier}|oui}>
+<BOUCLE_ispanier(paniers_liens){id_panier = #SESSION{id_panier}}{0,1}>
 	[(#BOUTON_ACTION{<:paniers:vider_le_panier:>,#URL_ACTION_AUTEUR{supprimer_panier_encours,'',#SELF},ajax supprimer_panier})]
-	<BOUCLE_article_suitepanier(ARTICLES){id_rubrique=-1}>[(#PAGE|=={suitepanier}|oui)<div class="texte #EDIT{texte}">#TEXTE</div>]</BOUCLE_article_suitepanier>
+
 	[(#BOUTON_ACTION{<:shop:passer_la_commande:>,[(#URL_PAGE{shop}|parametre_url{appel,mes_coordonnees})],continuer})]
 	<br class="clear" />
-	<//B_article_suitepanier>
+
 	
 </BOUCLE_ispanier>
 [(#ENV{appel}|=={mon_panier}|oui)<p><:paniers:panier_vide:></p>]

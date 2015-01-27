@@ -34,7 +34,8 @@
       	[(#FORMULAIRE_PAYER_ACTE{#GET{prix_total},#ARRAY{
 		      montant_ht,#GET{prix_ht},
 		      id_commande,#ID_COMMANDE,
- 			      id_auteur,#ID_AUTEUR,
+ 			  id_auteur,#ID_AUTEUR,
+ 			  id_panier,#SESSION{id_panier}
 	      }})] ]
       	[(#PLUGIN{bank}|non)
       	[(#FORMULAIRE_PAIEMENTS{#ARRAY{
