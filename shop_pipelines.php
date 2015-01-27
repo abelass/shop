@@ -240,10 +240,18 @@ function shop_traitement_paypal($flux){
     $commande = sql_fetsel('id_commande, statut, id_auteur', 'spip_commandes', 'reference = '.sql_quote($reference));
     $objet=sql_fetsel('objet,id_objet','spip_commandes_details','id_commande='.$commande['id_commande']);
     $id_panier=sql_getfetsel('id_panier','spip_paniers_liens','id_objet='.$objet['id_objet'].' AND objet='.sql_quote($objet['objet']));
-    sql_delete('spip_paniers_liens','id_panier='.$id_panier);
-    sql_delete('spip_paniers','id_panier='.$id_panier);
+    $action = charger_fonction('supprimer_panier', 'action/');
+	$action($id_panier);
     spip_log("Retour paypal eliminer panier $id_panier",'paypal' . _LOG_INFO);
     return $flux;
 }
 
-?>
+//Eliminer le panier après le traitment bank
+
+function shop_bank_traiter_reglement($flux){
+	$id_panier=sql_getfetsel('id_panier','spip_transactions','id_transaction='.$flux['args']['id_transaction']);
+	
+	$action = charger_fonction('supprimer_panier', 'action/');
+	$action($id_panier);
+	return $flux;
+}
