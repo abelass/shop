@@ -1,7 +1,7 @@
 #CACHE{0}
 
 [(#REM)Remplacer tous les liens sauf celui pour les puces statut]
-#SET{pattern,/exec=(?!puce_statut\b)\b/}
+#SET{pattern,/exec=(?!puce_statut\b)/}
 #SET{replace,exec=shop&voir=}
 [(#ENV{voir}|non)
 <h1><:shop:shop:></h1>
