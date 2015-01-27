@@ -1,12 +1,14 @@
 #CACHE{0}
+#SET{pattern,/exec=(?!puce_statut\b)\b/}
+#SET{replace,exec=shop&voir=}
 [(#ENV{voir}|non)
 <h1><:shop:shop:></h1>
-[(#INCLURE{fond=prive/squelettes/contenu/commandes,env,exec=#ENV{voir}}|replace{'\?exec=','?exec=shop&voir='})]
+[(#INCLURE{fond=prive/squelettes/contenu/commandes,env,exec=#ENV{voir}}|rep_interface_shop{#GET{pattern},#GET{replace}})]
 ]
 
 [(#ENV{voir}|oui|et{#ENV{voir}|match{_edit}|non})
     [(#CHEMIN{prive/squelettes/contenu/#ENV{voir}.html}|oui|et{#ENV{voir}|match{_edit}|non})
-        [(#INCLURE{fond=prive/squelettes/contenu/#ENV{voir},env,exec=#ENV{voir}}|replace{'\?exec=','?exec=shop&voir='})]
+        [(#INCLURE{fond=prive/squelettes/contenu/#ENV{voir},env,exec=#ENV{voir}}|rep_interface_shop{#GET{pattern},#GET{replace}})]
     ]
 ]
 [(#ENV{voir}|match{_edit}|oui)
@@ -17,5 +19,5 @@
              #SET{retour,#ENV{redirect,#SELF|parametre_url{new,''}}}
              #SET{retourajax,''}   
              ]
-        [(#INCLURE{fond=prive/squelettes/contenu/#ENV{voir},env,redirect=#GET{retour},retourajax=#GET{retourajax},exec=#ENV{voir}}|replace{'\?exec=','?exec=shop&voir='})]
+        [(#INCLURE{fond=prive/squelettes/contenu/#ENV{voir},env,redirect=#GET{retour},retourajax=#GET{retourajax},exec=#ENV{voir}}|rep_interface_shop{#GET{pattern},#GET{replace}})]
     ]
