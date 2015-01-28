@@ -48,7 +48,15 @@ function inc_objets_shop_dist(){
                 'titre'=>_T('paypal:configuration_paypal'),
                 'chemin'=>'prive/exec/configurer_paypal'
                 )
-            ),                                                            
+            ), 
+         'bank'=>array(
+            'action'=>'transactions',
+            'nom_action'=>_T('bank:titre_menu_transactions'),
+            'icone'=>'credit-card-16.png',
+            'configurer'=>array(
+                'titre'=>_T('bank:titre_menu_transactions'),
+                'chemin'=>'prive/squelettes/contenu/configurer_bank')
+            ),                                                                      
         );
     
     /* On cherche d'abord ceux qui on contiennent un shop_dan leur nom*/
