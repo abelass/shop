@@ -181,9 +181,7 @@ function shop_recuperer_fond($flux){
     $fond=$flux['args']['fond'];
     if ($fond== 'formulaires/editer_client'){
             if(isset($flux['args']['contexte']['champs_extras']['commande'])){
-
                 $champs=recuperer_fond('formulaires/champs_commandes_extras',$flux['args']['contexte']);
-
             }
 
         $flux['data']['texte'] = str_replace("<!--extra-->",  $champs.'<!--extra-->',$flux['data']['texte']);
