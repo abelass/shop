@@ -5,7 +5,7 @@
 #SET{replace,exec=shop&voir=}
 [(#ENV{voir}|non)
 <h1><:shop:shop:></h1>
-[(#INCLURE{fond=prive/squelettes/contenu/commandes,env,exec=#ENV{voir}}|rep_interface_shop{#GET{pattern},#GET{replace}})]
+[(#INCLURE{fond=prive/squelettes/contenu/commandes,nb=10,env,exec=#ENV{voir}}|rep_interface_shop{#GET{pattern},#GET{replace}})]
 ]
 
 [(#ENV{voir}|oui|et{#ENV{voir}|match{_edit}|non})
