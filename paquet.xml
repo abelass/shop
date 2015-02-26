@@ -32,10 +32,14 @@
 	<pipeline nom="autoriser" inclure="shop_autorisations.php" />  
 	<pipeline nom="insert_head" inclure="shop_pipelines.php" /> 
 	<pipeline nom="header_prive" inclure="shop_pipelines.php" /> 
-	<pipeline nom="recuperer_fond" inclure="shop_pipelines.php" /> 		
+	
+	<pipeline nom="recuperer_fond" inclure="shop_pipelines.php" /> 
+	<pipeline nom="affiche_gauche" inclure="shop_pipelines.php" /> 	
+			
 	<pipeline nom="formulaire_traiter" inclure="shop_pipelines.php" /> 	
 	<pipeline nom="formulaire_verifier" inclure="shop_pipelines.php" /> 		
-	<pipeline nom="formulaire_charger" inclure="shop_pipelines.php" /> 	
+	<pipeline nom="formulaire_charger" inclure="shop_pipelines.php" /> 
+		
 	<pipeline nom="traitement_paypal" inclure="shop_pipelines.php" /> 
 	<pipeline nom="traitement_paiements_forms" inclure="shop_pipelines.php" /> 	
 	<pipeline nom="traitement_paiements_retours" inclure="shop_pipelines.php" />

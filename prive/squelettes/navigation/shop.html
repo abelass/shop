@@ -11,7 +11,7 @@
 #SET{donnees_objets,#VAL|donnees_objet{#GET{objet}}}
 
 [(#CHEMIN{prive/squelettes/navigation/#ENV{voir}.html}|oui|et{#ENV{voir}|=={configurer_shop}|non}) #SET{info,oui}
-       [(#INCLURE{fond=prive/squelettes/navigation/#ENV{voir},env}|replace{'\?exec=','?exec=shop&voir='})]
+       [(#INCLURE{fond=prive/squelettes/navigation/#ENV{voir},env})]
        ]
 [(#GET{info}|non)
 [(#REM)La boite info]
@@ -46,7 +46,14 @@
     <li><a href="#URL_ECRIRE{shop}"class="cellule-h">[(#CHEMIN_IMAGE{logo_shop_24.png}|image_reduire{16})] &nbsp;<:shop:retour_panel:> <:shop:shop:></a></li>
     ]
 <BOUCLE_objets(DATA) {source tableau,#GET{objets}}>
-        [(#CHEMIN{prive/squelettes/contenu/#VALEUR{action}.html}|oui)<li><a href="[(#URL_ECRIRE{shop}|parametre_url{voir,#VALEUR{action}})]" class="cellule-h" title="#VALEUR{nom_action}"><img src="#CHEMIN_IMAGE{#VALEUR{icone}}" alt="#VALEUR{nom_action}" align="absmiddle"/> &nbsp;#VALEUR{nom_action}</a></li>]
+
+        [(#CHEMIN{prive/squelettes/contenu/#ACTION.html}|oui)
+        <li>
+        	[(#ENV{voir}|!={#ACTION}|oui)
+        	<a href="[(#URL_ECRIRE{#ACTION})]" class="cellule-h" title="#ACTION">#SET{liens,</a>}
+        	]
+        	<img src="#CHEMIN_IMAGE{#VALEUR{icone}}" alt="#VALEUR{nom_action}" align="absmiddle"/> &nbsp;#VALEUR{nom_action}
+        	#GET{liens}</li>]#SET{liens,''}
 </BOUCLE_objets> 
 </ol>
 </B_objets> 

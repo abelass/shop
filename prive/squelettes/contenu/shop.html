@@ -1,25 +1,6 @@
 #CACHE{0}
 
-[(#REM)Remplacer tous les liens sauf celui pour les puces statut]
-#SET{pattern,/exec=(?!puce_statut\b)/}
-#SET{replace,exec=shop&voir=}
-[(#ENV{voir}|non)
 <h1><:shop:shop:></h1>
-[(#INCLURE{fond=prive/squelettes/contenu/commandes,nb=10,env,exec=#ENV{voir}}|rep_interface_shop{#GET{pattern},#GET{replace}})]
-]
+[(#INCLURE{fond=prive/squelettes/contenu/commandes,nb=10,env,exec=#ENV{voir}})]
 
-[(#ENV{voir}|oui|et{#ENV{voir}|match{_edit}|non})
-    [(#CHEMIN{prive/squelettes/contenu/#ENV{voir}.html}|oui|et{#ENV{voir}|match{_edit}|non})
-        [(#INCLURE{fond=prive/squelettes/contenu/#ENV{voir},env,exec=#ENV{voir}}|rep_interface_shop{#GET{pattern},#GET{replace}})]
-    ]
-]
-[(#ENV{voir}|match{_edit}|oui)
-        #SET{objet,#ENV{voir}|replace{_edit,''}}
-        #SET{retour,#SELF|parametre_url{voir,#GET{objet}}}
-        #SET{retourajax,oui}    
-        [(#ENV{new}|oui)
-             #SET{retour,#ENV{redirect,#SELF|parametre_url{new,''}}}
-             #SET{retourajax,''}   
-             ]
-        [(#INCLURE{fond=prive/squelettes/contenu/#ENV{voir},env,redirect=#GET{retour},retourajax=#GET{retourajax},exec=#ENV{voir}}|rep_interface_shop{#GET{pattern},#GET{replace}})]
-    ]
+

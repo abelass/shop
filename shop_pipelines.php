@@ -253,3 +253,17 @@ function shop_bank_traiter_reglement($flux){
 	$action($id_panier);
 	return $flux;
 }
+
+//Afficher le menu shop pour les objets shop
+function shop_affiche_gauche($flux){
+	$objet=$flux['args']['exec'];
+	
+	$objets_shop=objets_shop();
+	
+
+	if (isset($objets_shop[$objet]) OR $objet=='transactions'){
+	
+		$flux['data'] .= recuperer_fond('prive/squelettes/navigation/shop',array('voir'=>$objet));
+	}
+	return $flux;
+}
