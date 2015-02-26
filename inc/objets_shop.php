@@ -22,7 +22,15 @@ function inc_objets_shop_dist(){
             'configurer'=>array(
                 'titre'=>_T('commandes:commandes_titre'),
                 'chemin'=>'prive/squelettes/contenu/configurer_commandes')
-            ),          
+            ),   
+         'coordonnees'=>array(
+            'action'=>'coordonnees',
+            'nom_action'=>_T('coordonnees:titre_coordonnees'),
+            'icone'=>'addressbook-16.png',
+            'configurer'=>array(
+                'titre'=>_T('coordonnees:titre_coordonnees'),
+                'chemin'=>'prive/squelettes/contenu/configurer_coordonnees')
+            ),     
          'clients'=>array(
             'configurer'=>array(
                 'titre'=>_T('clients:clients_titre'),
