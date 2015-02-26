@@ -158,8 +158,4 @@ function montant_formater($montant,$devise=0){
 
     return $montant;
 }
-
-function rep_interface_shop($text,$pattern,$replace){
-	return preg_replace($pattern, $replace, $text);
-}
 ?>
