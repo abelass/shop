@@ -3,15 +3,13 @@
 
 [(#REM)Déterminer l'objet]
  #SET{objet,#ENV{voir}}
-[(#ENV{voir}|match{_edit}|oui)
-    #SET{objet,#ENV{voir}|replace{_edit,''}}
-    ]
+
+
 
 [(#REM)Les infos de l'objet]
 #SET{donnees_objets,#VAL|donnees_objet{#GET{objet}}}
 
 [(#CHEMIN{prive/squelettes/navigation/#ENV{voir}.html}|oui|et{#ENV{voir}|=={configurer_shop}|non}) #SET{info,oui}
-       [(#INCLURE{fond=prive/squelettes/navigation/#ENV{voir},env})]
        ]
 [(#GET{info}|non)
 [(#REM)La boite info]
