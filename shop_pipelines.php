@@ -260,8 +260,11 @@ function shop_affiche_gauche($flux){
 	
 	$objets_shop=objets_shop();
 	
+	$actions=array_column($objets_shop, 'action');	
+    $navigations=array_column($objets_shop, 'navigation','action');
 
-	if (isset($objets_shop[$objet]) OR $objet=='transactions'){
+	
+	if (in_array($objet,$actions) OR in_array($objet,$actions)){
 	
 		$flux['data'] .= recuperer_fond('prive/squelettes/navigation/shop',array('voir'=>$objet));
 	}
