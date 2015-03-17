@@ -43,7 +43,8 @@ function shop_formulaire_charger($flux){
                 $flux['data'][$nom]=_request($nom);
                 }
             }   
-        }    
+        }   
+
      return $flux;
 }
 
@@ -58,14 +59,14 @@ function shop_formulaire_verifier($flux){
        ){
         //Récupérer les champs extras choisis
         include_spip('inc/config');
-        $config=lire_config('shop',array($config));
+        $config=lire_config('shop',array());
         
         //Déterminer les champs obligatoire
         $obligatoires=array();
         foreach($config AS $name=>$value){
             $obligatoire='';
             list($objet,$champ,$obligatoire)=explode('-',$name);
-            if(isset($config[$name.'_obligatoire']))$obligatoires[]=$champ;
+            if(isset($config[$name.'-obligatoire']))$obligatoires[]=$champ;
             }
         foreach($obligatoires AS $champ) {
             if(!_request($champ))$flux['data'][$champ]=_T("info_obligatoire");
@@ -177,6 +178,11 @@ function shop_recuperer_fond($flux){
     $fond=$flux['args']['fond'];
     if ($fond== 'formulaires/editer_client'){
             if(isset($flux['args']['contexte']['champs_extras']['commande'])){
+            	//reconvertir les labels en unicode	
+            	foreach($flux['args']['contexte']['champs_extras']['commande'] AS $key=>$value){
+            		$flux['args']['contexte']['champs_extras']['commande'][$key]['options']['label']=html2unicode($value['options']['label']);
+					
+            	}
                 $champs=recuperer_fond('formulaires/champs_commandes_extras',$flux['args']['contexte']);
             }
 
