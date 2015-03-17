@@ -262,23 +262,19 @@ function shop_affiche_gauche($flux){
 	
 	$actions=array_column($objets_shop, 'action');
 	$afficher_objet=false;
-	if(in_array($objet,$actions))	{
-		$afficher_objet=true;
-	}
+	//Le cas normal l'exec correspond à l'action de a définition
+	if(in_array($objet,$actions)) $afficher_objet=$objet;
+	// cas ou une page action contient plusieurs onglets
 	else{
 		foreach(array_column($objets_shop, 'navigation','action') AS $action=>$navigation){
 			if(in_array($objet,$navigation)){
-				$afficher_objet=true;
-				$objet=$action;
+				$afficher_objet=$action;
 				break;
 			}
 		}
 	}
 	
+	if ($afficher_objet) $flux['data'] .= recuperer_fond('prive/squelettes/navigation/shop',array('voir'=>$afficher_objet));
 	
-	if ($afficher_objet){
-	
-		$flux['data'] .= recuperer_fond('prive/squelettes/navigation/shop',array('voir'=>$objet));
-	}
 	return $flux;
 }
