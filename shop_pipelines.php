@@ -38,10 +38,8 @@ function shop_formulaire_charger($flux){
         include_spip('inc/shop');
 
         foreach($flux['data']['champs_extras'] AS $objet=>$champs){
-           // echo serialize($objet);
             $noms=noms_champs_extras_presents($champs);
             foreach($noms AS $nom=>$label){
-               // echo serialize($nom);
                 $flux['data'][$nom]=_request($nom);
                 }
             }   
@@ -103,8 +101,6 @@ function shop_formulaire_traiter($flux){
       if($config[0]=='on'){
           if($auteur=sql_fetsel('*','spip_auteurs','email='.sql_quote(_request('mail_inscription')))){
                 include_spip('inc/auth');
-                //$edition_dist = charger_fonction('traiter', 'formulaires/editer_client');
-                //$erreurs = $edition_dist($auteur['id_auteur'],'');
                 auth_loger($auteur);
           }
       }
@@ -187,7 +183,6 @@ function shop_recuperer_fond($flux){
         $flux['data']['texte'] = str_replace("<!--extra-->",  $champs.'<!--extra-->',$flux['data']['texte']);
     }
     
-
     if ($fond== 'prive/objets/contenu/commande'){
 
         $id=$flux["data"]['contexte']['id'];
@@ -245,7 +240,6 @@ function shop_traitement_paypal($flux){
 }
 
 //Eliminer le panier après le traitment bank
-
 function shop_bank_traiter_reglement($flux){
 	$id_panier=sql_getfetsel('id_panier','spip_transactions','id_transaction='.$flux['args']['id_transaction']);
 	
