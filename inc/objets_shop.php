@@ -25,7 +25,6 @@ function inc_objets_shop_dist(){
             ),   
          'coordonnees'=>array(
             'action'=>'coordonnees',
-            'navigation'=>array('coordonnees','numero','email'),
             'nom_action'=>_T('coordonnees:titre_coordonnees'),
             'icone'=>'addressbook-16.png',
             'configurer'=>array(
@@ -39,8 +38,8 @@ function inc_objets_shop_dist(){
             ),               
          'contacts'=>array(
             'action'=>'repertoire',
-            'navigation'=>array('repertoire','organisations','contacts'),
             'nom_action'=>_T('contacts:contact'),
+            'navigation'=>array('repertoire','organisations','contacts'),
             'icone'=>'contact-16.png',         
             'configurer'=>array(
                 'titre'=>_T('contacts:contact'),

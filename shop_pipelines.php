@@ -260,11 +260,23 @@ function shop_affiche_gauche($flux){
 	
 	$objets_shop=objets_shop();
 	
-	$actions=array_column($objets_shop, 'action');	
-    $navigations=array_column($objets_shop, 'navigation','action');
-
+	$actions=array_column($objets_shop, 'action');
+	$afficher_objet=false;
+	if(in_array($objet,$actions))	{
+		$afficher_objet=true;
+	}
+	else{
+		foreach(array_column($objets_shop, 'navigation','action') AS $action=>$navigation){
+			if(in_array($objet,$navigation)){
+				$afficher_objet=true;
+				$objet=$action;
+				break;
+			}
+		}
+	}
 	
-	if (in_array($objet,$actions) OR in_array($objet,$actions)){
+	
+	if ($afficher_objet){
 	
 		$flux['data'] .= recuperer_fond('prive/squelettes/navigation/shop',array('voir'=>$objet));
 	}
