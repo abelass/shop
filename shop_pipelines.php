@@ -35,15 +35,17 @@ function shop_formulaire_charger($flux){
         $config=lire_config('shop',array($config));
     
         $flux['data']['champs_extras']=shop_champs_extras_presents($config,'','par_objets','',$form);
-        include_spip('inc/shop');
+
 
         foreach($flux['data']['champs_extras'] AS $objet=>$champs){
-            $noms=noms_champs_extras_presents($champs);
-            foreach($noms AS $nom=>$label){
-                $flux['data'][$nom]=_request($nom);
+
+            foreach(array_column($champs,'options') AS $data){
+
+                $flux['data'][$data['nom']]=_request($data['nom']);
                 }
             }   
         }   
+        
 
      return $flux;
 }
@@ -60,19 +62,27 @@ function shop_formulaire_verifier($flux){
         //Récupérer les champs extras choisis
         include_spip('inc/config');
         $config=lire_config('shop',array());
-        
+        $champs_extras=shop_champs_extras_presents($config,'','par_objets');
+		
         //Déterminer les champs obligatoire
         $obligatoires=array();
-        foreach($config AS $name=>$value){
-            $obligatoire='';
-            list($objet,$champ,$obligatoire)=explode('-',$name);
-            if(isset($config[$name.'-obligatoire']))$obligatoires[]=$champ;
-            }
+
+        foreach($champs_extras['commande'] AS $value){
+		
+            if(isset($value['options']['obligatoire']) AND $value['options']['obligatoire']=='oui')
+            	$obligatoires[]=$value['options']['nom'];
+
+			}
+
         foreach($obligatoires AS $champ) {
-            if(!_request($champ))$flux['data'][$champ]=_T("info_obligatoire");
-            }  
-        }    
-     return $flux;
+        	$request=_request($champ);
+        	if(is_array($request) AND count($request)==0){$request='';}
+            if(!$request)$flux['data'][$champ]=_T("info_obligatoire");
+            } 
+		
+
+	   }
+		 return $flux;
 }
 
 
