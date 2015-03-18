@@ -4,16 +4,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Retourne la liste des champs extras
 function inc_shop_champs_extras_dist($defaut=array()){
-	//echo serialize($defaut);
     if(count($defaut)==0){
     	include_spip('inc/config');
     	$defaut=lire_config('shop',array());
 	}
 	
-	$test=serialize($defaut['commande_commentaire']);
-	echo $test;
 
-	$accepter_conditions_texte=isset($defaut['accepter_conditions_texte'])?$defaut['accepter_conditions_texte']:'';
+	$accepter_conditions_texte=isset($defaut['commande_accepterconditions_texte'])?$defaut['commande_accepterconditions_texte']:'';
 	if($accepter_conditions_texte){
 		include_spip('formulaires/selecteur/generique_fonctions');
 		foreach(array('rubrique','article') AS $objet){
@@ -46,7 +43,7 @@ function inc_shop_champs_extras_dist($defaut=array()){
                     )
                 ),
                 array(
-                    'saisie' => 'checkbox',// Pour la configuration
+                    'saisie' => 'oui_non',// Pour la configuration
                     'saisie_2' => 'textarea', // Pour le formulaire public                   
                     'formulaires' => array('configuer_shop','editer_client'),
                     'tables'=>array(
@@ -58,27 +55,27 @@ function inc_shop_champs_extras_dist($defaut=array()){
                         ),
                     'options' => array(
                         'li_class'=>'conditionnel',
-                        'datas'=>array('on'=>_T('item_oui')),
-                        'nom' => 'commande-commentaire',// Pour la configuration
+
+                        'nom' => 'commande_commentaire',// Pour la configuration
                         'nom_2' => 'commentaire',// Pour le formulaire public                          
                         'label' => _T('shop:label_commentaire'),
+                        'defaut' => isset($defaut['commande_commentaire'])?$defaut['commande_commentaire']:'',
 
                     )
                 ),
                 array(
-                    'saisie' => 'checkbox',
+                    'saisie' => 'oui_non',
                     'formulaires' => array('configuer_shop'),
                     'options' => array(
                         'li_class'=>'conditionnel last',
-                        'datas'=>array('on'=>_T('item_oui')),
-                        'nom' => 'commande-commentaire-obligatoire',
+                        'nom' => 'commande_commentaire_obligatoire',
                         'label' => _T('saisies:option_obligatoire_label'),
-                        'defaut' => isset($defaut['commande-commentaire-obligatoire'])?$defaut['commande_commentaire_obligatoire']:'',
-                        'afficher_si' => '@commande-commentaire@ == "on"',
+                        'defaut' => isset($defaut['commande_commentaire_obligatoire'])?$defaut['commande_commentaire_obligatoire']:'',
+                        'afficher_si' => '@commande_commentaire@ == "on"',
                     )
                 ), 
  				array(
-                    'saisie' => 'checkbox',// Pour la configuration
+                    'saisie' => 'oui_non',// Pour la configuration
                     'saisie_2' => 'checkbox', // Pour le formulaire public                   
                     'formulaires' => array('configuer_shop','editer_client'),
                     'tables'=>array(
@@ -90,27 +87,26 @@ function inc_shop_champs_extras_dist($defaut=array()){
                         ),
                     'options' => array(
                         'li_class'=>'conditionnel',
-                        'datas'=>array('on'=>_T('item_oui')),
+                        'datas'=>'',
                         'datas_2'=>array('1'=>_T('item_oui')),                       
-                        'nom' => 'commande-accepter_conditions',// Pour la configuration
+                        'nom' => 'commande_accepterconditions',// Pour la configuration
                         'nom_2' => 'accepter_conditions',// Pour le formulaire public                          
                         'label' => _T('shop:label_accepter_conditions'),// Pour la configuration
                         'label_2' => _T('shop:label_accepter_conditions_public',array('url'=>'<a href="'.$url_cg.'">'._T('shop:conditions_generales').'</a>')),// Pour le formulaire public                           
-                        'defaut' => isset($defaut['commande-accepter_conditions'])?$defaut['commande-accepter_conditions']:'',
+                        'defaut' => isset($defaut['commande_accepterconditions'])?$defaut['commande_accepterconditions']:'',
                         'defaut_2' => '',
                                                 
                     )
                 ),
                 array(
-                    'saisie' => 'checkbox',
+                    'saisie' => 'oui_non',
                     'formulaires' => array('configuer_shop'),
                     'options' => array(
                         'li_class'=>'conditionnel last',
-                        'datas'=>array('1'=>_T('item_oui')),
-                        'nom' => 'commande-accepter_conditions-obligatoire',
+                        'nom' => 'commande_accepterconditions_obligatoire',
                         'label' => _T('saisies:option_obligatoire_label'),
-                        'defaut' => isset($defaut['commande-accepter_conditions-obligatoire'])?$defaut['commande-accepter_conditions-obligatoire']:'',
-                        'afficher_si' => '@commande-accepter_conditions@ == "on"',
+                        'defaut' => isset($defaut['commande_accepterconditions_obligatoire'])?$defaut['commande_accepterconditions_obligatoire']:'',
+                        'afficher_si' => '@commande_accepterconditions@ == "on"',
                     )
                 ),
                  array(
@@ -118,10 +114,10 @@ function inc_shop_champs_extras_dist($defaut=array()){
                     'formulaires' => array('configuer_shop'),
                     'options' => array(
                         'li_class'=>'conditionnel last',
-                        'nom' => 'accepter_conditions_texte',
+                        'nom' => 'commande_accepterconditions_texte',
                         'label' => _T('shop:label_accepter_conditions_texte'),
                         'defaut' => $accepter_conditions_texte,
-                        'afficher_si' => '@commande-accepter_conditions@ == "on"',
+                        'afficher_si' => '@commande_accepterconditions@ == "on"',
                     )
                 )               
             )
