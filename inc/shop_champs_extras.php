@@ -22,7 +22,8 @@ function inc_shop_champs_extras_dist($defaut=array()){
 		}
 	
 	}
-	
+	if($url_cg)$url='<a href="'.$url_cg.'">'._T('shop:conditions_generales').'</a>';
+	else $url=_T('shop:conditions_generales');
 	
      $champs_extras=array(
         array(
@@ -89,7 +90,7 @@ function inc_shop_champs_extras_dist($defaut=array()){
                         'nom' => 'commande_accepterconditions',// Pour la configuration
                         'nom_2' => 'accepterconditions',// Pour le formulaire public                          
                         'label' => _T('shop:label_accepter_conditions'),// Pour la configuration
-                        'label_2' => _T('shop:label_accepter_conditions_public',array('url'=>'<a href="'.$url_cg.'">'._T('shop:conditions_generales').'</a>')),// Pour le formulaire public                           
+                        'label_2' => _T('shop:label_accepter_conditions_public',array('url'=>$url)),// Pour le formulaire public                           
                         'defaut' => isset($defaut['commande_accepterconditions'])?$defaut['commande_accepterconditions']:'',
                         'defaut_2' => '',
                                                 
