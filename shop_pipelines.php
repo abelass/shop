@@ -32,8 +32,9 @@ function shop_formulaire_charger($flux){
          and _request('appel') == 'mes_coordonnees'
        ){
         include_spip('inc/config');
+		include_spip('inc/array_column');
+		
         $config=lire_config('shop',array($config));
-    
         $flux['data']['champs_extras']=shop_champs_extras_presents($config,'','par_objets','',$form);
 
 
@@ -266,10 +267,10 @@ function shop_bank_traiter_reglement($flux){
 
 //Afficher le menu shop pour les objets shop
 function shop_affiche_gauche($flux){
+	include_spip('inc/array_column');
+	
 	$objet=$flux['args']['exec'];
-	
-	$objets_shop=objets_shop();
-	
+	$objets_shop=objets_shop();	
 	$actions=array_column($objets_shop, 'action');
 	$afficher_objet=false;
 	//Le cas normal l'exec correspond à l'action de a définition
