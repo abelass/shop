@@ -47,6 +47,7 @@ function shop_formulaire_charger($flux){
             }   
         }   
         
+	echo serialize($flux);
 
      return $flux;
 }

@@ -25,8 +25,11 @@ function inc_shop_champs_extras_dist($defaut=array()){
 	if($url_cg)$url='<a href="'.$url_cg.'">'._T('shop:conditions_generales').'</a>';
 	else $url=_T('shop:conditions_generales');
 	
+	
+	
+	
      $champs_extras=array(
-        array(
+        'commande'=>array(
             'saisie' => 'fieldset',
             'objet' => 'commande', //Objet concerné par les champs suivants
             'options' => array(
@@ -117,7 +120,7 @@ function inc_shop_champs_extras_dist($defaut=array()){
                         'defaut' => $accepter_conditions_texte,
                         'afficher_si' => '@commande_accepterconditions@ == "on"',
                     )
-                )               
+                )            
             )
         ),
         array(
@@ -143,10 +146,11 @@ function inc_shop_champs_extras_dist($defaut=array()){
                                            
           )
        );
-     /*Possibilité de rajouter de plugin ou de modifier leur définition*/
-    $champs_extras =pipeline('shop_champs_extras',$champs_extras);
+	   
 
-    
+	$shop_champs_extras =pipeline('shop_champs_extras',$champs_extras);
+	$champs_extras=array_merge($champs_extras,$shop_champs_extras);
+	
     return $champs_extras;
 }
 
