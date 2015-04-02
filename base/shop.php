@@ -20,6 +20,7 @@ function shop_declarer_tables_principales($tables_principales){
         include_spip('inc/shop');
         
         $tables_principales=array_merge($tables_principales,definitions_sql_champs_extras($champs_extras));
+		
 
         return $tables_principales;
 

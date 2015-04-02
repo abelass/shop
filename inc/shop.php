@@ -85,16 +85,21 @@ function objets_champs_extras(){
 }
 
 //Cherche les définitions des tables
-function definitions_sql_champs_extras($champs_actifs=array()){
-    $champs_extras=charger_fonction('shop_champs_extras','inc');
-    $champs_extras=$champs_extras();
+function definitions_sql_champs_extras($champs_extras=array()){
+	include_spip('inc/array_column');
+	if(!$champs_extras){
+		$champs_extras=charger_fonction('shop_champs_extras','inc');
+    	$champs_extras=$champs_extras();
+	}
     $tables=array();
-    foreach($champs_extras AS $value) {
-        foreach($value['saisies'] AS $f){
-            if(isset($f['tables']))$tables=$f['tables'];
+	$t=array_column($champs_extras,'saisies');
+	
+    foreach($t AS $value) {
+        foreach(array_column($value,'tables') AS $f){
+        	$table=key($f);
+            $tables[$table]['field'][key($f[$table]['field'])]=$f[$table]['field'][key($f[$table]['field'])];
             }
         }
-   
     return $tables;
 }
 

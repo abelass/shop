@@ -29,7 +29,7 @@ function inc_shop_champs_extras_dist($defaut=array()){
 	
 	
      $champs_extras=array(
-        'commande'=>array(
+        array(
             'saisie' => 'fieldset',
             'objet' => 'commande', //Objet concerné par les champs suivants
             'options' => array(
