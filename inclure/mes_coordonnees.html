@@ -1,25 +1,34 @@
-[(#SESSION{id_auteur}|non)
-	[<div id="abonne_login" [class="(#ENV{mail}|=={oui}|oui)mailshow"]>
-		<h1><:shop:deja_client:></h1>
-		(#FORMULAIRE_LOGIN{[(#URL_PAGE{shop}|parametre_url{appel,mes_coordonnees}|parametre_url{id_auteur,#SESSION{id_auteur}})]})
-	</div>]
-]
 
-<BOUCLE_contact(CONTACTS){id_auteur=#SESSION{id_auteur}}{id_auteur>0}{0,1}>
-    [<div id="abonne_coord">    
-        <h2><:shop:verifiez_vos_coordonnees:></h2>
-        (#FORMULAIRE_EDITER_CLIENT{#SESSION{id_auteur},[(#URL_PAGE{shop}|parametre_url{appel,paiement})]})
-    </div>]
-</BOUCLE_contact>
-        [<div id="abonne_coord" [class="(#ENV{mail}|=={oui}|oui)mailhide"]> 
-            <h2><:shop:vos_coordonnees:></h2>
-            <div>(#FORMULAIRE_INSCRIPTION_CLIENT)</div>
-        </div>]
-    [(#SESSION{id_auteur}|oui)
-        [<div id="abonne_coord">    
-            <h2><:shop:verifiez_vos_coordonnees:></h2>
-            (#FORMULAIRE_EDITER_CLIENT{#SESSION{id_auteur},[(#URL_PAGE{shop}|parametre_url{appel,paiement})]})
-        </div>
-        ]
-    ]
-<//B_contact>
+	[(#SESSION{id_auteur}|non)
+		[<div id="abonne_login" [class="(#ENV{mail}|=={oui}|oui)mailshow"]>
+			<h1><:shop:deja_client:></h1>
+			(#FORMULAIRE_LOGIN{[(#URL_PAGE{shop}|parametre_url{appel,mes_coordonnees}|parametre_url{id_auteur,#SESSION{id_auteur}})]})
+		</div>]
+	]
+	
+	<BOUCLE_contact(CONTACTS){id_auteur=#SESSION{id_auteur}}{id_auteur>0}{0,1}>
+	    [<div id="abonne_coord">    
+	        <h2><:shop:verifiez_vos_coordonnees:></h2>
+	        (#FORMULAIRE_EDITER_CLIENT{#SESSION{id_auteur}})
+	    </div>]
+	</BOUCLE_contact>
+	        [<div id="abonne_coord" [class="(#ENV{mail}|=={oui}|oui)mailhide"]> 
+	            <h2><:shop:vos_coordonnees:></h2>
+	            <div>(#FORMULAIRE_INSCRIPTION_CLIENT)</div>
+	        </div>]
+	    [(#SESSION{id_auteur}|oui)
+	        [<div id="abonne_coord">    
+	            <h2><:shop:verifiez_vos_coordonnees:></h2>
+	            (#FORMULAIRE_EDITER_CLIENT{#SESSION{id_auteur}})
+	        </div>
+	        ]
+	    ]
+	<//B_contact>
+	
+	<BOUCLE_commande(COMMANDES){id_commande=#SESSION{id_commande}}{statut=encours}{!par id_commande}>
+		<INCLURE{fond=inclure/mes_adresses,id_auteur,id_commande,edit=oui}>
+	</BOUCLE_commande>
+	<div>
+		[(#BOUTON_ACTION{<:passer_paiement:>,[(#URL_PAGE{shop}|parametre_url{appel,paiement})],continuer})]
+	</div>
+	</B_commande>
