@@ -29,7 +29,7 @@ function inc_shop_champs_extras_dist($defaut=array()){
 	
 	
      $champs_extras=array(
-        array(
+       'commande'=> array(
             'saisie' => 'fieldset',
             'objet' => 'commande', //Objet concerné par les champs suivants
             'options' => array(
@@ -123,7 +123,7 @@ function inc_shop_champs_extras_dist($defaut=array()){
                 )            
             )
         ),
-        array(
+        'authentifiaction'=>array(
             'saisie' => 'fieldset',
             'options' => array(
                 'nom' => 'authentification',
@@ -148,8 +148,8 @@ function inc_shop_champs_extras_dist($defaut=array()){
        );
 	   
 
-	$shop_champs_extras =pipeline('shop_champs_extras',$champs_extras);
-	$champs_extras=array_merge($champs_extras,$shop_champs_extras);
+	$champs_extras =pipeline('shop_champs_extras',$champs_extras);
+	
 	
     return $champs_extras;
 }
