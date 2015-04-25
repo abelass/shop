@@ -1,7 +1,7 @@
-[(#ENV{champs_extras}|serialize)]
-<BOUCLE_extras(DATA){source tableau, #ENV{champs_extras}}>
+
+<BOUCLE_extras(DATA){source tableau, #ENV{data}}>
     [<div class="champ contenu_#CLE[ (#VALEUR*|strlen|?{'',vide})]">
-        <label>[(#VAL{shop:label_#CLE}|_T)]</label>
+        <label>[(#CHAMPS_EXTRAS|table_valeur{#CLE})]</label>
         <span dir='#LANG_DIR' class='#CLE'>
                 (#VALEUR)
         </span>

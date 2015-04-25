@@ -32,7 +32,7 @@ function shop_formulaire_charger($flux){
          and _request('appel') == 'mes_coordonnees'
        ){
         include_spip('inc/config');
-		include_spip('inc/array_column');
+		
 		
 		/*Charger les champs extras*/
         $config=lire_config('shop',array($config));
@@ -214,21 +214,26 @@ function shop_recuperer_fond($flux){
         $id=$flux["data"]['contexte']['id'];
         include_spip('inc/shop');
         include_spip('inc/config'); 
-		 $config=lire_config('shop',array($config));
+		$config=lire_config('shop',array($config));
         
         //On chercher les champs prévus
-        $champs_extras=shop_champs_extras_presents($config,'','','commande',$form);;
+        $champs_extras=shop_champs_extras_presents($config,'','','commande');;
 		
+		//var_dump($champs_extras);
 		
-		var_dump($champs_extras);
-               
+		$champs=array();
+		
+        foreach(array_column($champs_extras[0],'options') AS $data){
+        	$champs[$data['nom']]=$data['label'];
+            }
+
         //Les valeurs de la commande
-        $champs=sql_fetsel($champs_extras,'spip_commandes','id_commande='.$id);
+        $data=sql_fetsel(array_keys($champs),'spip_commandes','id_commande='.$id);
 
         //On détermine les valeurs qui sont des champs extras
        // $champs = array_intersect_key($champs,array_flip($champs_extras));
 
-        $c = recuperer_fond("prive/squelettes/inclure/champs_extras_commande",array('champs_extras' =>$champs));
+        $c = recuperer_fond("prive/squelettes/inclure/champs_extras_commande",array('champs_extras' =>$champs,'data'=>$data));
 
         $flux['data']['texte'] .= $c;
     }
@@ -281,9 +286,7 @@ function shop_bank_traiter_reglement($flux){
 }
 
 //Afficher le menu shop pour les objets shop
-function shop_affiche_gauche($flux){
-	include_spip('inc/array_column');
-	
+function shop_affiche_gauche($flux){	
 	$objet=$flux['args']['exec'];
 	$objets_shop=objets_shop();	
 	$actions=array_column($objets_shop, 'action');
