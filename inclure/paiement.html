@@ -5,9 +5,7 @@
       <h2><:shop:votre_commande_du:> [(#DATE|affdate_jourcourt)] ([(#VAL{commandes:statut_#STATUT}|_T)])</h2>
       <INCLURE{fond=inclure/commande,id_commande,statut}>
       
-      #SET{id_commande,#ID_COMMANDE}
-      #SET{id_autuer,#ID_AUTEUR}      
-
+      #SET{id_commande,#ID_COMMANDE}   
       #SET{details, #ARRAY}
       #SET{prix, #ARRAY} 
       #SET{prix_ht, #ARRAY}           
@@ -33,7 +31,7 @@
       	[(#FORMULAIRE_PAYER_ACTE{#GET{prix_total},#ARRAY{
 		      montant_ht,#GET{prix_ht},
 		      id_commande,#ID_COMMANDE,
- 			  id_auteur,#ID_AUTEUR,
+ 			  id_auteur,#SESSION{id_auteur},
  			  id_panier,#SESSION{id_panier}
 	      }})] ]
       	[(#PLUGIN{bank}|non)
