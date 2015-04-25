@@ -195,6 +195,7 @@ function shop_formulaire_traiter($flux){
 
 function shop_recuperer_fond($flux){
     $fond=$flux['args']['fond'];
+	
     if ($fond== 'formulaires/editer_client'){
             if(isset($flux['args']['contexte']['champs_extras']['commande'])){
             	//reconvertir les labels en unicode	
@@ -213,15 +214,19 @@ function shop_recuperer_fond($flux){
         $id=$flux["data"]['contexte']['id'];
         include_spip('inc/shop');
         include_spip('inc/config'); 
+		 $config=lire_config('shop',array($config));
         
         //On chercher les champs prévus
-        $champs_extras=champs_reduits();
+        $champs_extras=shop_champs_extras_presents($config,'','','commande',$form);;
+		
+		
+		var_dump($champs_extras);
                
         //Les valeurs de la commande
-        $champs=sql_fetsel('*','spip_commandes','id_commande='.$id);
+        $champs=sql_fetsel($champs_extras,'spip_commandes','id_commande='.$id);
 
         //On détermine les valeurs qui sont des champs extras
-        $champs = array_intersect_key($champs,array_flip($champs_extras));
+       // $champs = array_intersect_key($champs,array_flip($champs_extras));
 
         $c = recuperer_fond("prive/squelettes/inclure/champs_extras_commande",array('champs_extras' =>$champs));
 
@@ -242,6 +247,8 @@ function shop_recuperer_fond($flux){
 
         //On détermine les valeurs qui sont des champs extras
         $champs = array_intersect_key($champs,array_flip($champs_extras));
+		
+		spip_log($champs ,'teste');
 
         $c .= recuperer_fond("prive/squelettes/inclure/champs_extras_commande",array('champs_extras' =>$champs));
 

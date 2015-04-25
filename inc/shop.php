@@ -128,7 +128,7 @@ function champs_reduits(){
     //Déterminer les champs à afficher
     $champs_extras=array();
     foreach($c[0] AS $name){
-       list($objet,$champ)=explode('-',$name);
+       list($objet,$champ)=explode('_',$name);
             if($champ)$champs_extras[]=$champ;
         } 
     return $champs_extras;
