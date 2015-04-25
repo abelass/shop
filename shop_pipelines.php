@@ -219,8 +219,6 @@ function shop_recuperer_fond($flux){
         //On chercher les champs prévus
         $champs_extras=shop_champs_extras_presents($config,'','','commande');;
 		
-		//var_dump($champs_extras);
-		
 		$champs=array();
 		
         foreach(array_column($champs_extras[0],'options') AS $data){
@@ -229,9 +227,6 @@ function shop_recuperer_fond($flux){
 
         //Les valeurs de la commande
         $data=sql_fetsel(array_keys($champs),'spip_commandes','id_commande='.$id);
-
-        //On détermine les valeurs qui sont des champs extras
-       // $champs = array_intersect_key($champs,array_flip($champs_extras));
 
         $c = recuperer_fond("prive/squelettes/inclure/champs_extras_commande",array('champs_extras' =>$champs,'data'=>$data));
 
@@ -243,19 +238,22 @@ function shop_recuperer_fond($flux){
         $id=$flux["data"]['contexte']['id'];
         include_spip('inc/shop');
         include_spip('inc/config'); 
+		
+		$config=lire_config('shop',array($config));
         
         //On chercher les champs prévus
-        $champs_extras=champs_reduits();
-               
-        //Les valeurs de la commande
-        $champs=sql_fetsel('*','spip_commandes','id_commande='.$id);
-
-        //On détermine les valeurs qui sont des champs extras
-        $champs = array_intersect_key($champs,array_flip($champs_extras));
+        $champs_extras=shop_champs_extras_presents($config,'','','commande');;
 		
-		spip_log($champs ,'teste');
+		$champs=array();
+		
+        foreach(array_column($champs_extras[0],'options') AS $data){
+        	$champs[$data['nom']]=$data['label'];
+            }
 
-        $c .= recuperer_fond("prive/squelettes/inclure/champs_extras_commande",array('champs_extras' =>$champs));
+        //Les valeurs de la commande
+        $data=sql_fetsel(array_keys($champs),'spip_commandes','id_commande='.$id);
+
+        $c = recuperer_fond("prive/squelettes/inclure/champs_extras_commande",array('champs_extras' =>$champs,'data'=>$data));
 
         $flux['data']['texte'] = str_replace("<!--extra_commande-->",  $c.'<!--extra_commande-->',$flux['data']['texte']);
     }    
