@@ -34,18 +34,19 @@ function shop_formulaire_charger($flux){
         include_spip('inc/config');
 		include_spip('inc/array_column');
 		
+		/*Charger les champs extras*/
         $config=lire_config('shop',array($config));
         $flux['data']['champs_extras']=shop_champs_extras_presents($config,'','par_objets','',$form);
 
 
         foreach($flux['data']['champs_extras'] AS $objet=>$champs){
-
             foreach(array_column($champs,'options') AS $data){
-
                 $flux['data'][$data['nom']]=_request($data['nom']);
                 }
             }   
-        }   
+        }  
+	   
+
 
      return $flux;
 }
@@ -59,6 +60,11 @@ function shop_formulaire_verifier($flux){
          and _request('page') == 'shop'
          and _request('appel') == 'mes_coordonnees'
        ){
+       	
+		/*
+		 * Tester si les champs extras sont obligatoire
+		 */
+		 
         //Récupérer les champs extras choisis
         include_spip('inc/config');
         $config=lire_config('shop',array());
@@ -79,8 +85,6 @@ function shop_formulaire_verifier($flux){
         	if(is_array($request) AND count($request)==0){$request='';}
             if(!$request)$flux['data'][$champ]=_T("info_obligatoire");
             } 
-		
-
 	   }
 		 return $flux;
 }
@@ -107,9 +111,10 @@ function shop_formulaire_traiter($flux){
        ){
       //si autentification automatique activé on authentifie
       include_spip('inc/config');
-      $config=lire_config('shop/authentification_automatique',array());
+      //$config=lire_config('shop/authentification_automatique',array());
+	  $authentification_automatique=lire_config('shop/authentification_automatique',array());
 
-      if($config[0]=='on'){
+      if($authentification_automatique[0]=='on' AND !session_get('id_auteur')){
           if($auteur=sql_fetsel('*','spip_auteurs','email='.sql_quote(_request('mail_inscription')))){
                 include_spip('inc/auth');
                 auth_loger($auteur);
@@ -126,32 +131,36 @@ function shop_formulaire_traiter($flux){
        ){
         // On recupere d'abord toutes les informations dont on va avoir besoin
         // Deje le visiteur connecte
-        $id_auteur = session_get('id_auteur');
-    
-        // On cree la commande ici
         include_spip('inc/commandes');
+		include_spip('inc/config');
+		include_spip('inc/shop');
+		 
+        $id_auteur = session_get('id_auteur');
+		$config=lire_config('shop',array($config));
+    
+        /* On cree la commande ici*/
         $id_commande = creer_commande_encours();
         
-        //On rajoute les champs extras de la commande
+        /*
+		 * On rajoute les champs extras de la commande
+		 */
         
         //Récupérer les champs extras choisis
-        include_spip('inc/config');
-        $config=lire_config('shop',array($config));
-        
-        //Déterminer les champs choisis
-        include_spip('inc/shop');
-        $objets_possibles=objets_champs_extras();
+		$champs_extras=shop_champs_extras_presents($config,'','par_objets');
         
         //preparer les valeurs pour chaque objet
-        $champs=array();
+        $c=array();
         $ids=array('commande'=>$id_commande);
-        foreach($config AS $name=>$value){
-            list($objet,$champ,$obligatoire)=explode('-',$name);
-            if(in_array($objet,$objets_possibles))$champs[$objet][$champ]=_request($champ);
-            }
-        
+		
+		 
+        foreach($champs_extras AS $objet=>$champs){ 
+            foreach(array_column($champs,'options') AS $data){
+				$c[$objet][$data['nom']]=_request($data['nom']);
+                }
+            }  
+		
         //Actualiser les tables
-        foreach($champs AS $objet=>$valeurs) {
+        foreach($c AS $objet=>$valeurs) {
             sql_updateq('spip_'.$objet.'s',$valeurs,'id_'.$objet.'='.$ids[$objet]);
             }  
         
