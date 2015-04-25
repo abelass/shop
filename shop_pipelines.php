@@ -254,13 +254,11 @@ function shop_recuperer_fond($flux){
         //Les valeurs de la commande
         $data=sql_fetsel(array_keys($champs),'spip_commandes','id_commande='.$id);
 		
-		//spip_log($data,'teste');
 
         $c = recuperer_fond("prive/squelettes/inclure/champs_extras_commande",array('champs_extras' =>$champs,'data'=>$data));
 		
-		//spip_log("text: $c",'teste');
 
-        $flux['data']['texte'] .= $c;
+        $flux['data']['texte'] = str_replace("<hr />",  $c.'<hr />',$flux['data']['texte']);
 		
 		spip_log($flux['data']['texte'],'teste');
     }    
