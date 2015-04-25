@@ -241,7 +241,7 @@ function shop_recuperer_fond($flux){
 		
 		$config=lire_config('shop',array($config));
         
-        //On chercher les champs prévus
+        //On cherche les champs prévus
         $champs_extras=shop_champs_extras_presents($config,'','','commande');;
 		
 		$champs=array();
@@ -250,12 +250,19 @@ function shop_recuperer_fond($flux){
         	$champs[$data['nom']]=$data['label'];
             }
 
+		spip_log($champs,'teste');
         //Les valeurs de la commande
         $data=sql_fetsel(array_keys($champs),'spip_commandes','id_commande='.$id);
+		
+		//spip_log($data,'teste');
 
         $c = recuperer_fond("prive/squelettes/inclure/champs_extras_commande",array('champs_extras' =>$champs,'data'=>$data));
+		
+		//spip_log("text: $c",'teste');
 
-        $flux['data']['texte'] = str_replace("<!--extra_commande-->",  $c.'<!--extra_commande-->',$flux['data']['texte']);
+        $flux['data']['texte'] .= $c;
+		
+		spip_log($flux['data']['texte'],'teste');
     }    
         
     return $flux;
