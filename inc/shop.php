@@ -86,7 +86,6 @@ function objets_champs_extras(){
 
 //Cherche les définitions des tables
 function definitions_sql_champs_extras($champs_extras=array()){
-	include_spip('inc/array_column');
 	if(!$champs_extras){
 		$champs_extras=charger_fonction('shop_champs_extras','inc');
     	$champs_extras=$champs_extras();
