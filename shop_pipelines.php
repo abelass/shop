@@ -76,8 +76,6 @@ function shop_formulaire_charger($flux) {
                 }
             }   
         }  
-	   
-
 
      return $flux;
 }
@@ -163,7 +161,7 @@ function shop_formulaire_traiter($flux) {
       //$config=lire_config('shop/authentification_automatique',array());
 	  $authentification_automatique=lire_config('shop/authentification_automatique',array());
 
-      if($authentification_automatique[0]=='on' AND !session_get('id_auteur')){
+      if($authentification_automatique[0]=='on'){
           if($auteur=sql_fetsel('*','spip_auteurs','email='.sql_quote(_request('mail_inscription')))){
                 include_spip('inc/auth');
                 auth_loger($auteur);
@@ -185,7 +183,7 @@ function shop_formulaire_traiter($flux) {
 		include_spip('inc/shop');
 		 
         $id_auteur = session_get('id_auteur');
-		$config=lire_config('shop',array($config));
+		$config=lire_config('shop',array());
     
         /* On cree la commande ici*/
         $id_commande = creer_commande_encours();
@@ -238,6 +236,7 @@ function shop_formulaire_traiter($flux) {
                                 'objet' => 'commande',
                                 'id_objet' => $id_commande,
                                 'type' => 'livraison' ) );
+	    $flux['data']['editable'] = FALSE;
     }
     return($flux);
 }
@@ -328,6 +327,7 @@ function shop_recuperer_fond($flux) {
 			in_array($mode,array('cheque','virement')) and 
 			$qui == 'client' and 
 			isset($config_bank['config_' . $data['mode']])) {
+				
 			$contexte = $config_bank['config_' . $mode];
 			$contexte['mode'] = $mode;
 			$contexte['$format_envoi'] = $format_envoi;
@@ -346,8 +346,6 @@ function shop_recuperer_fond($flux) {
         	array($p . '<hr />',$c . '<hr />'),
         	$flux['data']['texte']);
 		
-        
-		spip_log($flux['data']['texte'],'teste');
     }    
         
     return $flux;
