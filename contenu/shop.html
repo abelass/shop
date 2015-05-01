@@ -43,7 +43,12 @@
 	
 	[(#REM) 3 - mes_coordonnees ]
 	[(#ENV{appel}|=={"mes_coordonnees"}|oui)
-		<INCLURE{fond=inclure/mes_coordonnees}{env}>
+		[(#SESSION{id_panier}|?{
+			#INCLURE{fond=inclure/mes_coordonnees}{env},
+			<:paniers:panier_vide:>
+		})]
+		
+		
       #SET{stop,oui}
 	]
    [(#ENV{appel}|=={""}|non|et{#ENV{appel}|=={"mon_panier"}|non}|et{#ENV{appel}|=={"mes_coordonnees"}|non}|et{#SESSION{id_auteur}|non})
