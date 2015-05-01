@@ -347,6 +347,7 @@ function shop_recuperer_fond($flux) {
         	$flux['data']['texte']);
 		
     }    
+	spip_log( $flux['data']['texte'],'teste');
         
     return $flux;
 }

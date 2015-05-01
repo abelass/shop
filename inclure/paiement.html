@@ -32,7 +32,8 @@
 		      montant_ht,#GET{prix_ht},
 		      id_commande,#ID_COMMANDE,
  			  id_auteur,#SESSION{id_auteur},
- 			  id_panier,#SESSION{id_panier}
+ 			  id_panier,#SESSION{id_panier},
+ 			  tracking_id,#REFERENCE
 	      }})] ]
       	[(#PLUGIN{bank}|non)
       	[(#FORMULAIRE_PAIEMENTS{#ARRAY{
