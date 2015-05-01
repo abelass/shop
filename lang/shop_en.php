@@ -34,12 +34,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // d
 'date_enregistrement' => "Record date",
-
 'date_vente' => "Sale date",
 'de_la_part_de' => "From",
 'detail_commande' => "Order details",
 'devises_choisis' => "Selected currency",
 'devise_default' => " Default Currency",
+'donnees_prestataire'=>'You have chosen to pay by @prestataire@',
 
 // e
 'email' => "Email",

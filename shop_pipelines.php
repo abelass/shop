@@ -1,19 +1,50 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-
-function shop_insert_head($flux){
+/**
+ * Ajout du contenu dans le header de l'espacé public.
+ * 
+ * @pipeline insert_head
+ * 
+ * @param array $flux
+ * Données du pipeline
+ * 
+ * @return array 
+ * Données du pipeline
+ */
+function shop_insert_head($flux) {
        $flux .= '<link rel="stylesheet" href="'.find_in_path('css/styles_shop_public.css').'" type="text/css" media="all" />';
  	return $flux;	
 }
 
-function shop_header_prive($flux){
+/**
+ * Ajout du contenu dans le header de l'espace privé.
+ * 
+ * @pipeline header_prive
+ * 
+ * @param array $flux
+ * Données du pipeline
+ * 
+ * @return array 
+ * Données du pipeline
+ */
+function shop_header_prive($flux) {
            $flux .= '<link rel="stylesheet" href="'.find_in_path('css/styles_shop_admin.css').'" type="text/css" media="all" />';
     return $flux;
 }
 
-
-function shop_formulaire_charger($flux){
+/**
+ * Intervient dans le chargement du formulaire.
+ * 
+ * @pipeline formulaire_charger
+ * 
+ * @param array $flux
+ * Données du pipeline
+ * 
+ * @return array 
+ * Données du pipeline
+ */
+function shop_formulaire_charger($flux) {
  $form=$flux['args']['form'];
  
  // cré un contact si pas encore existant
@@ -51,8 +82,18 @@ function shop_formulaire_charger($flux){
      return $flux;
 }
 
-
-function shop_formulaire_verifier($flux){
+/**
+ * Intervient dans le procéssus de vérification du formulaire.
+ * 
+ * @pipeline formulaire_verifier
+ * 
+ * @param array $flux
+ * Données du pipeline
+ * 
+ * @return array 
+ * Données du pipeline
+ */
+function shop_formulaire_verifier($flux) {
  $form=$flux['args']['form'];
  
 
@@ -90,17 +131,25 @@ function shop_formulaire_verifier($flux){
 }
 
 
-/*
- * Salement pique dans z-commerce
- * S'inscruster apres le traitement classique du formulaire d'edition des coordonnees (etape 3) pour
- * - creer la commande e partir du panier en cours (s'il n'est pas vide)
- * - y associer les adresses de facturation et de livraison (copies de l'adresse principale du client)
- * - rediriger vers la page d'affichage de la commande et de paiement
- *
- * @return $flux 
+/**
+ * Intervient après le traitement du formulaire.
+ * 
+ * @pipeline formulaire_traiter
+ * 
+ * @param array $flux
+ * Données du pipeline
+ * 
+ * @return array 
+ * Données du pipeline
  */
-function shop_formulaire_traiter($flux){
-    // Si on est sur le formulaire client qui est sur la page identification
+function shop_formulaire_traiter($flux) {
+	
+	/* Récupéré chez z-commerce
+	 * S'inscruster apres le traitement classique du formulaire d'edition des coordonnees (etape 3) pour
+	 * - creer la commande e partir du panier en cours (s'il n'est pas vide)
+	 * - y associer les adresses de facturation et de livraison (copies de l'adresse principale du client)
+	 * - rediriger vers la page d'affichage de la commande et de paiement
+	 */
     $form=$flux['args']['form'];
     
     if($form == 'inscription_client'
@@ -193,7 +242,18 @@ function shop_formulaire_traiter($flux){
     return($flux);
 }
 
-function shop_recuperer_fond($flux){
+/**
+ * Modifie l'affichage des squelettes.
+ * 
+ * @pipeline recuperer_fond
+ * 
+ * @param array $flux
+ * Données du pipeline
+ * 
+ * @return array 
+ * Données du pipeline
+ *  */
+function shop_recuperer_fond($flux) {
     $fond=$flux['args']['fond'];
 	
     if ($fond== 'formulaires/editer_client'){
@@ -211,10 +271,10 @@ function shop_recuperer_fond($flux){
     
     if ($fond== 'prive/objets/contenu/commande'){
 
-        $id=$flux["data"]['contexte']['id'];
+        $id = $flux["data"]['contexte']['id'];
         include_spip('inc/shop');
         include_spip('inc/config'); 
-		$config=lire_config('shop',array($config));
+		$config = lire_config('shop',array());
         
         //On chercher les champs prévus
         $champs_extras=shop_champs_extras_presents($config,'','','commande');;
@@ -233,41 +293,79 @@ function shop_recuperer_fond($flux){
         $flux['data']['texte'] .= $c;
     }
     
-    if ($fond== 'notifications/contenu_commande_mail'){
-
-        $id=$flux["data"]['contexte']['id'];
-        include_spip('inc/shop');
+	//Modifie l'affichage des notifications de la commande
+    if ($fond == 'notifications/contenu_commande_mail'){
+    	include_spip('inc/shop');
         include_spip('inc/config'); 
+
+        $id_commande = $flux["data"]['contexte']['id'];
+		$qui = $flux["data"]['contexte']['qui'];
+		$format_envoi = $flux["data"]['contexte']['format_envoi'];
 		
-		$config=lire_config('shop',array($config));
-        
+		$config_shop = lire_config('shop',array());
+ 		$config_bank = lire_config('bank_paiement',array()); 
+		      
         //On cherche les champs prévus
-        $champs_extras=shop_champs_extras_presents($config,'','','commande');;
+        $champs_extras=shop_champs_extras_presents($config_shop,'','','commande');;
 		
-		$champs=array();
+		$champs = array();
+		$fields = array('statut','mode');
+
 		
         foreach(array_column($champs_extras[0],'options') AS $data){
-        	$champs[$data['nom']]=$data['label'];
+        	$champs[$data['nom']] = $data['label'];
+			$fields[] = $data['nom'];
             }
 
-		spip_log($champs,'teste');
+
         //Les valeurs de la commande
-        $data=sql_fetsel(array_keys($champs),'spip_commandes','id_commande='.$id);
+        $data = sql_fetsel($fields, 'spip_commandes','id_commande=' . $id_commande);
+		$mode = $data['mode'];
+
+		
+		if(
+			$data['statut'] == 'attente' and 
+			in_array($mode,array('cheque','virement')) and 
+			$qui == 'client' and 
+			isset($config_bank['config_' . $data['mode']])) {
+			$contexte = $config_bank['config_' . $mode];
+			$contexte['mode'] = $mode;
+			$contexte['$format_envoi'] = $format_envoi;
+						
+			$p = recuperer_fond("inclure/donnees_prestataire",$contexte);
+
+		}
+		else $p = '';
 		
 
-        $c = recuperer_fond("prive/squelettes/inclure/champs_extras_commande",array('champs_extras' =>$champs,'data'=>$data));
-		
+        $c = recuperer_fond("inclure/champs_extras_commande",array('champs_extras' => $champs,'data' => $data, 'format_envoi' => $format_envoi));
 
-        $flux['data']['texte'] = str_replace("<hr />",  $c.'<hr />',$flux['data']['texte']);
+
+        $flux['data']['texte'] = str_replace(
+        	array('<hr />','<hr />'),  
+        	array($p . '<hr />',$c . '<hr />'),
+        	$flux['data']['texte']);
 		
+        
 		spip_log($flux['data']['texte'],'teste');
     }    
         
     return $flux;
 }
 
-// Eliminer le panier après le retour paypal
-function shop_traitement_paypal($flux){
+
+/**
+ * Eliminer le panier après le retour paypal.
+ * 
+ * @pipeline traitement_paypal
+ * 
+ * @param array $flux
+ * Données du pipeline
+ * 
+ * @return array 
+ * Données du pipeline
+ *  */
+function shop_traitement_paypal($flux) {
    
     $reference = $flux['args']['paypal']['invoice'];
     $commande = sql_fetsel('id_commande, statut, id_auteur', 'spip_commandes', 'reference = '.sql_quote($reference));
@@ -279,8 +377,19 @@ function shop_traitement_paypal($flux){
     return $flux;
 }
 
-//Eliminer le panier après le traitment bank
-function shop_bank_traiter_reglement($flux){
+
+/**
+ * Eliminer le panier après le traitment bank
+ * 
+ * @pipeline bank_traiter_reglement
+ * 
+ * @param array $flux
+ * Données du pipeline
+ * 
+ * @return array 
+ * Données du pipeline
+ *  */
+function shop_bank_traiter_reglement($flux) {
 	$id_panier=sql_getfetsel('id_panier','spip_transactions','id_transaction='.$flux['args']['id_transaction']);
 	
 	$action = charger_fonction('supprimer_panier', 'action/');
@@ -288,8 +397,20 @@ function shop_bank_traiter_reglement($flux){
 	return $flux;
 }
 
-//Afficher le menu shop pour les objets shop
-function shop_affiche_gauche($flux){	
+
+
+/**
+ * Afficher le menu shop pour les objets shop.
+ * 
+ * @pipeline affiche_gauche
+ * 
+ * @param array $flux
+ * Données du pipeline
+ * 
+ * @return array 
+ * Données du pipeline
+ *  */
+function shop_affiche_gauche($flux) {	
 	$objet=$flux['args']['exec'];
 	$objets_shop=objets_shop();	
 	$actions=array_column($objets_shop, 'action');
@@ -307,6 +428,27 @@ function shop_affiche_gauche($flux){
 	}
 	
 	if ($afficher_objet) $flux['data'] .= recuperer_fond('prive/squelettes/navigation/shop',array('voir'=>$afficher_objet));
+	
+	return $flux;
+}
+
+/**
+ * Intervient sur l'action action/action_bank_enregistrer_modereglement_dist du Plugin bank pour changer le statut de la commande en attente lors d'un paiement n'impliquant pas un formulaire vers un service externe comme paioement par virement ou cheque.
+ * @pipeline trig_bank_reglement_en_attente
+ * 
+ * @param array $flux
+ * Données du pipeline
+ * 
+ * @return array 
+ * Données du pipeline
+ *  */
+
+function shop_trig_bank_reglement_en_attente($flux) {
+	
+	$id_commande = session_get('id_commande');
+	$mode = $flux['args']['mode'];
+	
+	commande_modifier($id_commande, array('statut'=>'attente', 'mode'=>$mode));
 	
 	return $flux;
 }

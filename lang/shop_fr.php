@@ -29,6 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 //D
 'deja_client'=>'Si vous avez déjà un compte client, identifiez-vous',
 'detail_commande' => "Détails de la commande",
+'donnees_prestataire'=>'Vous avez choissis de payer par @prestataire@',
 
 
 //E

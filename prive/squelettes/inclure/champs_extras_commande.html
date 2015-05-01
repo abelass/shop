@@ -1,8 +1,8 @@
-<BOUCLE_extras(DATA){source tableau, #ENV{data}}>
-    [<div class="champ contenu_#CLE[ (#VALEUR*|strlen|?{'',vide})]">
-        <label>[(#CHAMPS_EXTRAS|table_valeur{#CLE})]</label>
+<BOUCLE_extras(DATA){source tableau, #ENV{champs_extras}}>
+    [<div class="champ contenu_#CLE[ (#DATA|table_valeur{#CLE}|strlen|?{'',vide})]">
+        <label>#VALEUR</label>
         <span dir='#LANG_DIR' class='#CLE'>
-                (#VALEUR)
+                (#DATA|table_valeur{#CLE})
         </span>
     </div>]
 </BOUCLE_extras>
