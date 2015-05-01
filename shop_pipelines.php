@@ -331,6 +331,7 @@ function shop_recuperer_fond($flux) {
 			$contexte = $config_bank['config_' . $mode];
 			$contexte['mode'] = $mode;
 			$contexte['$format_envoi'] = $format_envoi;
+			$contexte['id_commande']=$id_commande;
 						
 			$p = recuperer_fond("inclure/donnees_prestataire",$contexte);
 
@@ -347,7 +348,6 @@ function shop_recuperer_fond($flux) {
         	$flux['data']['texte']);
 		
     }    
-	spip_log( $flux['data']['texte'],'teste');
         
     return $flux;
 }
@@ -427,27 +427,6 @@ function shop_affiche_gauche($flux) {
 	}
 	
 	if ($afficher_objet) $flux['data'] .= recuperer_fond('prive/squelettes/navigation/shop',array('voir'=>$afficher_objet));
-	
-	return $flux;
-}
-
-/**
- * Intervient sur l'action action/action_bank_enregistrer_modereglement_dist du Plugin bank pour changer le statut de la commande en attente lors d'un paiement n'impliquant pas un formulaire vers un service externe comme paioement par virement ou cheque.
- * @pipeline trig_bank_reglement_en_attente
- * 
- * @param array $flux
- * Données du pipeline
- * 
- * @return array 
- * Données du pipeline
- *  */
-
-function shop_trig_bank_reglement_en_attente($flux) {
-	
-	$id_commande = session_get('id_commande');
-	$mode = $flux['args']['mode'];
-	
-	commande_modifier($id_commande, array('statut'=>'attente', 'mode'=>$mode));
 	
 	return $flux;
 }

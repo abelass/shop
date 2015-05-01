@@ -1,12 +1,14 @@
+<BOUCLE_transaction(TRANSACTIONS){id_commande}{tout}>
 <p>
     [(#VAL{bank:info_virement_etablir}|
     _T{#ARRAY{
     ordre, #ORDRE,
-    montant, #MONTANT,
-    transaction, #TRANSACTION,
+    montant, #MONTANT|affiche_monnaie|wrap{'<b>'},
+    transaction, #ID_TRANSACTION,
     iban, #IBAN,
     bic, #BIC,
     banque, #BANQUE,
     adressebanque, #ADRESSE_BANQUE}
     }|propre)]
 </p>
+</BOUCLE_transaction>
