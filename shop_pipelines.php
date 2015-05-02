@@ -63,6 +63,7 @@ function shop_formulaire_charger($flux) {
          and _request('appel') == 'mes_coordonnees'
        ){
         include_spip('inc/config');
+		include_spip('inc/array_column');
 		
 		
 		/*Charger les champs extras*/
@@ -181,6 +182,7 @@ function shop_formulaire_traiter($flux) {
         include_spip('inc/commandes');
 		include_spip('inc/config');
 		include_spip('inc/shop');
+		include_spip('inc/array_column');
 		 
         $id_auteur = session_get('id_auteur');
 		$config=lire_config('shop',array());
@@ -296,6 +298,7 @@ function shop_recuperer_fond($flux) {
     if ($fond == 'notifications/contenu_commande_mail'){
     	include_spip('inc/shop');
         include_spip('inc/config'); 
+		include_spip('inc/array_column');
 
         $id_commande = $flux["data"]['contexte']['id'];
 		$qui = $flux["data"]['contexte']['qui'];
@@ -409,7 +412,8 @@ function shop_bank_traiter_reglement($flux) {
  * @return array 
  * Données du pipeline
  *  */
-function shop_affiche_gauche($flux) {	
+function shop_affiche_gauche($flux) {
+	include_spip('inc/array_column');	
 	$objet=$flux['args']['exec'];
 	$objets_shop=objets_shop();	
 	$actions=array_column($objets_shop, 'action');

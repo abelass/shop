@@ -90,6 +90,7 @@ function definitions_sql_champs_extras($champs_extras=array()){
 		$champs_extras=charger_fonction('shop_champs_extras','inc');
     	$champs_extras=$champs_extras();
 	}
+	include_spip('inc/array_column');
     $tables=array();
 	$t=array_column($champs_extras,'saisies');
 	
