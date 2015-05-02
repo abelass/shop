@@ -148,8 +148,7 @@ function inc_shop_champs_extras_dist($defaut=array()){
        );
 	   
 
-	$champs_extras =pipeline('shop_champs_extras',$champs_extras);
-	
+	$champs_extras =pipeline('shop_champs_extras',array('args' => $defaut,'data' => $champs_extras));
 	
     return $champs_extras;
 }

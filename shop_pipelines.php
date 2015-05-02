@@ -413,6 +413,7 @@ function shop_bank_traiter_reglement($flux) {
  * Données du pipeline
  *  */
 function shop_affiche_gauche($flux) {
+
 	include_spip('inc/array_column');	
 	$objet=$flux['args']['exec'];
 	$objets_shop=objets_shop();	
