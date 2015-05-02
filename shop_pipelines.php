@@ -347,7 +347,7 @@ function shop_recuperer_fond($flux) {
 
         $flux['data']['texte'] = str_replace(
         	array('<hr />','<hr />'),  
-        	array($p . '<hr />',$c . '<hr />'),
+        	array($c . '<hr />',$p . '<hr />'),
         	$flux['data']['texte']);
 		
     }    
