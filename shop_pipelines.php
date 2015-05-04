@@ -415,23 +415,24 @@ function shop_bank_traiter_reglement($flux) {
 function shop_affiche_gauche($flux) {
 
 	include_spip('inc/array_column');	
-	$objet=$flux['args']['exec'];
-	$objets_shop=objets_shop();	
-	$actions=array_column($objets_shop, 'action');
-	$afficher_objet=false;
+	$objet = $flux['args']['exec'];
+	$objets_shop = objets_shop();	
+	$actions = array_column($objets_shop, 'action');
+	$afficher_objet = FALSE;
+  
 	//Le cas normal l'exec correspond à l'action de a définition
-	if(in_array($objet,$actions)) $afficher_objet=$objet;
+	if(in_array($objet, $actions) and $objet != 'configurer_shop') $afficher_objet = $objet;
 	// cas ou une page action contient plusieurs onglets
 	else{
-		foreach(array_column($objets_shop, 'navigation','action') AS $action=>$navigation){
-			if(in_array($objet,$navigation)){
-				$afficher_objet=$action;
+		foreach(array_column($objets_shop, 'navigation', 'action') AS $action=>$navigation) {
+			if(in_array($objet, $navigation)) {
+				$afficher_objet = $action;
 				break;
 			}
 		}
 	}
 	
-	if ($afficher_objet) $flux['data'] .= recuperer_fond('prive/squelettes/navigation/shop',array('voir'=>$afficher_objet));
+	if ($afficher_objet) $flux['data'] .= recuperer_fond('prive/squelettes/navigation/shop', array('voir' => $afficher_objet));
 	
 	return $flux;
 }

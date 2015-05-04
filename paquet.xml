@@ -1,7 +1,7 @@
 <paquet
 	prefix="shop"
 	categorie="edition"
-	version="1.10.3"
+	version="1.10.4"
 	etat="test"
 	compatibilite="[3.0.10;3.1.*]"
 	logo="prive/themes/spip/images/logo_shop_32.png"
