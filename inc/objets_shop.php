@@ -27,7 +27,7 @@ function inc_objets_shop_dist(){
          'coordonnees'=>array(
             'action'=>'coordonnees',
             'nom_action'=>_T('coordonnees:titre_coordonnees'),
-            'navigation'=>array('coordonnees','adresse'),
+            'navigation'=>array('coordonnees','adresse','email','numero'),
             'icone'=>'addressbook-16.png',
             'configurer'=>array(
                 'titre'=>_T('coordonnees:titre_coordonnees'),
