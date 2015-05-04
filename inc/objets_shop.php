@@ -18,6 +18,7 @@ function inc_objets_shop_dist(){
          'commandes'=>array(
             'action'=>'commandes',
             'nom_action'=>_T('commandes:commandes_titre'),
+            'navigation'=>array('commandes','commande'),
             'icone'=>'commande-16.png',
             'configurer'=>array(
                 'titre'=>_T('commandes:commandes_titre'),
@@ -26,6 +27,7 @@ function inc_objets_shop_dist(){
          'coordonnees'=>array(
             'action'=>'coordonnees',
             'nom_action'=>_T('coordonnees:titre_coordonnees'),
+            'navigation'=>array('coordonnees','adresse'),
             'icone'=>'addressbook-16.png',
             'configurer'=>array(
                 'titre'=>_T('coordonnees:titre_coordonnees'),
