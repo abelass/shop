@@ -1,5 +1,4 @@
 <?php
-
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /*Les exceptions*/
@@ -9,12 +8,11 @@ function inc_exceptions_dist($filtrer=''){
         'titre'=>array(
             'auteur'=>'nom',
             'site'=>'nom_site',
-            'syndic'=>'nom_site',            
+            'syndic'=>'nom_site',
             ),
         );
     $retour=$exceptions;   
     if($filtrer)$retour=$exceptions[$filtrer];
     return $retour;
 }
-
 ?>
