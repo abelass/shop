@@ -17,9 +17,9 @@
     </thead>})]
         <BOUCLE_objets_precieux(PRIX_OBJETS){fusion id_objet}{pagination}{par titre}>
         [(#GET{declinaisons}|?{
-          [(#ID_OBJET|generer_objet_details{#OBJET,#ARRAY{id_objet,#ID_OBJET,id_prix_objet,#ID_PRIX_OBJET},inclure/objet_precieux_detail_declinaison})]  
+          [(#ID_OBJET|generer_objet_details{#OBJET,#ARRAY{id_prix_objet,#ID_PRIX_OBJET},inclure/objet_precieux_detail_declinaison})]  
             ,
-          [(#ID_OBJET|generer_objet_details{#OBJET,#ARRAY{id_objet,#ID_OBJET,id_prix_objet,#ID_PRIX_OBJET,prix,#GET{prix_unitaire}}})] 
+          [(#ID_OBJET|generer_objet_details{#OBJET,#ARRAY{id_prix_objet,#ID_PRIX_OBJET,prix,#PRIX}})] 
           })]
         </BOUCLE_objets_precieux>
   [(#GET{declinaisons}|?{

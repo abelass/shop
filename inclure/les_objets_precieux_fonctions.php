@@ -37,7 +37,11 @@ function generer_objet_details($id_objet, $objet = 'article', $env = array(), $f
 
   //déterminer le titre
   if (!$contexte['titre'])
-    $contexte['titre'] = $titre = generer_info_entite($id_objet, $objet, 'titre');;
+    $contexte['titre'] = generer_info_entite($id_objet, $objet, 'titre');
+  
+  //déterminer l'url
+  if (!$contexte['url'])
+    $contexte['url'] = generer_info_entite($id_objet, $objet, 'url');
 
   //Chercher le logo correspondant
   //Si il y a un logo Selection Objet
