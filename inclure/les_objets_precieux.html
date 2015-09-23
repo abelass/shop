@@ -5,25 +5,25 @@
     <h2><:shop:les_articles_precieux:></h2>
     [(#GET{declinaisons}|?{
    	<ul class="liste-items objets_precieux">
-   		,
+    ,
     <table class="spip">
     <thead>
-    	<tr>
-	    	<th colspan="3"></th>
-	    	<th><:shop:info_prix:></th>
-	    	<th><:prix:label_taxes:></th>
-	    	<th> </th>
-     	</tr>	
-    </thead>})]   	
+      <tr>
+        <th colspan="3"></th>
+        <th><:shop:info_prix:></th>
+        <th><:prix:label_taxes:></th>
+        <th> </th>
+      </tr>
+    </thead>})]
         <BOUCLE_objets_precieux(PRIX_OBJETS){fusion id_objet}{pagination}{par titre}>
         [(#GET{declinaisons}|?{
-        	[(#ID_OBJET|generer_objet_details{#OBJET,#ARRAY{id_objet,#ID_OBJET,taxe,#GET{taxe},id_prix_objet,#ID_PRIX_OBJET,ht,#GET{ht}},inclure/objet_precieux_detail_declinaison})]  
+          [(#ID_OBJET|generer_objet_details{#OBJET,#ARRAY{id_objet,#ID_OBJET,taxe,#GET{taxe},id_prix_objet,#ID_PRIX_OBJET,ht,#GET{ht}},inclure/objet_precieux_detail_declinaison})]  
             ,
-        	[(#ID_OBJET|generer_objet_details{#OBJET,#ARRAY{id_objet,#ID_OBJET,taxe,#GET{taxe},id_prix_objet,#ID_PRIX_OBJET,prix,#GET{prix_unitaire}}})] 
-        	})]
- 		</BOUCLE_objets_precieux>
- 	[(#GET{declinaisons}|?{
- 	</ul>,
+          [(#ID_OBJET|generer_objet_details{#OBJET,#ARRAY{id_objet,#ID_OBJET,taxe,#GET{taxe},id_prix_objet,#ID_PRIX_OBJET,prix,#GET{prix_unitaire}}})] 
+          })]
+        </BOUCLE_objets_precieux>
+  [(#GET{declinaisons}|?{
+  </ul>,
     </table>})]
     [<p class="pagination">(#PAGINATION)</p>]
     </div>
@@ -32,5 +32,5 @@
 <script type="text/javascript">
     $(function(){
         ajaxReload('mon_panier', {args:{voir:'oui',action:''},history:false });
-        });      
+        });
 </script>]

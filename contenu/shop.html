@@ -12,15 +12,14 @@
       <INCLURE{fond=inclure/les_articles}{env}>
     ]
     [(#REM) Plugin shop_prix]
-    [(#PLUGIN{prix_objets}|oui)
-    
-      <INCLURE{fond=inclure/les_objets_precieux}{env}>
-    ]
-        <BOUCLE_articles(ARTICLES)>[(#PRIX*|>{0}|oui) #SET{article_prix,#PRIX}]</BOUCLE_articles>
+     <BOUCLE_prix_objets(CONDITION){si #PLUGIN{prix_objets}|oui}>
+        <INCLURE{fond=inclure/les_objets_precieux}{env}>
+     </BOUCLE_prix_objets>
+          <BOUCLE_articles(ARTICLES)>[(#PRIX*|>{0}|oui) #SET{article_prix,#PRIX}]</BOUCLE_articles>
         [(#GET{article_prix}|oui)
             <INCLURE{fond=inclure/les_articles_precieux}{env}>]
         </B_articles>
-
+     <//B_prix_objets>
   [(#REM) documents avec un champ prix non vide. Tester d'abord l'existence du champ prix dans la table documents]
   <BOUCLE_documents(DOCUMENTS)>[(#PRIX*|>{0}|oui) #SET{document_prix,#PRIX}]</BOUCLE_documents>
   [(#GET{document_prix}|oui)
