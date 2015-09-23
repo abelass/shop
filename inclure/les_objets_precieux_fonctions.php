@@ -37,7 +37,7 @@ function generer_objet_details($id_objet, $objet = 'article', $env = array(), $f
 
   //déterminer le titre
   if (!$contexte['titre'])
-    $contexte['titre'] = titre_objet_shop($objet, $contexte);
+    $contexte['titre'] = $titre = generer_info_entite($id_objet, $objet, 'titre');;
 
   //Chercher le logo correspondant
   //Si il y a un logo Selection Objet
@@ -52,37 +52,4 @@ function generer_objet_details($id_objet, $objet = 'article', $env = array(), $f
   $fond = recuperer_fond($fichier, $contexte);
 
   return $fond;
-}
-
-/*Etablit le titre de l'objet*/
-function titre_objet_shop($objet, $contexte) {
-
-  $exceptions = charger_fonction('exceptions', 'inc');
-  $exception_titre = array(
-    'auteur' => 'nom',
-    'site' => 'nom_site',
-    'syndic' => 'nom_site'
-  );
-
-  //Les exceptions du titre
-  if (!$titre = $contexte[$exception_titre[$objet]] and isset($contexte['titre']))
-    $titre = $contexte['titre'];
-  else {
-    if ($objet == 'document') {
-      $f = explode('/', $contexte['fichier']);
-      $titre = $f[1];
-    }
-    // A vérifier
-    else {
-      $table_sql = table_objet_sql($objet);
-      $tables = lister_tables_objets_sql();
-      $titre_objet = _T($tables[$table_sql]['texte_objet']);
-      if (isset($contexte['id_objet']))
-        $id = $contexte['id_objet'];
-      if ($objet == 'selection_objet' AND isset($contexte['id_selection_objet']))
-        $id = $contexte['id_selection_objet'];
-      $titre = $titre_objet . ' ' . $id;
-    }
-  }
-  return $titre;
 }
