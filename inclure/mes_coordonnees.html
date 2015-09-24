@@ -29,12 +29,6 @@
 		<INCLURE{fond=inclure/mes_adresses,id_auteur,id_commande,edit=oui}>
 	</BOUCLE_commande>
 	<div>
-		[(#BOUTON_ACTION{
-    <:shop:passer_paiement:>,
-    #URL_ACTION_AUTEUR{
-      commandes_paniers,
-      #ID_PANIER,
-      #SELF|parametre_url{appel,paiement}}
-  })]
+    [(#BOUTON_ACTION{<:shop:passer_paiement:>,[(#URL_PAGE{shop}|parametre_url{appel,paiement})],continuer})]
 	</div>
 	</B_commande>

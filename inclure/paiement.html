@@ -1,5 +1,4 @@
 [(#REM) si commande en cours -le panier a ete valide-]
-#SESSION{id_commande}
 <BOUCLE_commande(COMMANDES){id_commande=#SESSION{id_commande}}{statut=encours}{!par id_commande}>
    <div class="liste_commande">
       <h2><:shop:votre_commande_du:> [(#DATE|affdate_jourcourt)] ([(#VAL{commandes:statut_#STATUT}|_T)])</h2>

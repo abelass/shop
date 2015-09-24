@@ -5,8 +5,15 @@
 <div class="ajax">#FORMULAIRE_PANIER</div>
 	<BOUCLE_ispanier(paniers_liens){id_panier = #SESSION{id_panier}}{0,1}>
 		[(#BOUTON_ACTION{<:paniers:vider_le_panier:>,#URL_ACTION_AUTEUR{supprimer_panier_encours,'',#SELF},ajax supprimer_panier})]
-		[(#BOUTON_ACTION{<:shop:passer_la_commande:>,[(#URL_PAGE{shop}|parametre_url{appel,mes_coordonnees})],continuer})]
-		<br class="clear" />	
+		[(#BOUTON_ACTION{
+    <:shop:passer_la_commande:>,
+    #URL_ACTION_AUTEUR{
+      commandes_paniers,
+      #ID_PANIER,
+      #SELF|parametre_url{appel,mes_coordonnees}}
+      ,continuer
+  })]
+		<br class="clear" />
 	</BOUCLE_ispanier>
 [(#ENV{appel}|=={mon_panier}|oui)<p><:paniers:panier_vide:></p>]
 <//B_ispanier>
