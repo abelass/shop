@@ -166,8 +166,6 @@ function shop_formulaire_traiter($flux) {
     $id_auteur = session_get('id_auteur');
     $config = lire_config('shop', array());
 
-    ;
-
     /*
      * On rajoute les champs extras de la commande
      */
