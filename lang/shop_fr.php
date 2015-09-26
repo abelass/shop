@@ -65,6 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'paiement'=>'Paiement',
 'paiement_fictif'=>'Paiement fictif',
 'passer_la_commande'=>'Passer la commande',
+'passer_paiement'=>'Passer au paiement',
 
 //R
 'retour_panel' => "Retour au panel",
