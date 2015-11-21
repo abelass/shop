@@ -123,7 +123,7 @@ function shop_champs_extras_presents($champs_actifs, $defaut = array(), $option 
 }
 
 //Surcharge de la fonction filtres_prix_formater_dist du plugin prix
-function montant_formater($montant, $devise = 0) {
+function montant_formater($montant, $devise = '') {
   include_spip('inc/config');
   include_spip('inc/cookie');
 
