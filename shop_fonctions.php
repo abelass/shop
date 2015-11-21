@@ -129,7 +129,7 @@ function montant_formater($montant, $devise = '') {
 
   $montant = number_format($montant, 2);
 
-  //>Si prix objets isntallés on recupère ses configs
+  // Si prix objets installés on recupère ses configs
   $config = lire_config('prix_objets');
   $devises = isset($config['devises']) ? $config['devises'] : array();
 
