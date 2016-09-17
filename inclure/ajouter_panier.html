@@ -5,7 +5,7 @@
         <BOUCLE_objets_precieux(PRIX_OBJETS?){pagination}{objet}{id_objet}>
         [(#GET{declinaisons}|non)
          #SET{prix_unitaire,#PRIX*{prix_objet,#ID_PRIX_OBJET}}
-        #SET{devise,#ID_OBJET|devise_defaut{#OBJET}|traduire_devise}
+        #SET{devise,#ID_OBJET|devise_defaut_objet{#OBJET}|traduire_devise}
         [(#SET{taxe,[(#GET{prix_unitaire}|moins{#PRIX_HT*{prix_objet,#ID_PRIX_OBJET}})]})]        
         <div class="prix"><:prix_objets:prix:> : #GET{prix_unitaire}[ (#GET{devise})]</div>
         [<div class="taxe"><:prix_objets:taxes:> : (#GET{taxe}) [ (#GET{devise})]</div>]     
