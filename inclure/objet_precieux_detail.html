@@ -1,0 +1,12 @@
+[(#SET{prix_unitaire,#PRIX*{prix_objet,#ID_PRIX_OBJET}})]
+[(#SET{taxe,[(#GET{prix_unitaire}|moins{#PRIX_HT*{prix_objet,#ID_PRIX_OBJET}})]})] 
+
+<tr class="row">
+    <td>[(#ENV{logo_objet}|image_reduire{100})]</td>
+    <td><a href="#URL_ARTICLE">#TITRE</a></td>
+    <td class="prix">[(#GET{prix_unitaire,}|montant_formater)]</td>
+    <td class="taxe">[(#GET{taxe}|montant_formater)] </td>        
+    <td class="ajouter_au_panier">
+    	<INCLURE{fond=inclure/ajouter_panier_lien,env,ajax}/>
+    </td>
+</tr>

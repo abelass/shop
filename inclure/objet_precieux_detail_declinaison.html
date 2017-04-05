@@ -1,0 +1,14 @@
+<li class="item">
+	<div class="wrapper">
+        <div class="titre"><a href="#URL_ARTICLE">#TITRE</a></div>	
+        <div class="logo">[(#ENV{logo_objet}
+        	|image_passe_partout{100,100}
+        	|image_recadre{100,100}
+        	|inserer_attribut{alt,[(#TITRE|attribut_html|couper{80})]})]</div>
+        <div class="panier">
+        	<div class="ajax">
+            	#FORMULAIRE_PANIER_DECLINAISON{#ID_OBJET,#OBJET}
+			</div>
+        </div>
+     </div>
+</li>

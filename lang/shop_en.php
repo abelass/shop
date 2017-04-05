@@ -98,7 +98,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // s
 'statut_paiement' => "Status",
 
-// t
+//T
 'titre_confirmation' => "Confirmation of your order",
 'titre_produit' => "Product Name",
 

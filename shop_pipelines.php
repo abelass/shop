@@ -32,20 +32,22 @@ function shop_formulaire_charger($flux){
          and _request('appel') == 'mes_coordonnees'
        ){
         include_spip('inc/config');
+		include_spip('inc/array_column');
+		
         $config=lire_config('shop',array($config));
-    
         $flux['data']['champs_extras']=shop_champs_extras_presents($config,'','par_objets','',$form);
-        include_spip('inc/shop');
+
 
         foreach($flux['data']['champs_extras'] AS $objet=>$champs){
-           // echo serialize($objet);
-            $noms=noms_champs_extras_presents($champs);
-            foreach($noms AS $nom=>$label){
-               // echo serialize($nom);
-                $flux['data'][$nom]=_request($nom);
+
+            foreach(array_column($champs,'options') AS $data){
+
+                $flux['data'][$data['nom']]=_request($data['nom']);
                 }
             }   
-        }    
+        }   
+        
+
      return $flux;
 }
 
@@ -60,20 +62,28 @@ function shop_formulaire_verifier($flux){
        ){
         //Récupérer les champs extras choisis
         include_spip('inc/config');
-        $config=lire_config('shop',array($config));
-        
+        $config=lire_config('shop',array());
+        $champs_extras=shop_champs_extras_presents($config,'','par_objets');
+		
         //Déterminer les champs obligatoire
         $obligatoires=array();
-        foreach($config AS $name=>$value){
-            $obligatoire='';
-            list($objet,$champ,$obligatoire)=explode('-',$name);
-            if(isset($config[$name.'_obligatoire']))$obligatoires[]=$champ;
-            }
+
+        foreach($champs_extras['commande'] AS $value){
+		
+            if(isset($value['options']['obligatoire']) AND $value['options']['obligatoire']=='oui')
+            	$obligatoires[]=$value['options']['nom'];
+
+			}
+
         foreach($obligatoires AS $champ) {
-            if(!_request($champ))$flux['data'][$champ]=_T("info_obligatoire");
-            }  
-        }    
-     return $flux;
+        	$request=_request($champ);
+        	if(is_array($request) AND count($request)==0){$request='';}
+            if(!$request)$flux['data'][$champ]=_T("info_obligatoire");
+            } 
+		
+
+	   }
+		 return $flux;
 }
 
 
@@ -103,8 +113,6 @@ function shop_formulaire_traiter($flux){
       if($config[0]=='on'){
           if($auteur=sql_fetsel('*','spip_auteurs','email='.sql_quote(_request('mail_inscription')))){
                 include_spip('inc/auth');
-                //$edition_dist = charger_fonction('traiter', 'formulaires/editer_client');
-                //$erreurs = $edition_dist($auteur['id_auteur'],'');
                 auth_loger($auteur);
           }
       }
@@ -153,7 +161,7 @@ function shop_formulaire_traiter($flux){
         $id_adresse = sql_getfetsel( 'id_adresse',  'spip_adresses_liens',
                          array( 'objet = '.sql_quote('auteur'),
                         'id_objet = '.intval($id_auteur),
-                        'type = '.sql_quote('principale') ) );
+                        'type = '.sql_quote('pref') ) );
         
         $adresse = sql_fetsel('*', 'spip_adresses', 'id_adresse = '.$id_adresse);
         unset($adresse['id_adresse']);
@@ -181,15 +189,17 @@ function shop_recuperer_fond($flux){
     $fond=$flux['args']['fond'];
     if ($fond== 'formulaires/editer_client'){
             if(isset($flux['args']['contexte']['champs_extras']['commande'])){
-
+            	//reconvertir les labels en unicode	
+            	foreach($flux['args']['contexte']['champs_extras']['commande'] AS $key=>$value){
+            		$flux['args']['contexte']['champs_extras']['commande'][$key]['options']['label']=html2unicode($value['options']['label']);
+					
+            	}
                 $champs=recuperer_fond('formulaires/champs_commandes_extras',$flux['args']['contexte']);
-
             }
 
         $flux['data']['texte'] = str_replace("<!--extra-->",  $champs.'<!--extra-->',$flux['data']['texte']);
     }
     
-
     if ($fond== 'prive/objets/contenu/commande'){
 
         $id=$flux["data"]['contexte']['id'];
@@ -205,7 +215,7 @@ function shop_recuperer_fond($flux){
         //On détermine les valeurs qui sont des champs extras
         $champs = array_intersect_key($champs,array_flip($champs_extras));
 
-        $c .= recuperer_fond("prive/squelettes/inclure/champs_extras_commande",array('champs_extras' =>$champs));
+        $c = recuperer_fond("prive/squelettes/inclure/champs_extras_commande",array('champs_extras' =>$champs));
 
         $flux['data']['texte'] .= $c;
     }
@@ -240,10 +250,43 @@ function shop_traitement_paypal($flux){
     $commande = sql_fetsel('id_commande, statut, id_auteur', 'spip_commandes', 'reference = '.sql_quote($reference));
     $objet=sql_fetsel('objet,id_objet','spip_commandes_details','id_commande='.$commande['id_commande']);
     $id_panier=sql_getfetsel('id_panier','spip_paniers_liens','id_objet='.$objet['id_objet'].' AND objet='.sql_quote($objet['objet']));
-    sql_delete('spip_paniers_liens','id_panier='.$id_panier);
-    sql_delete('spip_paniers','id_panier='.$id_panier);
+    $action = charger_fonction('supprimer_panier', 'action/');
+	$action($id_panier);
     spip_log("Retour paypal eliminer panier $id_panier",'paypal' . _LOG_INFO);
     return $flux;
 }
 
-?>
+//Eliminer le panier après le traitment bank
+function shop_bank_traiter_reglement($flux){
+	$id_panier=sql_getfetsel('id_panier','spip_transactions','id_transaction='.$flux['args']['id_transaction']);
+	
+	$action = charger_fonction('supprimer_panier', 'action/');
+	$action($id_panier);
+	return $flux;
+}
+
+//Afficher le menu shop pour les objets shop
+function shop_affiche_gauche($flux){
+	include_spip('inc/array_column');
+	
+	$objet=$flux['args']['exec'];
+	$objets_shop=objets_shop();	
+	$actions=array_column($objets_shop, 'action');
+
+	$afficher_objet=false;
+	//Le cas normal l'exec correspond à l'action de a définition
+	if(in_array($objet,$actions)) $afficher_objet=$objet;
+	// cas ou une page action contient plusieurs onglets
+	else{
+		foreach(array_column($objets_shop, 'navigation','action') AS $action=>$navigation){
+			if(in_array($objet,$navigation)){
+				$afficher_objet=$action;
+				break;
+			}
+		}
+	}
+	
+	if ($afficher_objet) $flux['data'] .= recuperer_fond('prive/squelettes/navigation/shop',array('voir'=>$afficher_objet));
+	
+	return $flux;
+}

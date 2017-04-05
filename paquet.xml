@@ -1,9 +1,9 @@
 <paquet
 	prefix="shop"
 	categorie="edition"
-	version="1.4.0"
-	etat="dev"
-	compatibilite="[3.0.10;3.0.*]"
+	version="1.8.1"
+	etat="test"
+	compatibilite="[3.0.10;3.1.*]"
 	logo="prive/themes/spip/images/logo_shop_32.png"
 	documentation=""
 	schema="1.1.0" 
@@ -15,26 +15,38 @@
 
 	<licence>GNU/GPL</licence>
 
-	<necessite nom="saisies" compatibilite="[1.24.0;]" /> 
-	<necessite nom="paniers" compatibilite="[0.3.3;]" /> 	
-	<necessite nom="commandes" compatibilite="[0.9.1;]" />
-	<necessite nom="panier2commande" compatibilite="[0.1.2;]" />	
-	<necessite nom="clients" compatibilite="[0.5.3;]" />		
-	<necessite nom="shop_paiements" compatibilite="[1.0.0;]" />	
+	<necessite nom="saisies" compatibilite="[2.0.3;]" /> 
+	<necessite nom="paniers" compatibilite="[1.0.1;]" /> 	
+	<necessite nom="commandes" compatibilite="[ 1.2.1;]" />
+	<necessite nom="panier2commande" compatibilite="[0.1.5;]" />	
+	<necessite nom="clients" compatibilite="[0.6.5;]" />		
+	<necessite nom="prix" compatibilite="[0.1.8;]" />	
+	
+	
+	<utilise nom="shop_paiements" compatibilite="[1.2.1;]" />
+	<utilise nom="bank" compatibilite="[2.29.6;]" />	
 	<utilise nom="Z5" compatibilite="[2.0.0;]" />	
-		
+	<utilise nom="Z" compatibilite="[1.7.27;]" />
+	<utilise nom="spipr_dist" compatibilite="[0.4.8;]" />				
 		
 	<pipeline nom="autoriser" inclure="shop_autorisations.php" />  
 	<pipeline nom="insert_head" inclure="shop_pipelines.php" /> 
 	<pipeline nom="header_prive" inclure="shop_pipelines.php" /> 
-	<pipeline nom="recuperer_fond" inclure="shop_pipelines.php" /> 		
+	
+	<pipeline nom="recuperer_fond" inclure="shop_pipelines.php" /> 
+	<pipeline nom="affiche_gauche" inclure="shop_pipelines.php" /> 	
+			
 	<pipeline nom="formulaire_traiter" inclure="shop_pipelines.php" /> 	
 	<pipeline nom="formulaire_verifier" inclure="shop_pipelines.php" /> 		
-	<pipeline nom="formulaire_charger" inclure="shop_pipelines.php" /> 	
+	<pipeline nom="formulaire_charger" inclure="shop_pipelines.php" /> 
+		
 	<pipeline nom="traitement_paypal" inclure="shop_pipelines.php" /> 
 	<pipeline nom="traitement_paiements_forms" inclure="shop_pipelines.php" /> 	
 	<pipeline nom="traitement_paiements_retours" inclure="shop_pipelines.php" />
-	<pipeline nom="declarer_tables_principales" inclure="base/shop.php" /> 		
+	<pipeline nom="bank_traiter_reglement" inclure="shop_pipelines.php" /> 	
+	
+	<pipeline nom="declarer_tables_principales" inclure="base/shop.php" /> 
+			
 
 	
 	<menu nom="shop" titre="shop:shop" parent="menu_edition" icone="images/logo_shop_16.png" action="shop" /> 

@@ -22,6 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cfg_titre_authentification'=>'Authentifiaction',
 'cfg_titre_authentification_automatique'=>'Authentifiaction automatique après l\'inscription',
 'cfg_titre_champs_commandes'=>'Champs formulaire commandes',
+'conditions_generales'=>'Conditions générales',
 'continuer'=>'Continuer >>',
 'coordonnees'=>'Coordonnées',
 
@@ -39,6 +40,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_pays' => "Pays",
 
 //L
+'label_accepter_conditions'=>'Accepter les conditions générales :',
+'label_accepter_conditions_public'=>'Accepter les @url@ :',
+'label_accepter_conditions_texte'=>'Rubrique ou article contenant les conditions générales :',
 'label_commentaire'=>'Commentaire :',
 'liste_de_commandes'=>'Liste des commandes',
 'les_produits'=>'Les produits',

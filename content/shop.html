@@ -1,5 +1,4 @@
-
-	[(#INCLURE{fond=inclure/menu_shop,env})]
+[(#INCLURE{fond=inclure/menu_shop,env})]
 
 
 <div id="contenu_shop">
@@ -14,30 +13,30 @@
 		[(#PLUGIN{zaboarticle}|oui)
 			<INCLURE{fond=inclure/les_articles}{env}>
 			]
-        [(#REM) Plugin shop_prix]
-        [(#PLUGIN{shop_prix}|oui)
+        [(#REM) Plugin Prix Objets]
+        [(#PLUGIN{prix_objets}|oui)
         
-            <INCLURE{fond=inclure/les_objets_precieux}{env}>
+            <INCLURE{fond=inclure/les_objets_precieux,env,ajax}>
         ]
         
         <BOUCLE_articles(ARTICLES)>[(#PRIX*|>{0}|oui) #SET{article_prix,#PRIX}]</BOUCLE_articles>
         [(#GET{article_prix}|oui)
-            <INCLURE{fond=inclure/les_articles_precieux}{env}>]
+            <INCLURE{fond=inclure/les_articles_precieux,env,ajax}>]
         </B_articles>
 	
 		[(#REM) documents avec un champ prix non vide. Tester d'abord l'existence du champ prix dans la table documents]
 		<BOUCLE_documents(DOCUMENTS)>[(#PRIX*|>{0}|oui) #SET{document_prix,#PRIX}]</BOUCLE_documents>
 		[(#GET{document_prix}|oui)
-			<INCLURE{fond=inclure/les_documents_precieux}{env}>]
+			<INCLURE{fond=inclure/les_documents_precieux,ajax,env}>]
 		</B_documents>			
 				
-		[(#URL_PAGE{shop}|parametre_url{appel,mon_panier}|lien_ou_expose{<:shop:continuer:>,'',continuer})]	
+		[(#URL_PAGE{shop}|parametre_url{appel,mon_panier}|lien_ou_expose{<:shop:continuer:>,'',continuer btn btn-danger})]	
 	      #SET{stop,oui}
       </BOUCLE_test>
 	
 	[(#REM) 2 - mon_panier ]
 	[(#ENV{appel}|=={"mon_panier"}|oui)
-		<INCLURE{fond=inclure/mon_panier}{env}>
+		<INCLURE{fond=inclure/mon_panier,env}>
       #SET{stop,oui}
 	]
 	
