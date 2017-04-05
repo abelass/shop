@@ -1,9 +1,0 @@
-#SET{prestataire,#VAL{bank:label_presta_}|concat{#MODE}|_T}
-<p><:shop:donnees_prestataire{prestataire=#GET{prestataire}}:></p>
-#INCLURE{fond=inclure/donnees_prestataire_#MODE,env}
-
-
-[(#ENV{format_envoi}|=={plain}|oui)
-	#FILTRE{supprimer_tags|filtrer_entites|trim}]
-[(#ENV{format_envoi}|=={plain}|non)
-	#FILTRE{filtrer_entites|trim}]

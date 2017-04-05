@@ -22,14 +22,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cfg_titre_authentification'=>'Authentifiaction',
 'cfg_titre_authentification_automatique'=>'Authentifiaction automatique après l\'inscription',
 'cfg_titre_champs_commandes'=>'Champs formulaire commandes',
-'conditions_generales'=>'Conditions générales',
 'continuer'=>'Continuer >>',
 'coordonnees'=>'Coordonnées',
 
 //D
 'deja_client'=>'Si vous avez déjà un compte client, identifiez-vous',
 'detail_commande' => "Détails de la commande",
-'donnees_prestataire'=>'Vous avez choissis de payer par @prestataire@',
 
 
 //E
@@ -41,9 +39,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_pays' => "Pays",
 
 //L
-'label_accepter_conditions'=>'Accepter les conditions générales :',
-'label_accepter_conditions_public'=>'Accepter les @url@ :',
-'label_accepter_conditions_texte'=>'Rubrique ou article contenant les conditions générales :',
 'label_commentaire'=>'Commentaire :',
 'liste_de_commandes'=>'Liste des commandes',
 'les_produits'=>'Les produits',
@@ -65,7 +60,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'paiement'=>'Paiement',
 'paiement_fictif'=>'Paiement fictif',
 'passer_la_commande'=>'Passer la commande',
-'passer_paiement'=>'Passer au paiement',
 
 //R
 'retour_panel' => "Retour au panel",

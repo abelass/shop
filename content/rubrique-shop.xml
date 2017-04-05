@@ -1,6 +1,0 @@
-<composition>
-        <nom>La rubrique Shop</nom>
-        <description>Affiche les produits en vente</description>
-        <branche type="article" composition="shop" />
-                   
-</composition>

@@ -3,41 +3,20 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 //Enlèves les champs utilitaires et remplace saisie par saisie_2 et nom_2 par nom et teste si obligatoire
-function shop_champs_extras_nettoyes($champs_actifs=array(),$champs_extras,$objet='',$defaut=array(),$form=''){
+function shop_champs_extras_nettoyes($champs_actifs=array(),$champs_extras,$objet,$defaut=array(),$form=''){
     $champs=array();
     
      foreach($champs_extras as $key=>$value){
-     	//nom différent de celui de la configuration
         if(isset($value['options']['nom_2'])){
             $value['options']['nom']=$value['options']['nom_2'];
             unset($value['options']['nom_2']);
-        }
-		//saisie différent de celui de la configuration 
+        } 
         if(isset($value['saisie_2'])){
                 $value['saisie']=$value['saisie_2'];
                 unset($value['saisie_2']);
             }
-		//label différent de celui de la configuration 
-        if(isset($value['options']['label_2'])){
-            $value['options']['label']=$value['options']['label_2'];
-            unset($value['options']['label_2']);
-        } 
-		//label différent de celui de la configuration 
-        if(isset($value['options']['defaut_2'])){
-            $value['options']['defaut']=$value['options']['defaut_2'];
-            unset($value['options']['label_2']);
-        } 
-		
-		//data différent de celui de la configuration 
-        if(isset($value['options']['datas_2'])){
-            $value['options']['datas']=$value['options']['datas_2'];
-            unset($value['options']['datas_2']);
-        } 		
-				
-		
-        if($value['type']!='champ_outil' AND $champs_actifs[$objet.'_'.$value['options']['nom']]=='on'){
-        	//Tester si obligatoire
-            if($champs_actifs[$value['options']['nom'].'_obligatoire']=='on')$value['options']['obligatoire']='oui';
+        if($value['type']!='champ_outil' AND $champs_actifs[$objet.'-'.$value['options']['nom']]=='on'){
+            if($champs_actifs[$objet.'-'.$value['options']['nom'].'-obligatoire'][0]=='on')$value['options']['obligatoire']='oui';
             
             //La valeur par défaut   
             $value['options']['defaut']=isset($defaut[$value['options']['nom']])?$defaut[$value['options']['nom']]:'';
@@ -60,7 +39,7 @@ function shop_champs_extras_nom($champs_actifs=array(),$champs_extras){
 
 }
 // Retourne la liste des plugins type shop depuis champs_extras_nettoyes()
-/*function noms_champs_extras_presents($champs_extras){
+function noms_champs_extras_presents($champs_extras){
     $noms=array();
     
      foreach($champs_extras as $key=>$value){
@@ -71,7 +50,7 @@ function shop_champs_extras_nom($champs_actifs=array(),$champs_extras){
         $noms[$value['options']['nom']]=$value['options']['label'];
         }
     return $noms;
-}*/
+}
 
 //Cherche les objets définis
 function objets_champs_extras(){
@@ -85,21 +64,16 @@ function objets_champs_extras(){
 }
 
 //Cherche les définitions des tables
-function definitions_sql_champs_extras($champs_extras=array()){
-	if(!$champs_extras){
-		$champs_extras=charger_fonction('shop_champs_extras','inc');
-    	$champs_extras=$champs_extras();
-	}
-	include_spip('inc/array_column');
+function definitions_sql_champs_extras($champs_actifs=array()){
+    $champs_extras=charger_fonction('shop_champs_extras','inc');
+    $champs_extras=$champs_extras();
     $tables=array();
-	$t=array_column($champs_extras,'saisies');
-	
-    foreach($t AS $value) {
-        foreach(array_column($value,'tables') AS $f){
-        	$table=key($f);
-            $tables[$table]['field'][key($f[$table]['field'])]=$f[$table]['field'][key($f[$table]['field'])];
+    foreach($champs_extras AS $value) {
+        foreach($value['saisies'] AS $f){
+            if(isset($f['tables']))$tables=$f['tables'];
             }
         }
+   
     return $tables;
 }
 
@@ -128,7 +102,7 @@ function champs_reduits(){
     //Déterminer les champs à afficher
     $champs_extras=array();
     foreach($c[0] AS $name){
-       list($objet,$champ)=explode('_',$name);
+       list($objet,$champ)=explode('-',$name);
             if($champ)$champs_extras[]=$champ;
         } 
     return $champs_extras;

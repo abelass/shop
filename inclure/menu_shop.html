@@ -1,17 +1,18 @@
-<div class="btn-group">
-    	<div class="btn[(#ENV{appel}|non) on]"> 
+<div>
+    <ul class="menu-shop">
+    	<li[(#ENV{appel}|non) class="on"]> 
     		<a href="[(#URL_PAGE{shop}|parametre_url{appel,''})]"><span>1 </span><:shop:boutique:></a>
-    	</div>
-    	<div class="btn[(#ENV{appel}|=={mon_panier}|oui) on]"> 
+    	</li>
+    	<li[(#ENV{appel}|=={mon_panier}|oui) class="on"]> 
     		<a href="[(#URL_PAGE{shop}|parametre_url{appel,mon_panier})]"><span>2 </span><:shop:panier:></a>
-    	</div>
+    	</li>
     	
-    	<div class="btn[(#ENV{appel}|=={mes_coordonnees}|oui) on]"> 
+    	<li[(#ENV{appel}|=={mes_coordonnees}|oui) class="on"]> 
     		<a href="[(#URL_PAGE{shop}|parametre_url{appel,mes_coordonnees})]"><span>3 </span><:shop:coordonnees:></a>
-    	</div>
+    	</li>
     	
-    	<div class="btn[(#ENV{appel}|=={paiement}|oui) on]"> 
+    	<li[(#ENV{appel}|=={paiement}|oui) class="on"]> 
     		<a href="[(#URL_PAGE{shop}|parametre_url{appel,paiement})]"><span>4 </span><:shop:paiement:></a>
-    	</div>
-
+    	</li>
+    </ul>
 </div>

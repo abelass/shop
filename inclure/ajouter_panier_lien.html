@@ -1,8 +1,0 @@
-<a class="ajax nocache nohistory btn btn-danger" href="[(#URL_ACTION_AUTEUR{remplir_panier,prix_objets-#ID_PRIX_OBJET,#SELF|parametre_url{retour,ok}})]"><:paniers:action_ajouter:></a> 
-[(#ENV{retour}|=={ok}|oui)
-<script type="text/javascript">
-    $(function(){
-        ajaxReload('mon_panier', {args:{voir:'oui',action:''},history:false });
-        });      
-</script>
-]

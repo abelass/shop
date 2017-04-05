@@ -34,12 +34,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // d
 'date_enregistrement' => "Record date",
+
 'date_vente' => "Sale date",
 'de_la_part_de' => "From",
 'detail_commande' => "Order details",
 'devises_choisis' => "Selected currency",
 'devise_default' => " Default Currency",
-'donnees_prestataire'=>'You have chosen to pay by @prestataire@',
 
 // e
 'email' => "Email",
@@ -78,7 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'payer_paypal' => "paid via Paypal",
 'paiement' => "Payment of the Order ",
 'pendant' => "in progress",
-'prix' => "Price",
+'prix_devises' => "Price",
 'produit' => "Product",
 'produits' => "Products",
 'paiement_description' => "Please select payment method",
@@ -98,7 +98,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // s
 'statut_paiement' => "Status",
 
-//T
+// t
 'titre_confirmation' => "Confirmation of your order",
 'titre_produit' => "Product Name",
 

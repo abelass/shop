@@ -1,6 +1,0 @@
-<INCLURE{fond=prive/squelettes/inclure/champs_extras_commande,env}/>
-
-[(#ENV{format_envoi}|=={plain}|oui)
-	#FILTRE{supprimer_tags|filtrer_entites|trim}]
-[(#ENV{format_envoi}|=={plain}|non)
-	#FILTRE{filtrer_entites|trim}]

@@ -1,36 +1,14 @@
-[(#PLUGIN{declinaisons}|oui)#SET{declinaisons,oui}]
 <B_objets_precieux>
-  <div class="vente liste_objets_precieux">
-    #ANCRE_PAGINATION
+    <div class="vente liste_objets_precieux">
+        #ANCRE_PAGINATION
     <h2><:shop:les_articles_precieux:></h2>
-    [(#GET{declinaisons}|?{
-    <ul class="liste-items objets_precieux">
-    ,
     <table class="spip">
-    <thead>
-      <tr>
-        <th colspan="2"></th>
-        <th><:shop:info_prix:></th>
-        <th><:prix:label_taxes:></th>
-        <th> </th>
-      </tr>
-    </thead>})]
-        <BOUCLE_objets_precieux(PRIX_OBJETS){fusion id_objet}{pagination}{par titre}>
-        [(#GET{declinaisons}|?{
-          [(#ID_OBJET|generer_objet_details{#OBJET,#ARRAY{id_prix_objet,#ID_PRIX_OBJET},inclure/objet_precieux_detail_declinaison})]  
-            ,
-          [(#ID_OBJET|generer_objet_details{#OBJET,#ARRAY{id_prix_objet,#ID_PRIX_OBJET,prix,#PRIX}})] 
-          })]
+        <BOUCLE_objets_precieux(PRIX_OBJETS){pagination}>
+        #SET{prix_unitaire,#PRIX*{prix_objet,#ID_PRIX_OBJET}}
+        [(#SET{taxe,[(#GET{prix_unitaire}|moins{#PRIX_HT*{prix_objet,#ID_PRIX_OBJET}})]})]        
+            <INCLURE{fond=inclure/les_objets_precieux_#OBJET,id_objet,prix=#GET{prix_unitaire},taxe=#GET{taxe}id_prix_objet,ht=#GET{ht},id_declinaison}/>
         </BOUCLE_objets_precieux>
-  [(#GET{declinaisons}|?{
-  </ul>,
-    </table>})]
+    </table>
     [<p class="pagination">(#PAGINATION)</p>]
     </div>
 </B_objets_precieux>
-[(#ENV{retour}|=={ok}|oui)
-<script type="text/javascript">
-    $(function(){
-        ajaxReload('mon_panier', {args:{voir:'oui',action:''},history:false });
-        });
-</script>]

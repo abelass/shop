@@ -1,53 +1,57 @@
-[(#INCLURE{fond=inclure/menu_shop,env})]
+
+	[(#INCLURE{fond=inclure/menu_shop,env})]
+
+
 <div id="contenu_shop">
-  [(#REM) 1 -la boutique ]
-  <BOUCLE_test(CONDITION){si #ENV{appel}|non}>
-    [(#PLUGIN{produits}|oui)
-      <INCLURE{fond=inclure/les_produits}{env}>
-    ]
-    [(#PLUGIN{abonnement}|oui)	
-      <INCLURE{fond=inclure/les_abonnements}{env}>
-    ]
-    [(#PLUGIN{zaboarticle}|oui)
-      <INCLURE{fond=inclure/les_articles}{env}>
-    ]
-    [(#REM) Plugin shop_prix]
-     <BOUCLE_prix_objets(CONDITION){si #PLUGIN{prix_objets}|oui}>
-        <INCLURE{fond=inclure/les_objets_precieux}{env}>
-     </BOUCLE_prix_objets>
-          <BOUCLE_articles(ARTICLES)>[(#PRIX*|>{0}|oui) #SET{article_prix,#PRIX}]</BOUCLE_articles>
+	[(#REM) 1 -la boutique ]
+	<BOUCLE_test(CONDITION){si #ENV{appel}|=={""}|oui}>
+		[(#PLUGIN{produits}|oui)
+			<INCLURE{fond=inclure/les_produits}{env}>
+			]
+		[(#PLUGIN{abonnement}|oui)	
+			<INCLURE{fond=inclure/les_abonnements}{env}>
+			]
+		[(#PLUGIN{zaboarticle}|oui)
+			<INCLURE{fond=inclure/les_articles}{env}>
+			]
+        [(#REM) Plugin shop_prix]
+        [(#PLUGIN{shop_prix}|oui)
+        
+            <INCLURE{fond=inclure/les_objets_precieux}{env}>
+        ]
+        
+        <BOUCLE_articles(ARTICLES)>[(#PRIX*|>{0}|oui) #SET{article_prix,#PRIX}]</BOUCLE_articles>
         [(#GET{article_prix}|oui)
             <INCLURE{fond=inclure/les_articles_precieux}{env}>]
         </B_articles>
-     <//B_prix_objets>
-  [(#REM) documents avec un champ prix non vide. Tester d'abord l'existence du champ prix dans la table documents]
-  <BOUCLE_documents(DOCUMENTS)>[(#PRIX*|>{0}|oui) #SET{document_prix,#PRIX}]</BOUCLE_documents>
-  [(#GET{document_prix}|oui)
-    <INCLURE{fond=inclure/les_documents_precieux}{env}>]
-  </B_documents>
-  [(#URL_PAGE{shop}|parametre_url{appel,mon_panier}|lien_ou_expose{<:shop:continuer:>,'',continuer})]
+	
+		[(#REM) documents avec un champ prix non vide. Tester d'abord l'existence du champ prix dans la table documents]
+		<BOUCLE_documents(DOCUMENTS)>[(#PRIX*|>{0}|oui) #SET{document_prix,#PRIX}]</BOUCLE_documents>
+		[(#GET{document_prix}|oui)
+			<INCLURE{fond=inclure/les_documents_precieux}{env}>]
+		</B_documents>			
+				
+		[(#URL_PAGE{shop}|parametre_url{appel,mon_panier}|lien_ou_expose{<:shop:continuer:>,'',continuer})]	
+	      #SET{stop,oui}
+      </BOUCLE_test>
+	
+	[(#REM) 2 - mon_panier ]
+	[(#ENV{appel}|=={"mon_panier"}|oui)
+		<INCLURE{fond=inclure/mon_panier}{env}>
       #SET{stop,oui}
-    </BOUCLE_test>
-  
-  [(#REM) 2 - mon_panier ]
-  [(#ENV{appel}|=={"mon_panier"}|oui)
-    <INCLURE{fond=inclure/mon_panier}{env}>
+	]
+	
+	[(#REM) 3 - mes_coordonnees ]
+	[(#ENV{appel}|=={"mes_coordonnees"}|oui)
+		<INCLURE{fond=inclure/mes_coordonnees}{env}>
       #SET{stop,oui}
-  ]
-  
-  [(#REM) 3 - mes_coordonnees ]
-  [(#ENV{appel}|=={"mes_coordonnees"}|oui)
-    [(#SESSION{id_panier}|?{
-      #INCLURE{fond=inclure/mes_coordonnees}{env},
-      <:paniers:panier_vide:>
-    })]
-    #SET{stop,oui}
-  ]
+	]
    [(#ENV{appel}|=={""}|non|et{#ENV{appel}|=={"mon_panier"}|non}|et{#ENV{appel}|=={"mes_coordonnees"}|non}|et{#SESSION{id_auteur}|non})
       <h4>[(#URL_PAGE{shop}|parametre_url{appel,mes_coordonnees}|lien_ou_expose{<:shop:veuillez_vous_connecter:>})]</h4>
       #SET{stop,oui}
    ]
-  [(#GET{stop}|=={oui}|non)
+	[(#GET{stop}|=={oui}|non)
       <INCLURE{fond=inclure/#ENV{appel}}{env}>
-  ]
+	]
+
 </div>
