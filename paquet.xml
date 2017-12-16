@@ -16,7 +16,7 @@
 	<necessite nom="saisies" compatibilite="[2.0.3;]" />
 	<necessite nom="paniers" compatibilite="[1.0.1;]" />
 	<necessite nom="commandes" compatibilite="[ 1.2.1;]" />
-	<necessite nom="clients" compatibilite="[0.6.5;]" />
+	<necessite nom="clients" compatibilite="[1.0.9;]" />
 	<necessite nom="prix" compatibilite="[0.1.8;]" />
 
 	<utilise nom="shop_paiements" compatibilite="[1.2.1;]" />

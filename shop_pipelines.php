@@ -155,16 +155,22 @@ function shop_formulaire_traiter($flux) {
     }
   }
 
-  if ($form == 'editer_client' and _request('page') == 'shop' and _request('appel') == 'mes_coordonnees' and include_spip('inc/paniers')) {
+  if ($form == 'editer_client' and _request('page') == 'shop' and _request('appel') == 'mes_coordonnees' and include_spip('inc/paniers') and $id_panier = paniers_id_panier_encours()) {
     // On recupere d'abord toutes les informations dont on va avoir besoin
     // Deje le visiteur connecte
+    include_spip('inc/commandes');
     include_spip('inc/config');
     include_spip('inc/shop');
     include_spip('inc/array_column');
 
     $id_auteur = session_get('id_auteur');
-    $id_commande = intval(session_get('id_commande'));
     $config = lire_config('shop', array());
+
+    /* On cree la commande ici*/
+    $id_commande = creer_commande_encours();
+
+    include_spip('action/commandes_paniers');
+    panier2commande_remplir_commande($id_commande,$id_panier);
 
     /*
      * On rajoute les champs extras de la commande
