@@ -8,3 +8,4 @@ _svn
 .project
 .project
 /.buildpath
+.settings*
