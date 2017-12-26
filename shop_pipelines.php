@@ -285,7 +285,6 @@ function shop_recuperer_fond ($flux) {
 
 		// On chercher les champs prévus
 		$champs_extras = shop_champs_extras_presents($config, '', '', 'commande');
-		;
 
 		$champs = array();
 
@@ -322,7 +321,6 @@ function shop_recuperer_fond ($flux) {
 		// On cherche les champs prévus
 		$champs_extras = shop_champs_extras_presents($config_shop, '', '',
 				'commande');
-		;
 
 		$champs = array();
 		$fields = array(
@@ -462,3 +460,4 @@ function shop_affiche_gauche ($flux) {
 
 	return $flux;
 }
+
