@@ -1,24 +1,24 @@
 [(#PLUGIN{declinaisons}|oui)#SET{declinaisons,oui}]
 
 <B_objets_precieux>
-    <div class="prix_produit ajax">
-        <BOUCLE_objets_precieux(PRIX_OBJETS?){pagination}{objet}{id_objet}>
-        [(#GET{declinaisons}|non)
-         #SET{prix_unitaire,#PRIX*{prix_objet,#ID_PRIX_OBJET}}
-        #SET{devise,#ID_OBJET|devise_defaut{#OBJET}|traduire_devise}
-        [(#SET{taxe,[(#GET{prix_unitaire}|moins{#PRIX_HT*{prix_objet,#ID_PRIX_OBJET}})]})]        
-        <div class="prix"><:prix_objets:prix_devises:> : #GET{prix_unitaire}[ (#GET{devise})]</div>
-        [<div class="taxe"><:prix_objets:taxes:> : (#GET{taxe}) [ (#GET{devise})]</div>]     
-        <div class="ajouter_au_panier">
-        <a  class="ajax nocache nohistory btn btn-danger" href="[(#URL_ACTION_AUTEUR{remplir_panier,prix_objets-#ID_PRIX_OBJET,#SELF|parametre_url{retour,ok}})]" rel="nofollow"><:paniers:action_ajouter:></a> 
-        </div>
-        ]
-        </BOUCLE_objets_precieux>        </BOUCLE_objets_precieux>
-        [(#GET{declinaisons}|oui)
-        	<div class="ajax">
-            	#FORMULAIRE_PANIER_DECLINAISON{#ID_OBJET,#OBJET}
-			</div>]
-    </div>
+	<div class="prix_produit ajax">
+	<BOUCLE_objets_precieux(PRIX_OBJETS?){pagination}{objet}{id_objet}>
+		[(#GET{declinaisons}|non)
+		#SET{prix_unitaire,#PRIX*{prix_objet,#ID_PRIX_OBJET}}
+		#SET{devise,#ID_OBJET|devise_defaut_objet{#OBJET}|traduire_devise}
+		[(#SET{taxe,[(#GET{prix_unitaire}|moins{#PRIX_HT*{prix_objet,#ID_PRIX_OBJET}})]})]
+		<div class="prix"><:prix_objets:prix:> : #GET{prix_unitaire}[ (#GET{devise})]</div>
+		[<div class="taxe"><:prix_objets:taxes:> : (#GET{taxe}) [ (#GET{devise})]</div>]
+		<div class="ajouter_au_panier">
+		<a  class="ajax nocache nohistory btn btn-danger" href="[(#URL_ACTION_AUTEUR{remplir_panier,prix_objets-#ID_PRIX_OBJET,#SELF|parametre_url{retour,ok}})]" rel="nofollow"><:paniers:action_ajouter:></a>
+		</div>
+		]
+	</BOUCLE_objets_precieux>        </BOUCLE_objets_precieux>
+		[(#GET{declinaisons}|oui)
+		<div class="ajax">
+			#FORMULAIRE_PANIER_DECLINAISON{#ID_OBJET,#OBJET}
+		</div>]
+	</div>
 </B_objets_precieux>
 
 
@@ -27,8 +27,8 @@
 
 [(#ENV{retour}|=={ok}|oui)
 <script type="text/javascript">
-    $(function(){
-        ajaxReload('mon_panier', {args:{voir:'oui',action:''},history:false });
-        });      
+		$(function(){
+				ajaxReload('mon_panier', {args:{voir:'oui',action:''},history:false });
+				});
 </script>
 ]
