@@ -1,14 +1,14 @@
 <?php
 if (! defined("_ECRIRE_INC_VERSION"))
 	return;
-	
+
 	// Retourne la liste des champs extras
 	function inc_shop_champs_extras_dist ($defaut = array()) {
 		if (count($defaut) == 0) {
 			include_spip('inc/config');
 			$defaut = lire_config('shop', array());
 		}
-		
+
 		$accepter_conditions_texte = isset($defaut['accepterconditions_texte']) ? $defaut['accepterconditions_texte'] : '';
 		if ($accepter_conditions_texte) {
 			include_spip('formulaires/selecteur/generique_fonctions');
@@ -29,7 +29,7 @@ if (! defined("_ECRIRE_INC_VERSION"))
 			'</a>';
 			else
 				$url = _T('shop:conditions_generales');
-				
+
 				$champs_extras = array(
 					'commande' => array(
 						'saisie' => 'fieldset',
@@ -67,12 +67,12 @@ if (! defined("_ECRIRE_INC_VERSION"))
 								),
 								'options' => array(
 									'li_class' => 'conditionnel',
-									
+
 									'nom' => 'commande_commentaire', // Pour la configuration
 									'nom_2' => 'commentaire', // Pour le formulaire public
 									'label' => _T('shop:label_commentaire'),
 									'defaut' => isset($defaut['commande_commentaire']) ? $defaut['commande_commentaire'] : ''
-									
+
 								)
 							),
 							array(
@@ -112,7 +112,7 @@ if (! defined("_ECRIRE_INC_VERSION"))
 											)), // Pour le formulaire public
 									'defaut' => isset($defaut['commande_accepterconditions']) ? $defaut['commande_accepterconditions'] : '',
 									'defaut_2' => ''
-									
+
 								)
 							),
 							array(
@@ -171,16 +171,15 @@ if (! defined("_ECRIRE_INC_VERSION"))
 								)
 							)
 						)
-						
+
 					)
 				);
-				
+
 				$champs_extras = pipeline('shop_champs_extras',
 						array(
 							'args' => $defaut,
 							'data' => $champs_extras
 						));
-				
+
 				return $champs_extras;
 	}
-	
