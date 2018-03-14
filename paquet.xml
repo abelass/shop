@@ -1,9 +1,9 @@
 <paquet
 	prefix="shop"
 	categorie="edition"
-	version="1.10.7"
+	version="2.0.0"
 	etat="test"
-	compatibilite="[3.0.10;3.1.*]"
+	compatibilite="[3.0.10;3.2.*]"
 	logo="prive/themes/spip/images/logo_shop_32.png"
 	documentation=""
 	schema="1.1.3"
@@ -16,7 +16,7 @@
 	<necessite nom="saisies" compatibilite="[2.19.3;]" />
 	<necessite nom="paniers" compatibilite="[1.3.2;]" />
 	<necessite nom="commandes" compatibilite="[1.15.2;]" />
-	<necessite nom="clients" compatibilite="[1.0.9;]" />
+	<necessite nom="clients" compatibilite="[1.0.10;]" />
 	<necessite nom="prix" compatibilite="[0.1.15;]" />
 
 	<utilise nom="shop_paiements" compatibilite="[1.2.1;]" />
