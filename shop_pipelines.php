@@ -222,6 +222,7 @@ function shop_formulaire_traiter($flux) {
 		));
 		$flux['data']['editable'] = FALSE;
 	}
+
 	return ($flux);
 }
 
