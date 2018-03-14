@@ -1,47 +1,43 @@
 [(#REM) si commande en cours -le panier a ete valide-]
 <BOUCLE_commande(COMMANDES){id_commande=#SESSION{id_commande}}{statut=encours}{!par id_commande}>
 	<div class="liste_commande">
-			<h2><:shop:votre_commande_du:> [(#DATE|affdate_jourcourt)] ([(#VAL{commandes:statut_#STATUT}|_T)])</h2>
-			<INCLURE{fond=inclure/commande,id_commande,statut}>
+		<h2><:shop:votre_commande_du:> [(#DATE|affdate_jourcourt)] ([(#VAL{commandes:statut_#STATUT}|_T)])</h2>
+		<INCLURE{fond=inclure/commande,id_commande,statut}>
 
-			#SET{id_commande,#ID_COMMANDE}
-			#SET{details, #ARRAY}
-			#SET{prix, #ARRAY}
-			#SET{prix_ht, #ARRAY}
-			<BOUCLE_details(COMMANDES_DETAILS){id_commande}{par id_commandes_detail}>
-				[(#SET{detail#COMPTEUR_BOUCLE,
-							[(#ARRAY{
-										descriptif, [(#DESCRIPTIF*|supprimer_numero)],
-										quantite, #QUANTITE,
-										prix, [(#PRIX_UNITAIRE_HT*|mult{#TAXE}|plus{#PRIX_UNITAIRE_HT*})],
-				})]})]
-				#SET{prix,#GET{prix}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,(#PRIX_UNITAIRE_HT*|mult{#TAXE}|plus{#PRIX_UNITAIRE_HT*})}}}
-				#SET{prix_ht,#GET{prix_ht}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#PRIX_UNITAIRE_HT}}}
-
-				[(#SET{ details,
-							#GET{details}|push{ #GET{detail#COMPTEUR_BOUCLE} } })]
-			</BOUCLE_details>
-			#SET{prix_total,#GET{prix}|array_sum}
-			#SET{prix_ht,#GET{prix_ht}|array_sum}
-
-
-		[(#PLUGIN{bank}|oui)
-			[(#FORMULAIRE_PAYER_ACTE{#GET{prix_total},#ARRAY{
-				montant_ht,#GET{prix_ht},
-				id_commande,#ID_COMMANDE,
-			id_auteur,#SESSION{id_auteur},
-			id_panier,#SESSION{id_panier},
-			tracking_id,#REFERENCE
-			}})] ]
-			[(#PLUGIN{bank}|non)
-			[(#FORMULAIRE_PAIEMENTS{#ARRAY{
-				id_commande,#ID_COMMANDE,
-				reference,#REFERENCE,
-				details,#GET{details},
-				prix_total,#GET{prix_total},
+		#SET{id_commande,#ID_COMMANDE}
+		#SET{details, #ARRAY}
+		#SET{prix, #ARRAY}
+		#SET{prix_ht, #ARRAY}
+		<BOUCLE_details(COMMANDES_DETAILS){id_commande}{par id_commandes_detail}>
+			[(#SET{detail#COMPTEUR_BOUCLE,
+						[(#ARRAY{
+							descriptif, [(#DESCRIPTIF*|supprimer_numero)],
+							quantite, #QUANTITE,
+							prix, [(#PRIX_UNITAIRE_HT*|mult{#TAXE}|plus{#PRIX_UNITAIRE_HT*})],
+						})]
+			})]
+			#SET{prix,#GET{prix}|array_merge{#ARRAY{
+					#COMPTEUR_BOUCLE,(#PRIX_UNITAIRE_HT*|mult{#TAXE}|plus{#PRIX_UNITAIRE_HT*})}
 				}
 			}
-			)]
+			#SET{prix_ht,#GET{prix_ht}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#PRIX_UNITAIRE_HT}}}
+
+			[(#SET{details,#GET{details}|push{ #GET{detail#COMPTEUR_BOUCLE} } })]
+		</BOUCLE_details>
+		#SET{prix_total,#GET{prix}|array_sum}
+		#SET{prix_ht,#GET{prix_ht}|array_sum}
+
+		[(#PLUGIN{bank}|oui)
+			[(#FORMULAIRE_PAYER_ACTE{
+			#GET{prix_total},
+				#ARRAY{
+						montant_ht,#GET{prix_ht},
+						id_commande,#ID_COMMANDE,
+					id_auteur,#SESSION{id_auteur},
+					id_panier,#SESSION{id_panier},
+					tracking_id,#REFERENCE
+				}
+			})]
 		]
 	</div>
 </BOUCLE_commande>
