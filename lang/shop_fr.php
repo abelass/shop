@@ -13,10 +13,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'ajouter_au_panier'=>'Ajouter au panier',
 'annuler'=>'<< Annuler',
 
-
 //B
 'bonjour' => "Bonjour",
-
 
 //C
 'cfg_titre_authentification'=>'Authentifiaction',
@@ -30,7 +28,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'deja_client'=>'Si vous avez déjà un compte client, identifiez-vous',
 'detail_commande' => "Détails de la commande",
 'donnees_prestataire'=>'Vous avez choissis de payer par @prestataire@',
-
 
 //E
 'explication_authentification_automatique' => "Pouvoir accéder directement à la confirmation des données enregistrés lors d'une nouvelle inscription sans devoir se connecter préablement",
@@ -66,6 +63,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'paiement_fictif'=>'Paiement fictif',
 'passer_la_commande'=>'Passer la commande',
 'passer_paiement'=>'Passer au paiement',
+'passer_panier'=>'Passer au panier',
 
 //R
 'retour_panel' => "Retour au panel",
