@@ -285,7 +285,7 @@ function shop_recuperer_fond ($flux) {
 
 		// On chercher les champs prévus
 		$champs_extras = shop_champs_extras_presents($config, '', '', 'commande');
-		;
+
 
 		$champs = array();
 
@@ -293,9 +293,16 @@ function shop_recuperer_fond ($flux) {
 			$champs[$data['nom']] = $data['label'];
 		}
 
-		// Les valeurs de la commande
-		$data = sql_fetsel(array_keys($champs), 'spip_commandes',
-				'id_commande=' . $id);
+		if (count($champs) > 0) {
+			// Les valeurs de la commande
+			$data = sql_fetsel(array_keys($champs), 'spip_commandes',
+					'id_commande=' . $id);
+		}
+		else {
+			$data = array();
+		}
+
+
 
 		$c = recuperer_fond("prive/squelettes/inclure/champs_extras_commande",
 				array(
