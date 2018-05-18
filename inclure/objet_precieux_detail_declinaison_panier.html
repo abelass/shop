@@ -1,5 +1,5 @@
 <div class="taxes"><:prix:label_taxes:>
-	<BOUCLE_objets_precieux(PRIX_OBJETS){id_prix_objet}{par titre}>
+	<BOUCLE_objets_precieux(PRIX_OBJETS){id_prix_objet}{id_prix_objet_source=0}{par titre}>
 		[(#SET{prix_unitaire,#PRIX*{prix_objet,#ID_PRIX_OBJET}})]
 		[(#SET{taxe,[(#GET{prix_unitaire}|moins{#PRIX_HT*{prix_objet,#ID_PRIX_OBJET}})]})]
 		[(#GET{taxe}|montant_formater)]
