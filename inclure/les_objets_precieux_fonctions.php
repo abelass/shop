@@ -1,59 +1,60 @@
 <?php
 if (!defined('_ECRIRE_INC_VERSION'))
-  return;
+	return;
 
 //Génère les donnés de l'objet
 function generer_objet_details($id_objet, $objet = 'article', $env = array(), $fichier = 'inclure/objet_precieux_detail') {
-  include_spip('inc/pipelines_ecrire');
-  include_spip('inc/utils');
+	include_spip('inc/pipelines_ecrire');
+	include_spip('inc/utils');
 
-  $ancien_objet = $objet;
-  $e = trouver_objet_exec($objet);
-  $objet = $e['type'];
-  $id_table_objet = $e['id_table_objet'];
-  // Pour les récalcitrants
-  if (!$objet) {
-    $objet = $ancien_objet;
-    $id_table_objet = 'id_' . $objet;
-  }
-  $table = table_objet_sql($objet);
+	$ancien_objet = $objet;
+	$e = trouver_objet_exec($objet);
+	$objet = $e['type'];
+	$id_table_objet = $e['id_table_objet'];
 
-  $where = $id_table_objet . '=' . $id_objet;
-  if (!$contexte = sql_fetsel('*', $table, $where))
-    $contexte = array();
+	// Pour les récalcitrants
+	if (!$objet) {
+		$objet = $ancien_objet;
+		$id_table_objet = 'id_' . $objet;
+	}
+	$table = table_objet_sql($objet);
 
-  //Filtrer les champs vides
-  foreach ($env as $k => $v) {
-    if (!$v)
-      unset($env[$k]);
-  }
+	$where = $id_table_objet . '=' . $id_objet;
+	if (!$contexte = sql_fetsel('*', $table, $where))
+		$contexte = array();
 
-  if (!$cont = calculer_contexte())
-    $cont = array();
-  $contexte = array_merge($cont, $contexte, $env);
+	//Filtrer les champs vides
+	foreach ($env as $k => $v) {
+		if (!$v)
+			unset($env[$k]);
+	}
 
-  $contexte['objet'] = $objet;
-  $contexte['id_objet'] = $id_objet;
+	if (!$cont = calculer_contexte())
+		$cont = array();
+	$contexte = array_merge($cont, $contexte, $env);
 
-  //déterminer le titre
-  if (!$contexte['titre'])
-    $contexte['titre'] = generer_info_entite($id_objet, $objet, 'titre');
-  
-  //déterminer l'url
-  if (!$contexte['url'])
-    $contexte['url'] = generer_info_entite($id_objet, $objet, 'url');
+	$contexte['objet'] = $objet;
+	$contexte['id_objet'] = $id_objet;
 
-  //Chercher le logo correspondant
-  //Si il y a un logo Selection Objet
-  $chercher_logo = charger_fonction('chercher_logo', 'inc');
-  $logo = $chercher_logo($contexte['id_selection_objet'], 'id_selection_objet', 'on');
-  //sinon le logo de l'objet sélectionné
+	//déterminer le titre
+	if (!$contexte['titre'])
+		$contexte['titre'] = generer_info_entite($id_objet, $objet, 'titre');
 
-  $_id_objet = id_table_objet($objet);
-  $logo = $chercher_logo($id_objet, $_id_objet, 'on');
-  $contexte['logo_objet'] = $logo[0];
+	//déterminer l'url
+	if (!$contexte['url'])
+		$contexte['url'] = generer_info_entite($id_objet, $objet, 'url');
 
-  $fond = recuperer_fond($fichier, $contexte);
+	//Chercher le logo correspondant
+	//Si il y a un logo Selection Objet
+	$chercher_logo = charger_fonction('chercher_logo', 'inc');
+	$logo = $chercher_logo($contexte['id_selection_objet'], 'id_selection_objet', 'on');
+	//sinon le logo de l'objet sélectionné
 
-  return $fond;
+	$_id_objet = id_table_objet($objet);
+	$logo = $chercher_logo($id_objet, $_id_objet, 'on');
+	$contexte['logo_objet'] = $logo[0];
+
+	$fond = recuperer_fond($fichier, $contexte);
+
+	return $fond;
 }

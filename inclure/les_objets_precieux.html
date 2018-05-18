@@ -1,36 +1,36 @@
 [(#PLUGIN{declinaisons}|oui)#SET{declinaisons,oui}]
 <B_objets_precieux>
-  <div class="vente liste_objets_precieux">
-    #ANCRE_PAGINATION
-    <h2><:shop:les_articles_precieux:></h2>
-    [(#GET{declinaisons}|?{
-    <ul class="liste-items objets_precieux">
-    ,
-    <table class="spip">
-    <thead>
-      <tr>
-        <th colspan="2"></th>
-        <th><:shop:info_prix:></th>
-        <th><:prix:label_taxes:></th>
-        <th> </th>
-      </tr>
-    </thead>})]
-        <BOUCLE_objets_precieux(PRIX_OBJETS){fusion id_objet}{pagination}{par titre}>
-        [(#GET{declinaisons}|?{
-          [(#ID_OBJET|generer_objet_details{#OBJET,#ARRAY{id_prix_objet,#ID_PRIX_OBJET},inclure/objet_precieux_detail_declinaison})]  
-            ,
-          [(#ID_OBJET|generer_objet_details{#OBJET,#ARRAY{id_prix_objet,#ID_PRIX_OBJET,prix,#PRIX}})] 
-          })]
-        </BOUCLE_objets_precieux>
-  [(#GET{declinaisons}|?{
-  </ul>,
-    </table>})]
-    [<p class="pagination">(#PAGINATION)</p>]
-    </div>
+	<div class="vente liste_objets_precieux">
+		#ANCRE_PAGINATION
+		<h2><:shop:les_articles_precieux:></h2>
+		[(#GET{declinaisons}|?{
+		<ul class="liste-items objets_precieux">
+		,
+		<table class="spip">
+		<thead>
+			<tr>
+				<th colspan="2"></th>
+				<th><:shop:info_prix:></th>
+				<th><:prix:label_taxes:></th>
+				<th> </th>
+			</tr>
+		</thead>})]
+				<BOUCLE_objets_precieux(PRIX_OBJETS){id_prix_objet_source=0}{fusion id_objet}{pagination}{par titre}>
+				[(#GET{declinaisons}|?{
+					[(#ID_OBJET|generer_objet_details{#OBJET,#ARRAY{id_prix_objet,#ID_PRIX_OBJET},inclure/objet_precieux_detail_declinaison})]
+						,
+					[(#ID_OBJET|generer_objet_details{#OBJET,#ARRAY{id_prix_objet,#ID_PRIX_OBJET,prix,#PRIX}})]
+					})]
+				</BOUCLE_objets_precieux>
+	[(#GET{declinaisons}|?{
+	</ul>,
+		</table>})]
+		[<p class="pagination">(#PAGINATION)</p>]
+		</div>
 </B_objets_precieux>
 [(#ENV{retour}|=={ok}|oui)
 <script type="text/javascript">
-    $(function(){
-        ajaxReload('mon_panier', {args:{voir:'oui',action:''},history:false });
-        });
+		$(function(){
+				ajaxReload('mon_panier', {args:{voir:'oui',action:''},history:false });
+				});
 </script>]

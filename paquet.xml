@@ -1,7 +1,7 @@
 <paquet
 	prefix="shop"
 	categorie="edition"
-	version="2.0.0"
+	version="2.0.1"
 	etat="test"
 	compatibilite="[3.0.10;3.2.*]"
 	logo="prive/themes/spip/images/logo_shop_32.png"
@@ -24,6 +24,7 @@
 	<utilise nom="Z5" compatibilite="[2.0.0;]" />
 	<utilise nom="Z" compatibilite="[1.7.27;]" />
 	<utilise nom="spipr_dist" compatibilite="[0.4.8;]" />
+	<utilise nom="prix_objets" compatibilite="[2.0.0;]" />
 
 	<pipeline nom="autoriser" inclure="shop_autorisations.php" />
 	<pipeline nom="insert_head" inclure="shop_pipelines.php" />
