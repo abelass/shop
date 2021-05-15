@@ -1,9 +1,9 @@
 <paquet
 	prefix="shop"
 	categorie="edition"
-	version="2.1.0"
+	version="2.1.1"
 	etat="test"
-	compatibilite="[3.0.10;3.3.*]"
+	compatibilite="[3.0.10;4.0.*]"
 	logo="prive/themes/spip/images/logo_shop_32.png"
 	documentation=""
 	schema="1.1.3"
